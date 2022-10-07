@@ -3,25 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
 using Unity.VisualScripting;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PhoneItemDialog : MonoBehaviour
+public class PhoneItemDialog : PhoneUIBase
 {
     [SerializeField] public Button phoneButton;
-
-    void Awake()
-    {
-        Init();
-    }
-
+    
     public void Init()
     {
         phoneButton.onClick.AddListener(OnClickEvent);
+        base.Init();
     }
 
     public void OnClickEvent()
     {
-        Debug.Log("°´Å¥±»µã»÷");
+        Debug.Log("????????");
     }
+    
+    public readonly static string PATH = "PhonePrefab/PhoneItemDialog";
 }
