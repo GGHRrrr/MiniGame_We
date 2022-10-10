@@ -30,11 +30,10 @@ public class BeginControll : MonoBehaviour
         if (stateinfo.IsName("yilaguanAni") && (stateinfo.normalizedTime > 1.0f))
         {
             minCamera.GetComponent<Animator>().SetBool("isBegin", true);
-            
-            mainCamera.enabled = true;
-            mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             yield return new WaitForSecondsRealtime(2f);
             minCamera.gameObject.SetActive(false);
+            mainCamera.enabled = true;
+            mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             player.GetComponent<SpriteRenderer>().enabled = true;
             player.GetComponent<Animator>().Play("fade");
         }
