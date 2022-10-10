@@ -34,8 +34,6 @@ public class BeginControll : MonoBehaviour
             minCamera.gameObject.SetActive(false);
             mainCamera.enabled = true;
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
-            player.GetComponent<SpriteRenderer>().enabled = true;
-            player.GetComponent<Animator>().Play("fade");
         }
         else
         {
