@@ -25,6 +25,9 @@ public class InputManager : BaseManager<InputManager>
         CheckKeyCode(KeyCode.A);
         CheckKeyCode(KeyCode.S);
         CheckKeyCode(KeyCode.D);
+
+        CheckKeyCode(KeyCode.Tab);
+        CheckKeyCode(KeyCode.F);
     }
 
     //检测按键函数
@@ -33,10 +36,13 @@ public class InputManager : BaseManager<InputManager>
         if (Input.GetKeyDown(keycode))
         {
             //事件中心分发按下抬起
-            EventManager.Instance().EventTrigger("某键按下", keycode);
+            EventManager.Instance().EventTrigger("KeyDown", keycode);
         }else if (Input.GetKeyUp(keycode))
         {
-            EventManager.Instance().EventTrigger("某键抬起", keycode);
+            EventManager.Instance().EventTrigger("KeyUp", keycode);
+        }else if (Input.GetKey(keycode))
+        {
+            EventManager.Instance().EventTrigger("Key", keycode);
         }
     }
 }

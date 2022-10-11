@@ -28,13 +28,14 @@ public class SwitchRole : MonoBehaviour
                 //当切换回默认状态时，yiyi作为主角的子物体随之移动与转向
                 transform.GetComponent<PlayerMove>().ToFollowPoint(true);
                 yiyi.GetComponent<YiyiMove>().SwitchMove(false);
+                PlayerManager.Instance().SwitchState("Common");
             }
             else
             {
                 //当切换为yiyi状态时，可独立控制yiyi进行移动与飞行
-                
                 pos = yiyi.position;
                 yiyi.GetComponent<YiyiMove>().SwitchMove(true);
+                PlayerManager.Instance().SwitchState("Yiyi");
             }
         }
     }

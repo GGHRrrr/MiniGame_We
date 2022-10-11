@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(DistanceJoint2D))]
 public class RunCool : MonoBehaviour
 {
     //该模块是否开启(测试阶段，后面修改访问权限)

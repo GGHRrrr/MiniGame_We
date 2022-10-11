@@ -8,6 +8,7 @@ using UnityEngine;
  * 作用：负责yiyi机器人的移动逻辑
  
  */
+[RequireComponent(typeof(Rigidbody))]
 public class YiyiMove : MonoBehaviour
 {
     private Rigidbody rigidbody;
@@ -55,10 +56,6 @@ public class YiyiMove : MonoBehaviour
                 rigidbody.velocity = Vector3.zero;
             }
         }
-        else
-        {
-
-        }
     }
 
 
@@ -76,10 +73,12 @@ public class YiyiMove : MonoBehaviour
             KeyCode keyCode = (KeyCode)key;
             if (keyCode == KeyCode.A)
             {
+                transform.GetComponent<SpriteRenderer>().flipX = true;
                 rigidbody.velocity = moveSpeed * Vector3.left;
             }
             else if (keyCode == KeyCode.D)
             {
+                transform.GetComponent<SpriteRenderer>().flipX = false;
                 rigidbody.velocity = moveSpeed * Vector3.right;
             }
 
