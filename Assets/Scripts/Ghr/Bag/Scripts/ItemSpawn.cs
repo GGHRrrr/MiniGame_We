@@ -22,12 +22,8 @@ public class ItemSpawn : MonoBehaviour
     {
         switch(itemType)
         {
-            case Item.ItemType.battery:
-                item= new Item { itemType = Item.ItemType.battery, amount = currAmount };
-                itemWorld.SetItem(item);
-                break;
-            case Item.ItemType.sword:
-                 item = new Item { itemType = Item.ItemType.sword, amount = currAmount };
+            case Item.ItemType.yilaguan:
+                item= new Item { itemType = Item.ItemType.yilaguan, amount = currAmount };
                 itemWorld.SetItem(item);
                 break;
         }

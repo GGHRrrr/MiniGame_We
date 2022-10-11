@@ -20,7 +20,6 @@ public class ItemAssets : MonoBehaviour
         _instance = this;
     }
 
-    public Sprite batter_Spr;
-    public Sprite sword_Spr;
+    public Sprite yilaguan_Spr;
     public Transform pfItemWorld;
 }

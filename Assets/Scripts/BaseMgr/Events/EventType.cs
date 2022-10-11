@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum EventTypeEnum
 {
-    TALKWITH_YIYI,
-    TALKWITH_PLAYER
+    TALKWITH_YIYI,//yiyi对话
+    TALKWITH_PLAYER,//玩家对话
+    USEITEMS_YILAGUAN,//使用易拉罐
 }

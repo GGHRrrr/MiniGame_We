@@ -11,8 +11,7 @@ public class Item
 /// </summary>
     public enum ItemType
     {
-        battery,
-        sword
+       yilaguan,
     }
     /// <summary>
     /// 道具的的类型，数量等属性的定义
@@ -28,10 +27,8 @@ public class Item
         switch(itemType)
         {
             default:
-            case ItemType.battery:
-                return ItemAssets.Instance.batter_Spr;
-            case ItemType.sword:
-                return ItemAssets.Instance.sword_Spr;
+            case ItemType.yilaguan:
+                return ItemAssets.Instance.yilaguan_Spr;
         }
     }
 }

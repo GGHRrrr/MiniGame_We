@@ -9,22 +9,30 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         inventory = new Inventory(useItem);
-        uiInventory.SetInventory(inventory); 
+        uiInventory.SetInventory(inventory);
     }
     private void Start()
     {
         //ItemWorld.SpawnItemWorld(new Vector3(0, 0), new Item { itemType = Item.ItemType.battery, amount = 1 });
     }
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    ItemWorld itemWorld = other.GetComponent<ItemWorld>();
+    //    if (itemWorld != null)
+    //    {
+    //        inventory.AddItem(itemWorld.GetItem());
+    //        itemWorld.DestroySelf();
+    //    }
+    //}
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        ItemWorld itemWorld = other.GetComponent<ItemWorld>();
+        ItemWorld itemWorld = collision.GetComponent<ItemWorld>();
         if (itemWorld != null)
         {
             inventory.AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
         }
     }
-
     /// <summary>
     /// 玩家使用道具产生的影响
     /// </summary>
@@ -33,11 +41,9 @@ public class Player : MonoBehaviour
     {
         switch(item.itemType)
         {
-            case Item.ItemType.battery:
-                Debug.Log("使用电池");
-                break;
-            case Item.ItemType.sword:
-                Debug.Log("使用武器");
+            case Item.ItemType.yilaguan:
+                EventManager.Instance().EventTrigger(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), "");
+                Debug.Log("使用易拉罐");
                 break;
         }
     }
