@@ -8,10 +8,10 @@ using UnityEngine;
  * 作用：负责yiyi机器人的移动逻辑
  
  */
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class YiyiMove : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+    private Rigidbody2D rigidbody;
 
     //是否开启独立移动模块
     [HideInInspector]
@@ -22,7 +22,7 @@ public class YiyiMove : MonoBehaviour
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody2D>();
 
         isOpen = false;
         //引入移动输入模块事件

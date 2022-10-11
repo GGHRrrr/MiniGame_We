@@ -114,7 +114,7 @@ public class PlayerMove : MonoBehaviour
             s = Vector3.Distance(yiyi.position, followPoint.position);
             float vt = Mathf.Sqrt(2 * a * s);
             yiyi.transform.Translate(vt * direction * 0.0002f);
-            print("距离" + s);
+            //print("距离" + s);
         }
         //yiyi.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }

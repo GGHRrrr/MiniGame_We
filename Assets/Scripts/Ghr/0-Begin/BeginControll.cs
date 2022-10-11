@@ -12,6 +12,7 @@ public class BeginControll : MonoBehaviour
     Camera minCamera;//特写摄像机
     Camera mainCamera;//主摄像机
     GameObject openingAniPoint;//开场动画
+    GameObject playerPar;//角色父物体
     GameObject player;//角色
     GameObject yiYI;//机器人
     private void Awake()
@@ -25,8 +26,9 @@ public class BeginControll : MonoBehaviour
         minCamera = GameObject.Find("MinCamera").GetComponent<Camera>();
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         openingAniPoint = GameObject.Find("Opening_Animation");
-        player = GameObject.Find("Player");
-        yiYI = player.transform.GetChild(1).gameObject;
+        playerPar = GameObject.Find("Player");
+        player= playerPar.transform.GetChild(0).gameObject;
+        yiYI = playerPar.transform.GetChild(1).gameObject;
         StartCoroutine(PlayOpenningAni());
     }
 
@@ -37,7 +39,7 @@ public class BeginControll : MonoBehaviour
     IEnumerator PlayOpenningAni()
     {
         //禁用玩家移动先用移动测试脚本代替
-        player.GetComponent<MoveTest>().enabled = false;
+        player.GetComponent<PlayerMove>().enabled = false;
         yield return new WaitForSecondsRealtime(2f) ;
         Animator opAni = openingAniPoint.transform.GetChild(0).GetComponent<Animator>();
         AnimatorStateInfo stateinfo = opAni.GetCurrentAnimatorStateInfo(0);
@@ -61,6 +63,7 @@ public class BeginControll : MonoBehaviour
     IEnumerator PlayYiYiAni()
     {
         yield return null;
+        player.GetComponent<SwitchRole>().IsFollow = false;
         yiYI.GetComponent<Animator>().enabled = true;
         Animator yiyiAni = yiYI.GetComponent<Animator>();
         AnimatorStateInfo stateinfo = yiyiAni.GetCurrentAnimatorStateInfo(0);
@@ -68,10 +71,9 @@ public class BeginControll : MonoBehaviour
         {   //yiyi动画未作，暂时先用关闭animator处理
             yiYI.GetComponent<Animator>().enabled = false;
             //切换对象，捡易拉罐逻辑，yiyi颜文字表情
-            yiYI.transform.localPosition = new Vector2(-20.8f, 41.8f);//暂时捡到易拉罐直接回去
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             //回去之后移动回复,暂时用测试脚本代替
-            player.GetComponent<MoveTest>().enabled = true;
+            player.GetComponent<PlayerMove>().enabled = true;
         }
         else
         {
@@ -135,8 +137,11 @@ public class BeginControll : MonoBehaviour
     }
     #region 触碰垃圾桶
     void UseYilaguan_Garbage(object info)
-    {   if(isTouchGar)
+    {
+        Debug.Log("执行了吗1");
+        if (isTouchGar)
         {
+            Debug.Log("执行了吗");
             garbage.transform.localPosition = new Vector2(garbage.transform.localPosition.x, garbage.transform.localPosition.y + 0.5f);
             garbage.GetComponent<Collider2D>().enabled = false;
             EventManager.Instance().RemoveEventListener(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), UseYilaguan_Garbage);

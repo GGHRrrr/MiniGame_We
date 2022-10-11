@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        playerTarget = GameObject.Find("Player").transform;
+        playerTarget = GameObject.Find("Player/Human").transform;
     }
     /// <summary>
     /// 进行相机跟随
