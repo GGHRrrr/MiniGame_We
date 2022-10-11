@@ -24,9 +24,9 @@ public class MoveTest : MonoBehaviour
     private void Move()
     {
         rigi.velocity = new Vector2(moveH * moveSpeed, transform.position.y);
-        if(rigi.velocity.x>0|| rigi.velocity.x<0) anim.SetBool("IsMove", true);
+        if (rigi.velocity.x > 0 || rigi.velocity.x < 0) anim.Play("run");
         else
-            anim.SetBool("IsMove", false);
+            anim.Play("idle");
 
     }
     void Flip()
