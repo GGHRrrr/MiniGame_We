@@ -218,13 +218,21 @@ PrefabInstance:
       propertyPath: uiInventory
       value: 
       objectReference: {fileID: 154006586}
+    - target: {fileID: 1972554304, guid: 1aba2e042f32006438b3d4cb3af70123, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1972554304, guid: 1aba2e042f32006438b3d4cb3af70123, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 41.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7898355060682953657, guid: 1aba2e042f32006438b3d4cb3af70123, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7898355060682953657, guid: 1aba2e042f32006438b3d4cb3af70123, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.84
+      value: -5.15
       objectReference: {fileID: 0}
     - target: {fileID: 7898355060682953657, guid: 1aba2e042f32006438b3d4cb3af70123, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1660,7 +1668,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646794019}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
