@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Inventory inventory;
+    public Inventory Inventory { get { return inventory; } }
     [SerializeField]private  UI_Inventory uiInventory;
     private void Awake()
     {
