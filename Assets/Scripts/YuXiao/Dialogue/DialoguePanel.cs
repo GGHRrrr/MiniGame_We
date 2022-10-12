@@ -35,7 +35,7 @@ public class DialoguePanel : MonoBehaviour
     public Text txt_dialogue;
 
     //对话出现的位置
-    public Transform pos;
+    //public Transform pos;
 
     //存储一次对话的所有内容
     [TextArea(1,3)]
@@ -60,7 +60,7 @@ public class DialoguePanel : MonoBehaviour
     }
 
     //面板的显示
-    public void ShowDialogue(string[] info)
+    public void ShowDialogue(string[] info,Transform pos)
     {
         //如果说当前已经在对话阶段，可以直接返回
         if (panel_dialogue.activeInHierarchy) return;
@@ -79,15 +79,20 @@ public class DialoguePanel : MonoBehaviour
     //鼠标点击下一句
     private void ClickNext()
     {
-        //当点击鼠标左键，在面板激活的情况下，在文字显示完成的情况下
-        if (Input.GetMouseButtonUp(0) && panel_dialogue.activeInHierarchy && !isScrolling)
+        //当点击鼠标左键(空格)，在面板激活的情况下，在文字显示完成的情况下
+        if ((Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) 
+            && panel_dialogue.activeInHierarchy 
+            && !isScrolling)
         {
             
             //切换下一句
             currentLine++;
             //判断数组是否越界
             if (currentLine >= dialogueLines.Length)
+            {
                 panel_dialogue.SetActive(false);
+            }
+                
             else
                 //txt_dialogue.text = dialogueLines[currentLine];
                 //开启协程

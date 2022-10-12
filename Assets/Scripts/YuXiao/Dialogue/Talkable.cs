@@ -11,15 +11,33 @@ public class Talkable : MonoBehaviour
     [SerializeField] private bool isEntered;
     [TextArea(1, 3)]
     public string[] lines;
+    public Transform pos;
+
+    //可交互物体是否需要玩家按键触发
+    public bool needF;
+    //是否播放完成
+    private bool isFinish = false;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (isEntered && Input.GetKeyDown(KeyCode.F))
+        if (needF)
         {
-            DialoguePanel.Instance.ShowDialogue(lines);
+            if (isEntered && Input.GetKeyDown(KeyCode.F))
+            {
+                DialoguePanel.Instance.ShowDialogue(lines, pos);
+            }
         }
+        else
+        {
+            if (isEntered && !isFinish)
+            {
+                DialoguePanel.Instance.ShowDialogue(lines, pos);
+                isFinish = true;
+            }
+        }
+        
     }
 
     #region 触发器逻辑
