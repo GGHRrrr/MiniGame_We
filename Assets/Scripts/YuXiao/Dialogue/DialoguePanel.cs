@@ -11,11 +11,11 @@ using UnityEngine.UI;
         2.实现对话的切换
         3.实现对话遵循一定事件间隔弹出
  */
-public class DialogueManager : MonoBehaviour
+public class DialoguePanel : MonoBehaviour
 {
     #region 单例模式
     //实现单例模式
-    public static DialogueManager Instance;
+    public static DialoguePanel Instance;
 
     private void Awake()
     {
@@ -32,10 +32,10 @@ public class DialogueManager : MonoBehaviour
     public GameObject panel_dialogue;
 
     //对话文字内容以及说话人
-    public Text txt_dialogue, txt_name;
+    public Text txt_dialogue;
 
     //对话出现的位置
-    private Transform pos;
+    public Transform pos;
 
     //存储一次对话的所有内容
     [TextArea(1,3)]
@@ -49,6 +49,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print(currentLine);
         txt_dialogue.text = dialogueLines[currentLine];
     }
 
@@ -98,7 +99,7 @@ public class DialogueManager : MonoBehaviour
     //设置对话出现的位置
     public void SetPosition(Vector2 pos)
     {
-        this.pos.position = pos;
+        transform.position = pos;
     }
 
     //开启一个协程控制文字滚动

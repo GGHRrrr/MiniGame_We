@@ -18,7 +18,7 @@ public class Talkable : MonoBehaviour
     {
         if (isEntered && Input.GetKeyDown(KeyCode.F))
         {
-            DialogueManager.Instance.ShowDialogue(lines);
+            DialoguePanel.Instance.ShowDialogue(lines);
         }
     }
 
