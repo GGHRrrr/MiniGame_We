@@ -42,6 +42,10 @@ public class DialogueManager : MonoBehaviour
     public string[] dialogueLines;
     [SerializeField] private int currentLine = 0;
 
+    //滚动出现文字的开关与时间间隔
+    private bool isScrolling;
+    [SerializeField]private float textInterval;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         dialogueLines = info;
         currentLine = 0;
         //设置当前显示的内容
-        txt_dialogue.text = dialogueLines[currentLine];
+        StartCoroutine(ScrollingText());
         //设置对话的位置
         SetPosition(pos.position);
         //将对话设为可见
@@ -75,7 +79,7 @@ public class DialogueManager : MonoBehaviour
     private void ClickNext()
     {
         //当点击鼠标左键，在面板激活的情况下，在文字显示完成的情况下
-        if (Input.GetMouseButtonUp(0) && panel_dialogue.activeInHierarchy)
+        if (Input.GetMouseButtonUp(0) && panel_dialogue.activeInHierarchy && !isScrolling)
         {
             
             //切换下一句
@@ -84,7 +88,9 @@ public class DialogueManager : MonoBehaviour
             if (currentLine >= dialogueLines.Length)
                 panel_dialogue.SetActive(false);
             else
-                txt_dialogue.text = dialogueLines[currentLine];
+                //txt_dialogue.text = dialogueLines[currentLine];
+                //开启协程
+                StartCoroutine(ScrollingText());
 
         }
     }
@@ -93,5 +99,20 @@ public class DialogueManager : MonoBehaviour
     public void SetPosition(Vector2 pos)
     {
         this.pos.position = pos;
+    }
+
+    //开启一个协程控制文字滚动
+    private IEnumerator ScrollingText()
+    {
+        isScrolling = true;
+        txt_dialogue.text = "";
+
+        foreach(char letter in dialogueLines[currentLine].ToCharArray())
+        {
+            txt_dialogue.text += letter;
+            yield return new WaitForSeconds(textInterval);
+        }
+        //结束以后关闭开关
+        isScrolling = false;
     }
 }
