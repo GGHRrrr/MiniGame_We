@@ -1476,7 +1476,7 @@ GameObject:
   - component: {fileID: 8675343635758838823}
   m_Layer: 0
   m_Name: yiyi
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1498,7 +1498,7 @@ GameObject:
   - component: {fileID: 1344484279461625577}
   m_Layer: 0
   m_Name: Human
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1843,6 +1843,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -714150717603273564, guid: fecf401ee0924d04e86fd763edb7e97c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -714150717603273564, guid: fecf401ee0924d04e86fd763edb7e97c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.53
+      objectReference: {fileID: 0}
     - target: {fileID: -123702206815376630, guid: fecf401ee0924d04e86fd763edb7e97c, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -2180,7 +2188,7 @@ GameObject:
   - component: {fileID: 2270432583204003086}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
