@@ -1075,7 +1075,7 @@ MonoBehaviour:
   - "\u5783\u573E\xB7\xB7\xB7\u6E05\u7406\uFF0C\u4FDD\u62A4\xB7\xB7\xB7\u73AF\u5883"
   - "\u5783\u573E\xB7\xB7\xB7\u6536\u96C6\u5B8C\u6210\uFF0C\u9700\u8981\xB7\xB7\xB7\u5904\u7406\u5783\u573E"
   fixedPos: {fileID: 1315292438}
-  needF: 0
+  needF: 1
 --- !u!1 &1042995414
 GameObject:
   m_ObjectHideFlags: 0
