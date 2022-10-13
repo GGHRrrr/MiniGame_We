@@ -24,25 +24,44 @@ public class Talkable : MonoBehaviour
     void Update()
     {
         
+        //if (needF)
+        //{
+        //    if (isEntered && Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
+        //    }
+        //}
+        //else
+        //{
+        //    if (isEntered && !isFinish)
+        //    {
+        //        DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
+        //        isFinish = true;
+        //    }
+        //}
+        
+    }
+
+
+    #region ´¥·¢Æ÷Âß¼­
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (needF)
         {
             if (isEntered && Input.GetKeyDown(KeyCode.F))
             {
-                DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
+                DialoguePanel.Instance.ShowDialogue(lines, fixedPos);
             }
         }
         else
         {
             if (isEntered && !isFinish)
             {
-                DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
+                DialoguePanel.Instance.ShowDialogue(lines, fixedPos);
                 isFinish = true;
             }
         }
-        
     }
-
-    #region ´¥·¢Æ÷Âß¼­
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
