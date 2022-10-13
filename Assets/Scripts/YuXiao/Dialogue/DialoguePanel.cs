@@ -50,7 +50,7 @@ public class DialoguePanel : MonoBehaviour
     void Start()
     {
         print(currentLine);
-        txt_dialogue.text = dialogueLines[currentLine];
+        //txt_dialogue.text = dialogueLines[currentLine];
     }
 
     //鼠标点击切换下一句
