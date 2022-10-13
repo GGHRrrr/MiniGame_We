@@ -109,6 +109,29 @@ public class BeginControll : MonoBehaviour
         {
             case "Environments_Garbage":
                 Debug.Log("我碰到垃圾桶了");
+                //if (isTouchGar == false)
+                //{
+                //    //未触碰过则触发对话;
+                //    isTouchGar = !isTouchGar;
+                //}
+                //else
+                //{
+                //    garbage= collision.gameObject;
+                //}
+                break;
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        //if (isTouchGar == true)
+            //garbage = collision.gameObject;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch(collision.gameObject.name)
+        {
+            case "Environments_Garbage":
+                Debug.Log("我碰到垃圾桶了");
                 if (isTouchGar == false)
                 {
                     //未触碰过则触发对话;
@@ -119,21 +142,15 @@ public class BeginControll : MonoBehaviour
                 //    garbage= collision.gameObject;
                 //}
                 break;
-        }
-    }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (isTouchGar == true)
-            garbage = collision.gameObject;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        switch(collision.gameObject.name)
-        {
-                case "Environments_Fanmaiji":
+            case "Environments_Fanmaiji":
                 Debug.Log("我碰到贩卖机了");//可以做老虎机玩法,有时间再说
                 break;
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isTouchGar == true)
+            garbage = collision.gameObject;
     }
     #region 触碰垃圾桶
     void UseYilaguan_Garbage(object info)
@@ -143,7 +160,7 @@ public class BeginControll : MonoBehaviour
         {
             Debug.Log("执行了吗");
             garbage.transform.localPosition = new Vector2(garbage.transform.localPosition.x, garbage.transform.localPosition.y + 0.5f);
-            garbage.GetComponent<Collider2D>().enabled = false;
+            garbage.transform.GetChild(1).GetComponent<Collider2D>().enabled = false;
             EventManager.Instance().RemoveEventListener(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), UseYilaguan_Garbage);
         }
     }
