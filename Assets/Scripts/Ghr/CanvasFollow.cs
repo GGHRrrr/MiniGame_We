@@ -12,7 +12,7 @@ public class CanvasFollow : MonoBehaviour
         if (followTarget.transform.position.x != transform.position.x)
         {
             Vector3 pos;
-            pos = new Vector3(followTarget.position.x, transform.position.y,transform.position.z);
+            pos = new Vector3(followTarget.position.x, transform.position.y,10);
             transform.position = Vector3.Lerp(transform.position, pos, smoothSpeed);
         }
     }
