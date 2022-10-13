@@ -11,6 +11,9 @@ public class Talkable : MonoBehaviour
     [SerializeField] private bool isEntered;
     [TextArea(1, 3)]
     public string[] lines;
+    //不同的位置设定
+    //public Transform playerPos, yiyiPos, itemPos;
+
     public Transform pos;
 
     //可交互物体是否需要玩家按键触发
@@ -22,6 +25,7 @@ public class Talkable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (needF)
         {
             if (isEntered && Input.GetKeyDown(KeyCode.F))
