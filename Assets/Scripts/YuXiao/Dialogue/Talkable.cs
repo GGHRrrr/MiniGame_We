@@ -11,10 +11,8 @@ public class Talkable : MonoBehaviour
     [SerializeField] private bool isEntered;
     [TextArea(1, 3)]
     public string[] lines;
-    //不同的位置设定
-    //public Transform playerPos, yiyiPos, itemPos;
-
-    public Transform pos;
+    //是否有固定位置的设定
+    public Transform fixedPos;
 
     //可交互物体是否需要玩家按键触发
     public bool needF;
@@ -30,14 +28,14 @@ public class Talkable : MonoBehaviour
         {
             if (isEntered && Input.GetKeyDown(KeyCode.F))
             {
-                DialoguePanel.Instance.ShowDialogue(lines, pos);
+                DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
             }
         }
         else
         {
             if (isEntered && !isFinish)
             {
-                DialoguePanel.Instance.ShowDialogue(lines, pos);
+                DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
                 isFinish = true;
             }
         }
