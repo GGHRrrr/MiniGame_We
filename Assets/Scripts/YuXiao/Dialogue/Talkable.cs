@@ -40,7 +40,7 @@ public class Talkable : MonoBehaviour
     }
 
     #region ´¥·¢Æ÷Âß¼­
-    private void OnTriggerStay2D(Collider2D collision)
+    /*private void OnTriggerStay2D(Collider2D collision)
     {
         if (needF)
         {
@@ -57,7 +57,7 @@ public class Talkable : MonoBehaviour
                 isFinish = true;
             }
         }
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
