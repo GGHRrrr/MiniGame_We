@@ -19,29 +19,25 @@ public class Talkable : MonoBehaviour
     //是否播放完成
     private bool isFinish = false;
 
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-        //if (needF)
-        //{
-        //    if (isEntered && Input.GetKeyDown(KeyCode.F))
-        //    {
-        //        DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
-        //    }
-        //}
-        //else
-        //{
-        //    if (isEntered && !isFinish)
-        //    {
-        //        DialoguePanel.Instance.ShowDialogue(lines,fixedPos);
-        //        isFinish = true;
-        //    }
-        //}
-        
+        if (needF)
+        {
+            if (isEntered && Input.GetKeyDown(KeyCode.F))
+            {
+                print("案件成功");
+                DialoguePanel.Instance.ShowDialogue(lines, fixedPos);
+            }
+        }
+        else
+        {
+            if (isEntered && !isFinish)
+            {
+                DialoguePanel.Instance.ShowDialogue(lines, fixedPos);
+                isFinish = true;
+            }
+        }
     }
-
 
     #region 触发器逻辑
     private void OnTriggerStay2D(Collider2D collision)
@@ -62,6 +58,7 @@ public class Talkable : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -77,5 +74,6 @@ public class Talkable : MonoBehaviour
             isEntered = false;
         }
     }
+
     #endregion
 }

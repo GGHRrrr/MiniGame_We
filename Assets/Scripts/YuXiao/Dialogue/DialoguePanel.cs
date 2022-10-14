@@ -30,6 +30,8 @@ public class DialoguePanel : MonoBehaviour
 
     //对话面板对象
     public GameObject panel_dialogue;
+    //对话跟随组件
+    private CanvasFollow cf;
 
     //对话文字内容以及说话人
     public Text txt_dialogue;
@@ -47,6 +49,11 @@ public class DialoguePanel : MonoBehaviour
     //滚动出现文字的开关与时间间隔
     private bool isScrolling;
     [SerializeField]private float textInterval;
+
+    private void Start()
+    {
+        cf = GetComponent<CanvasFollow>();
+    }
 
     //鼠标点击切换下一句
     void Update()
@@ -90,12 +97,14 @@ public class DialoguePanel : MonoBehaviour
             if (currentLine >= dialogueLines.Length)
             {
                 panel_dialogue.SetActive(false);
+                cf.enabled = true;
             }
             else
             {
                 //设置对话位置(拿到对话内容)
                 dialogueLines[currentLine] = SetPosition(dialogueLines[currentLine],fixedPos);
                 //txt_dialogue.text = dialogueLines[currentLine];
+                cf.enabled = true;
                 //开启协程
                 StartCoroutine(ScrollingText());
             }
@@ -111,7 +120,6 @@ public class DialoguePanel : MonoBehaviour
         //返回值
         string res = "";
         //对话跟随组件的获取
-        CanvasFollow cf = transform.GetComponent<CanvasFollow>();
         cf.enabled = true;
 
         //如果是主角人类说的
@@ -135,7 +143,7 @@ public class DialoguePanel : MonoBehaviour
             cf.enabled = false;
             //交互物体说的话
             transform.position = fixedPos.position;
-            print(fixedPos.position);
+            //print(fixedPos.position);
             res = info;
         }
 
@@ -149,6 +157,28 @@ public class DialoguePanel : MonoBehaviour
         txt_dialogue.text = "";
 
         foreach(char letter in dialogueLines[currentLine].ToCharArray())
+        {
+            txt_dialogue.text += letter;
+            yield return new WaitForSeconds(textInterval);
+        }
+        //结束以后关闭开关
+        isScrolling = false;
+    }
+
+    //单独显示一句对话内容
+    public void ShowTriggerDialogue(string dialogueInfo)
+    {
+        string info = SetPosition(dialogueInfo, fixedPos);
+        StartCoroutine(ScrollingOne(info));
+    }
+
+    //开启一个协程控制文字滚动
+    private IEnumerator ScrollingOne(string dialogueInfo)
+    {
+        isScrolling = true;
+        txt_dialogue.text = "";
+
+        foreach (char letter in dialogueInfo.ToCharArray())
         {
             txt_dialogue.text += letter;
             yield return new WaitForSeconds(textInterval);
