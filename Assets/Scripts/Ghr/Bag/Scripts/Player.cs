@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private Inventory inventory;
-    public Item item;
     public Inventory Inventory { get { return inventory; } }
     [SerializeField]private  UI_Inventory uiInventory;
     private void Awake()
@@ -16,8 +15,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //ItemWorld.SpawnItemWorld(new Vector3(0, 0), new Item { itemType = Item.ItemType.battery, amount = 1 });
-        item= new Item { itemType = Item.ItemType.yilaguan, amount = 10 };
-        inventory.AddItem(item);
     }
     //private void OnTriggerEnter(Collider other)
     //{
