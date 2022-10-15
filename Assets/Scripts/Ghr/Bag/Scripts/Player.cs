@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //ItemWorld.SpawnItemWorld(new Vector3(0, 0), new Item { itemType = Item.ItemType.battery, amount = 1 });
+        inventory.AddItem(new Item { itemType=Item.ItemType.yilaguan,amount=1});
     }
     //private void OnTriggerEnter(Collider other)
     //{
