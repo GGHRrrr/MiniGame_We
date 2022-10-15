@@ -17,25 +17,22 @@ public class RunCool : MonoBehaviour
         {
             isOpen = value;
             GetComponent<SwitchRole>().IsFollow = true;
-            
+
         }
     }
-    //跳跃力
-    public float jumpForce;
 
     //组件
     private LineRenderer lineRenderer;
     private DistanceJoint2D distanceJoint;
-    private Rigidbody2D rigidbody;
 
 
     //是否处于钩锁状态
     bool isHook;
-    //是否处于地面状态
-    bool canJump;
 
     //荡秋千的轴心点
     public Transform pivot;
+    //手拿绳子的位置
+    public Transform hookTrans;
   
     float a = 0;
     
@@ -44,15 +41,22 @@ public class RunCool : MonoBehaviour
 
         lineRenderer = GetComponent<LineRenderer>();
         distanceJoint = GetComponent<DistanceJoint2D>();
-        rigidbody = GetComponent<Rigidbody2D>();
         lineRenderer.enabled = false;
         distanceJoint.enabled = false;
 
-        isOpen = false;
+        //isOpen = false;
         //canSwing = false;
         //isOpen = true;
         //引入移动输入模块事件
-        EventManager.Instance().AddEventListener("Key", CheckKeyDown);
+        //EventManager.Instance().AddEventListener("KeyDown", CheckKeyDown);
+    }
+
+    private void Update()
+    {
+        if (isOpen)
+        {
+            UseHook();
+        }
     }
 
     //切换该模块的状态开启
@@ -62,24 +66,24 @@ public class RunCool : MonoBehaviour
     }
 
 
-    //检测键盘输入
+   /* //检测键盘输入
     void CheckKeyDown(object key)
     {
         if (isOpen)
         {
             if ((KeyCode)key == KeyCode.W && canJump)
             {
-                Jump();
+                //Jump();
             }
             //if (canSwing)
             Debug.Log("哈哈");
 
-            UseHook(key);
+            //UseHook(key);
         }
         
-    }
+    }*/
 
-    //跳跃逻辑
+    /*//跳跃逻辑
     private void Jump()
     {
         rigidbody.velocity = new Vector2(0, jumpForce);
@@ -90,31 +94,31 @@ public class RunCool : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         canJump = true;
-    }
+    }*/
 
 
     //钩锁模块
-    void UseHook(object key)
+    private void UseHook()
     {
         //mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             lineRenderer.enabled = true;
             isHook = true;
         }
-        else if (Input.GetKeyUp(KeyCode.F))
+        else if (Input.GetKeyUp(KeyCode.Space))
         {
             lineRenderer.enabled = false;
             distanceJoint.enabled = false;
             isHook = false;
         }
-        lineRenderer.SetPosition(1, transform.position);
+        lineRenderer.SetPosition(1, hookTrans.position);
         Hook(pivot.position);
     }
 
 
     //放出钩锁操作
-    void Hook(Vector2 pivotPos)
+    private void Hook(Vector2 pivotPos)
     {
         if (isHook && Vector3.Distance(lineRenderer.GetPosition(0), pivotPos) > 0.1f)
         {
