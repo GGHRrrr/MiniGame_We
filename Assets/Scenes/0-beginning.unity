@@ -2019,7 +2019,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2642755130197290011, guid: 606433e84d0718843be597881d04358f, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: BagCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 2642755130197290015, guid: 606433e84d0718843be597881d04358f, type: 3}
       propertyPath: m_Pivot.x
