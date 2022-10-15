@@ -504,7 +504,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2036575261
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1096,7 +1096,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2036575261
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 8db7e7ad0ae1b024393524788904e9e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1890,40 +1890,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &1814339170
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1814339171}
-  m_Layer: 0
-  m_Name: DialogueYiyi
-  m_TagString: Untagged
-  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1814339171
+--- !u!4 &1800909625 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+  m_PrefabInstance: {fileID: 2893850990821995841}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814339170}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6, y: 4.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1949035666}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1949035666 stripped
+--- !u!4 &1814339171 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2893850989950966227, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1814339171, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
   m_PrefabInstance: {fileID: 2893850990821995841}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2014327180
@@ -2114,9 +2088,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2893850991124325067, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
-      propertyPath: m_Name
-      value: DialoguePlayer
+    - target: {fileID: 453519116179646938, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2893850991430129906, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
       propertyPath: m_RootOrder
@@ -2166,10 +2140,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5182974587340243658, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
       propertyPath: uiInventory
       value: 
       objectReference: {fileID: 154006586}
+    - target: {fileID: 6810645010435807200, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: Selected
+      value: 
+      objectReference: {fileID: 1800909625}
     - target: {fileID: 6810645010435807202, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
       propertyPath: uiInventory
       value: 

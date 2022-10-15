@@ -15,6 +15,8 @@ public class SwitchRole : MonoBehaviour
     private Transform yiyi;
     //yiyi在默认状态下的相对位置
     private Vector3 pos;
+    //yiyi被选中时的图标
+    public Transform Selected;
 
     //切换状态时需要做的事
     public bool IsFollow
@@ -25,6 +27,7 @@ public class SwitchRole : MonoBehaviour
             isFollow = value;
             if (isFollow)
             {
+                Selected.gameObject.SetActive(false);
                 //当切换回默认状态时，yiyi作为主角的子物体随之移动与转向
                 transform.GetComponent<PlayerMove>().ToFollowPoint(true);
                 yiyi.GetComponent<YiyiMove>().SwitchMove(false);
@@ -34,6 +37,7 @@ public class SwitchRole : MonoBehaviour
             {
                 //当切换为yiyi状态时，可独立控制yiyi进行移动与飞行
                 pos = yiyi.position;
+                Selected.gameObject.SetActive(true);
                 yiyi.GetComponent<YiyiMove>().SwitchMove(true);
                 PlayerManager.Instance().SwitchState("Yiyi");
             }
