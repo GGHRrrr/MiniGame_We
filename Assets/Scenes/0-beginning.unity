@@ -1890,6 +1890,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!4 &1800909625 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+  m_PrefabInstance: {fileID: 2893850990821995841}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1814339171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1814339171, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
@@ -2083,6 +2088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 453519116179646938, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2893850991430129906, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2131,10 +2140,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366416719898592110, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5182974587340243658, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
       propertyPath: uiInventory
       value: 
       objectReference: {fileID: 154006586}
+    - target: {fileID: 6810645010435807200, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
+      propertyPath: Selected
+      value: 
+      objectReference: {fileID: 1800909625}
     - target: {fileID: 6810645010435807202, guid: b76bd198332cb1d4db77f717517c31f6, type: 3}
       propertyPath: uiInventory
       value: 
