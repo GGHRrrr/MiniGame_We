@@ -44,7 +44,7 @@ public class RunCool : MonoBehaviour
         lineRenderer.enabled = false;
         distanceJoint.enabled = false;
 
-        //isOpen = false;
+        isOpen = false;
         //canSwing = false;
         //isOpen = true;
         //引入移动输入模块事件
