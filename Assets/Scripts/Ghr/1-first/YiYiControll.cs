@@ -18,6 +18,7 @@ public class YiYiControll : MonoBehaviour
     private void Start()
     {
         cam = GameObject.Find("Main Camera");
+
     }
     private void Update()
     {
@@ -35,6 +36,7 @@ public class YiYiControll : MonoBehaviour
                 cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(15,0);
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
+                player.GetComponent<SwitchRole>().IsFollow = false;
             }
         }//½øÈë´°»§
         if(isEnterHandle)
