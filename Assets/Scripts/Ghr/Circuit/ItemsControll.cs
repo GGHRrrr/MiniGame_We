@@ -17,6 +17,10 @@ public class ItemsControll : MonoBehaviour
     public DirectionType myDir=DirectionType.up;//目前的方向类型
     public DirectionType trueDir;//正确的方向
     public bool isTrue=false;//是否正确
+    private void Start()
+    {
+        Debug.Log(gameObject.name);
+    }
     /// <summary>
     /// 当鼠标点击时进行判断
     /// </summary>

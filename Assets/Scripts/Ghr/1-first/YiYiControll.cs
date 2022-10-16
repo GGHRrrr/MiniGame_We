@@ -10,6 +10,7 @@ public class YiYiControll : MonoBehaviour
     public GameObject player;
     public GameObject handle;
     public GameObject box;
+    public GameObject cir;
     private GameObject cam;
     private bool isEnterWindow = false;
     private bool isEnterHandle = false;
@@ -60,6 +61,27 @@ public class YiYiControll : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("打开电路解谜");
+                if(cir.gameObject.activeSelf==false)
+                {
+                    box.GetComponent<BoxCollider2D>().enabled = false;
+                    cir.gameObject.SetActive(true);
+                    gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
+                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                }
+                
+            }
+        }
+        else
+        {
+            if(cir.gameObject.activeInHierarchy)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    box.GetComponent<BoxCollider2D>().enabled = true;
+                    cir.gameObject.SetActive(false);
+                    gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
+                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                }    
             }
         }
         #endregion
