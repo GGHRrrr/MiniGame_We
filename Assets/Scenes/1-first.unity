@@ -2148,7 +2148,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 24.051136, y: -5}
+  m_Offset: {x: 24.051136, y: -15.243544}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2159,7 +2159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 65.71507, y: 0.79}
+  m_Size: {x: 65.71507, y: 21.277088}
   m_EdgeRadius: 0
 --- !u!1 &960555597
 GameObject:
@@ -2412,7 +2412,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 6.9955997, y: -5.152134}
+  m_Offset: {x: 23.645973, y: -5.152134}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2423,7 +2423,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 32.762234, y: 0.79059553}
+  m_Size: {x: 66.06297, y: 0.790596}
   m_EdgeRadius: 0
 --- !u!1 &1005787054
 GameObject:
@@ -4591,6 +4591,11 @@ Transform:
   m_Father: {fileID: 2010516983}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1835740421 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9043248047766032904, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
+  m_PrefabInstance: {fileID: 6730133219942061377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1873545047
 GameObject:
   m_ObjectHideFlags: 0
@@ -5395,6 +5400,22 @@ PrefabInstance:
       propertyPath: pivot
       value: 
       objectReference: {fileID: 496785348}
+    - target: {fileID: 3273209040420292055, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1646794019}
+    - target: {fileID: 3273209040420292055, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
+      propertyPath: yiyi
+      value: 
+      objectReference: {fileID: 1835740421}
+    - target: {fileID: 3273209040420292055, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
+      propertyPath: workEnv
+      value: 
+      objectReference: {fileID: 1162776073}
+    - target: {fileID: 3273209040420292055, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
+      propertyPath: workInsideEnv
+      value: 
+      objectReference: {fileID: 2010516982}
     - target: {fileID: 4186861922446204240, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
       propertyPath: m_SortingLayer
       value: 1

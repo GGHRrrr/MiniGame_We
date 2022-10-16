@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class FirstControll : MonoBehaviour
 {
+    public GameObject cam;
+    public GameObject yiyi;
+    public GameObject workEnv;
+    public GameObject workInsideEnv;
     private bool isEnterDoor=false;
     private bool isEnterWindow = false;
+    private void Awake()
+    {
+        
+    }
     private void Update()
     {
 

@@ -12,13 +12,20 @@ public class YiYiControll : MonoBehaviour
     public GameObject box;
     public GameObject cir;
     private GameObject cam;
+    private bool isEnterWork = false;
     private bool isEnterWindow = false;
     private bool isEnterHandle = false;
     private bool isEnterBox=false;
+    private Vector2 nowPos;
+    private Vector2 palyerNowPos;
+    private void Awake()
+    {
+        EventManager.Instance().AddEventListener(EventTypeEnum.KeyDown_Tab.ToString(), OnKey_TabDownEvnet);
+    }
     private void Start()
     {
         cam = GameObject.Find("Main Camera");
-
+        palyerNowPos = player.transform.localPosition;
     }
     private void Update()
     {
@@ -29,6 +36,7 @@ public class YiYiControll : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("yiyi在窗户吗，进入仓库");
+                isEnterWork = true;
                 workEnv.SetActive(false);
                 workEnv_Inside.SetActive(true);
                 gameObject.transform.localPosition = new Vector3(23, transform.position.y,transform.position.z);
@@ -87,6 +95,32 @@ public class YiYiControll : MonoBehaviour
             }
         }
         #endregion
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            EventManager.Instance().EventTrigger(EventTypeEnum.KeyDown_Tab.ToString(), "");
+           // if (workEnv_Inside.gameObject.activeInHierarchy)
+           //{
+                
+           //     if (player.GetComponent<SwitchRole>().IsFollow == false)
+           //     {
+           //         workEnv.gameObject.SetActive(true);
+           //         workEnv_Inside.gameObject.SetActive(false);
+           //         gameObject.GetComponent<SpriteRenderer>().enabled=false;
+           //         player.transform.GetChild(0).gameObject.SetActive(true);
+           //         nowPos = transform.localPosition;
+           //     }
+           // }
+           //if(!workEnv_Inside.gameObject.activeInHierarchy&&isEnterWork&& player.GetComponent<SwitchRole>().IsFollow)
+           // {
+           //     workEnv.gameObject.SetActive(false);
+           //     workEnv_Inside.gameObject.SetActive(true);
+           //     gameObject.GetComponent<SpriteRenderer>().enabled = true;
+           //     player.transform.GetChild(0).gameObject.SetActive(false);
+           //     transform.localPosition = nowPos;
+           // }
+        }
+        
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -117,6 +151,36 @@ public class YiYiControll : MonoBehaviour
             case "box":
                 isEnterBox = false;
                 break;
+        }
+    }
+    private void OnKey_TabDownEvnet(object info)
+    {
+        if (workEnv_Inside.gameObject.activeInHierarchy&& isEnterWork)
+        {
+            if(player.GetComponent<SwitchRole>().isYiYi)
+            //if (player.GetComponent<SwitchRole>().IsFollow == false)
+            {
+                player.transform.localPosition = palyerNowPos;
+                workEnv.gameObject.SetActive(true);
+                workEnv_Inside.gameObject.SetActive(false);
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                player.transform.GetChild(0).gameObject.SetActive(true);
+
+                nowPos = transform.localPosition;
+                cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
+            }
+        }
+        if (!workEnv_Inside.gameObject.activeInHierarchy && isEnterWork &&!player.GetComponent<SwitchRole>().isYiYi)//player.GetComponent<SwitchRole>().IsFollow)
+        {
+            palyerNowPos = player.transform.localPosition;
+            cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
+            workEnv.gameObject.SetActive(false);
+            workEnv_Inside.gameObject.SetActive(true);
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            player.transform.GetChild(0).gameObject.SetActive(false);
+            player.transform.position = new Vector2(nowPos.x,player.transform.localPosition.y);
+            transform.localPosition = nowPos;
+            cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
         }
     }
 }

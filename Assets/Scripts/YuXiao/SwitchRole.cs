@@ -9,6 +9,7 @@ using UnityEngine;
  */
 public class SwitchRole : MonoBehaviour
 {
+    public bool isYiYi=false;
     //记录是yiyi是否跟随状态
     private bool isFollow;
     //yiyi组件
@@ -32,6 +33,7 @@ public class SwitchRole : MonoBehaviour
                 transform.GetComponent<PlayerMove>().ToFollowPoint(true);
                 yiyi.GetComponent<YiyiMove>().SwitchMove(false);
                 PlayerManager.Instance().SwitchState("Common");
+                isYiYi = false;
             }
             else
             {
@@ -40,6 +42,7 @@ public class SwitchRole : MonoBehaviour
                 Selected.gameObject.SetActive(true);
                 yiyi.GetComponent<YiyiMove>().SwitchMove(true);
                 PlayerManager.Instance().SwitchState("Yiyi");
+                isYiYi = true;
             }
         }
     }
