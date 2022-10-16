@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class YiYiControll : MonoBehaviour
 {  
     //初始相机跟随数值2.5 49 
@@ -9,8 +8,12 @@ public class YiYiControll : MonoBehaviour
     public GameObject workEnv;
     public GameObject workEnv_Inside;
     public GameObject player;
+    public GameObject handle;
+    public GameObject box;
     private GameObject cam;
     private bool isEnterWindow = false;
+    private bool isEnterHandle = false;
+    private bool isEnterBox=false;
     private void Start()
     {
         cam = GameObject.Find("Main Camera");
@@ -32,6 +35,32 @@ public class YiYiControll : MonoBehaviour
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(15,0);
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
             }
+        }//进入窗户
+        if(isEnterHandle)
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                if (handle.GetComponent<SpriteRenderer>().enabled == true)
+                {
+                    handle.transform.GetChild(0).gameObject.SetActive(true);
+                    handle.GetComponent<SpriteRenderer>().enabled = false;
+                    Debug.Log("打开开关了");
+                }
+                else
+                {
+                    handle.transform.GetChild(0).gameObject.SetActive(false);
+                    handle.GetComponent<SpriteRenderer>().enabled = true;
+                    Debug.Log("关闭开关了 ");
+                }
+            }
+           
+        }//与把手交互
+        if (isEnterBox)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log("打开电路解谜");
+            }
         }
         #endregion
     }
@@ -43,6 +72,12 @@ public class YiYiControll : MonoBehaviour
                 Debug.Log("yiyi碰到窗户了！");
                 isEnterWindow = true;
                 break;
+            case "handle(up)":
+                isEnterHandle = true;
+                break;
+            case "box":
+                isEnterBox = true;
+                break;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -52,6 +87,12 @@ public class YiYiControll : MonoBehaviour
                 case "breakWindow":
                 isEnterWindow = false;
                 break;
-            }
+            case "handle(up)":
+                isEnterHandle = false;
+                break;
+            case "box":
+                isEnterBox = false;
+                break;
+        }
     }
 }
