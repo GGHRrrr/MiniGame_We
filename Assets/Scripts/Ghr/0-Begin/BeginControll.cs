@@ -64,12 +64,13 @@ public class BeginControll : MonoBehaviour
     {
         yield return null;
         player.GetComponent<SwitchRole>().IsFollow = false;
-        yiYI.GetComponent<Animator>().enabled = true;
+        yiYI.GetComponent<Animator>().Play("yilaguan");
+        //yiYI.GetComponent<Animator>().enabled = true;
         Animator yiyiAni = yiYI.GetComponent<Animator>();
         AnimatorStateInfo stateinfo = yiyiAni.GetCurrentAnimatorStateInfo(0);
-        if (stateinfo.IsName("Pick_yiyi") && (stateinfo.normalizedTime > 1.0f))
-        {   //yiyi动画未作，暂时先用关闭animator处理
-            yiYI.GetComponent<Animator>().enabled = false;
+        if (stateinfo.IsName("yilaguan") && (stateinfo.normalizedTime > 1.0f))
+        {   
+            yiYI.GetComponent<Animator>().Play("viviidle");
             //切换对象，捡易拉罐逻辑，yiyi颜文字表情
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             //回去之后移动回复,暂时用测试脚本代替
