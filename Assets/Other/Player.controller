@@ -90,7 +90,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -137,7 +137,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: run
+  m_Name: walk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -151,7 +151,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 17e14a04995556341bcab52e6aec1da4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 188a8331814fcb646bb61e5ed0e952ed, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

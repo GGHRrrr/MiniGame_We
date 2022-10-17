@@ -68,13 +68,13 @@ public class PlayerMove : MonoBehaviour
             //向右
             transform.eulerAngles = new Vector3(0, 0, 0);
             //yiyi转向
-            yiyi.transform.GetComponent<SpriteRenderer>().flipX = false;
+            yiyi.transform.localScale = new Vector3(1.6f, yiyi.transform.localScale.y, 1);
         }
         else if (moveH < 0)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
             //yiyi转向
-            yiyi.transform.GetComponent<SpriteRenderer>().flipX = true;
+            yiyi.transform.localScale = new Vector3(-1.6f, yiyi.transform.localScale.y, 1);
         }
     }
 

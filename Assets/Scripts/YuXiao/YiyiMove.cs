@@ -73,13 +73,12 @@ public class YiyiMove : MonoBehaviour
             KeyCode keyCode = (KeyCode)key;
             if (keyCode == KeyCode.A)
             {
-                print("A");
-                transform.GetComponent<SpriteRenderer>().flipX = true;
+                transform.localScale = new Vector3(-1.6f, 1.6f, 1);
                 rigidbody.velocity = moveSpeed * Vector3.left;
             }
             else if (keyCode == KeyCode.D)
             {
-                transform.GetComponent<SpriteRenderer>().flipX = false;
+                transform.localScale = new Vector3(1.6f, 1.6f, 1);
                 rigidbody.velocity = moveSpeed * Vector3.right;
             }
 
