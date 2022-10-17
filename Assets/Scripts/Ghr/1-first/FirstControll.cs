@@ -8,6 +8,7 @@ public class FirstControll : MonoBehaviour
     public GameObject yiyi;
     public GameObject workEnv;
     public GameObject workInsideEnv;
+    public static bool isPlayerEnterWork = false;
     private bool isEnterDoor=false;
     private bool isEnterWindow = false;
     private void Awake()
@@ -22,7 +23,15 @@ public class FirstControll : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("玩家在大门，播放音乐");
+                if(YiYiControll.isTotalunLocked)
+                {
+                    Debug.Log("进入工厂");
+                    isPlayerEnterWork = true;
+                }
+                else
+                {
+                    Debug.Log("玩家在大门，播放音乐");
+                }
             } 
         }
         if(isEnterWindow)

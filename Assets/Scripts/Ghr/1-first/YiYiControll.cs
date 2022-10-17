@@ -12,7 +12,7 @@ public class YiYiControll : MonoBehaviour
     public GameObject box;
     public GameObject cir;
     private GameObject cam;
-    public  bool isTotalunLocked=false;//解密全部解锁
+    public static bool isTotalunLocked=false;//解密全部解锁
     public  bool isEnterWork = false;
     private bool isEnterWindow = false;
     private bool isEnterHandle = false;
@@ -32,28 +32,10 @@ public class YiYiControll : MonoBehaviour
     private void Update()
     {
         #region yiyi交互事件
-        if (isEnterWindow)
-        {
-            if (Input.GetKeyDown(KeyCode.E)&&player.GetComponent<SwitchRole>().isYiYi)
-            {
-                Debug.Log("yiyi在窗户吗，进入仓库");
-                isEnterWork = true;
-                workEnv.SetActive(false);
-                workEnv_Inside.SetActive(true);
-                player.GetComponent<SwitchRole>().enabled = false;
-                player.GetComponent<PlayerMove>().enabled = false;
-                gameObject.transform.localPosition = new Vector3(23, transform.position.y,transform.position.z);
-                player.transform.GetChild(0).gameObject.SetActive(false);
-                cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
-                cam.GetComponent<CameraFollow>().maxPos = new Vector2(15,0);
-                cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
-                //player.GetComponent<SwitchRole>().IsFollow = false;
-            }
-        }//进入窗户
         //打开关闭把手
-        if(isEnterHandle)
+        if (isEnterHandle)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 if (handle.GetComponent<SpriteRenderer>().enabled == true)
                 {
@@ -68,45 +50,65 @@ public class YiYiControll : MonoBehaviour
                     Debug.Log("关闭开关了 ");
                 }
             }
-           
+
         }
-        //与电路箱交互,打开关闭电路箱
-        if (isEnterBox)
+        //玩家未进入时发生的事件
+        if (!FirstControll.isPlayerEnterWork)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (isEnterWindow)
             {
-                Debug.Log("打开电路解谜");
-                if(cir.gameObject.activeSelf==false)
+                if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<SwitchRole>().isYiYi)
                 {
-                    box.GetComponent<BoxCollider2D>().enabled = false;
-                    cir.gameObject.SetActive(true);
-                    gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
-                    gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                    Debug.Log("yiyi在窗户吗，进入仓库");
+                    isEnterWork = true;
+                    workEnv.SetActive(false);
+                    workEnv_Inside.SetActive(true);
+                    player.GetComponent<SwitchRole>().enabled = false;
+                    player.GetComponent<PlayerMove>().enabled = false;
+                    gameObject.transform.localPosition = new Vector3(23, transform.position.y, transform.position.z);
+                    player.transform.GetChild(0).gameObject.SetActive(false);
+                    cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
+                    cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
+                    cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
+                    //player.GetComponent<SwitchRole>().IsFollow = false;
                 }
-                
-            }
-        }
-        else
-        {
-            if(cir.gameObject.activeInHierarchy)
+            }//进入窗户
+            //与电路箱交互,打开关闭电路箱
+            if (isEnterBox)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    box.GetComponent<BoxCollider2D>().enabled = true;
-                    cir.gameObject.SetActive(false);
-                    gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
-                    gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                }    
+                    Debug.Log("打开电路解谜");
+                    if (cir.gameObject.activeSelf == false)
+                    {
+                        box.GetComponent<BoxCollider2D>().enabled = false;
+                        cir.gameObject.SetActive(true);
+                        gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
+                        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                    }
+
+                }
+            }
+            else
+            {
+                if (cir.gameObject.activeInHierarchy)
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        box.GetComponent<BoxCollider2D>().enabled = true;
+                        cir.gameObject.SetActive(false);
+                        gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
+                        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    }
+                }
+            }
+            //在场景内部，按压tab机器人和玩家分离操作
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                EventManager.Instance().EventTrigger(EventTypeEnum.KeyDown_Tab.ToString(), "");
             }
         }
-        #endregion
-        //在场景内部，按压tab机器人和玩家分离操作
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            EventManager.Instance().EventTrigger(EventTypeEnum.KeyDown_Tab.ToString(), "");
-        }
-        
-        
+ #endregion
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -188,6 +190,7 @@ public class YiYiControll : MonoBehaviour
     //电路解密完做一个渐隐效果，可以考虑用Dotween,目前用携程来做
     IEnumerator CricuitAni()
     {
+        yield return null;
         workEnv.gameObject.SetActive(true);
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
         player.transform.localPosition = new Vector3(6f, player.transform.localPosition.y, player.transform.localPosition.z);
