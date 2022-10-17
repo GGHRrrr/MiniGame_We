@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
         if (PlayerManager.Instance().state == E_Player_State.Common)
         {
             moveH = Input.GetAxisRaw("Horizontal");
+            //print(moveH);
             //moveV = Input.GetAxisRaw("Vertical");
             Move();
             Flip();
@@ -56,8 +57,8 @@ public class PlayerMove : MonoBehaviour
         rigidbody.velocity = new Vector3(moveH * moveSpeed, rigidbody.velocity.y,0);
         ToFollowPoint(false);
         //切换动画
-        if (moveH > 0 || moveH < 0) anim.Play("run");
-        else anim.Play("idle");
+        if (moveH > 0 || moveH < 0) anim.SetBool("run", true);
+        else anim.SetBool("run", false);
     }
 
     private void Flip()

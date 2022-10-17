@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputManager : BaseManager<InputManager>
 {
     //是否开启该模块功能
-    private bool isStart = false;
+    private bool isStart = true;
 
     public InputManager()
     {
