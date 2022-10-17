@@ -38,7 +38,7 @@ public class BeginControll : MonoBehaviour
     /// <returns></returns>
     IEnumerator PlayOpenningAni()
     {
-        //禁用玩家移动先用移动测试脚本代替
+        //禁用玩家移动
         player.GetComponent<PlayerMove>().enabled = false;
         yield return new WaitForSecondsRealtime(2f) ;
         Animator opAni = openingAniPoint.transform.GetChild(0).GetComponent<Animator>();
@@ -64,13 +64,14 @@ public class BeginControll : MonoBehaviour
     {
         yield return null;
         player.GetComponent<SwitchRole>().IsFollow = false;
-        yiYI.GetComponent<Animator>().Play("yilaguan");
-        //yiYI.GetComponent<Animator>().enabled = true;
+        yiYI.GetComponent<Animator>().enabled = true;
         Animator yiyiAni = yiYI.GetComponent<Animator>();
         AnimatorStateInfo stateinfo = yiyiAni.GetCurrentAnimatorStateInfo(0);
-        if (stateinfo.IsName("yilaguan") && (stateinfo.normalizedTime > 1.0f))
-        {   
-            yiYI.GetComponent<Animator>().Play("viviidle");
+        if (stateinfo.IsName("Pick") && (stateinfo.normalizedTime > 1.0f))
+        {
+            yiYI.transform.GetChild(0).GetComponent<Animator>().Play("Idle");
+            yiYI.GetComponent<Animator>().enabled = false;
+            //yiYI.GetComponent<Animator>().Play("viviidle");
             //切换对象，捡易拉罐逻辑，yiyi颜文字表情
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             //回去之后移动回复,暂时用测试脚本代替
