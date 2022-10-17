@@ -34,7 +34,7 @@ public class YiYiControll : MonoBehaviour
         #region yiyi交互事件
         if (isEnterWindow)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E)&&player.GetComponent<SwitchRole>().isYiYi)
             {
                 Debug.Log("yiyi在窗户吗，进入仓库");
                 isEnterWork = true;
@@ -199,12 +199,14 @@ public class YiYiControll : MonoBehaviour
             workEnv_Inside_Spr.color = new Color(1, 1, 1, workEnv_Inside_Spr.color.a - 0.05f);
         }
         workEnv_Inside.gameObject.SetActive(false);
+        workEnv_Inside_Spr.color = new Color(1, 1, 1, 1);
         PlayerManager.Instance().state = E_Player_State.Common;
         player.GetComponent<SwitchRole>().enabled = true;
         player.GetComponent<SwitchRole>().IsFollow = true;
         player.GetComponent<PlayerMove>().enabled = true;
         cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
         StartCoroutine(Fade(workEnv.transform.GetChild(0).gameObject, false));
+        gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
     }
 
     IEnumerator Fade(GameObject gameObj,bool isFade)//写一个渐变函数
