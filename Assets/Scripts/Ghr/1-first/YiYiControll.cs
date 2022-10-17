@@ -12,7 +12,8 @@ public class YiYiControll : MonoBehaviour
     public GameObject box;
     public GameObject cir;
     private GameObject cam;
-    private bool isEnterWork = false;
+    public  bool isTotalunLocked=false;//解密全部解锁
+    public  bool isEnterWork = false;
     private bool isEnterWindow = false;
     private bool isEnterHandle = false;
     private bool isEnterBox=false;
@@ -21,6 +22,7 @@ public class YiYiControll : MonoBehaviour
     private void Awake()
     {
         EventManager.Instance().AddEventListener(EventTypeEnum.KeyDown_Tab.ToString(), OnKey_TabDownEvnet);
+        EventManager.Instance().AddEventListener(EventTypeEnum.Unlock_Circuit.ToString(), UnlockCircuit);
     }
     private void Start()
     {
@@ -29,7 +31,6 @@ public class YiYiControll : MonoBehaviour
     }
     private void Update()
     {
-
         #region yiyi交互事件
         if (isEnterWindow)
         {
@@ -39,14 +40,17 @@ public class YiYiControll : MonoBehaviour
                 isEnterWork = true;
                 workEnv.SetActive(false);
                 workEnv_Inside.SetActive(true);
+                player.GetComponent<SwitchRole>().enabled = false;
+                player.GetComponent<PlayerMove>().enabled = false;
                 gameObject.transform.localPosition = new Vector3(23, transform.position.y,transform.position.z);
                 player.transform.GetChild(0).gameObject.SetActive(false);
                 cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(15,0);
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
-                player.GetComponent<SwitchRole>().IsFollow = false;
+                //player.GetComponent<SwitchRole>().IsFollow = false;
             }
         }//进入窗户
+        //打开关闭把手
         if(isEnterHandle)
         {
             if(Input.GetKeyDown(KeyCode.E))
@@ -65,7 +69,8 @@ public class YiYiControll : MonoBehaviour
                 }
             }
            
-        }//与把手交互
+        }
+        //与电路箱交互,打开关闭电路箱
         if (isEnterBox)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -95,29 +100,10 @@ public class YiYiControll : MonoBehaviour
             }
         }
         #endregion
+        //在场景内部，按压tab机器人和玩家分离操作
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             EventManager.Instance().EventTrigger(EventTypeEnum.KeyDown_Tab.ToString(), "");
-           // if (workEnv_Inside.gameObject.activeInHierarchy)
-           //{
-                
-           //     if (player.GetComponent<SwitchRole>().IsFollow == false)
-           //     {
-           //         workEnv.gameObject.SetActive(true);
-           //         workEnv_Inside.gameObject.SetActive(false);
-           //         gameObject.GetComponent<SpriteRenderer>().enabled=false;
-           //         player.transform.GetChild(0).gameObject.SetActive(true);
-           //         nowPos = transform.localPosition;
-           //     }
-           // }
-           //if(!workEnv_Inside.gameObject.activeInHierarchy&&isEnterWork&& player.GetComponent<SwitchRole>().IsFollow)
-           // {
-           //     workEnv.gameObject.SetActive(false);
-           //     workEnv_Inside.gameObject.SetActive(true);
-           //     gameObject.GetComponent<SpriteRenderer>().enabled = true;
-           //     player.transform.GetChild(0).gameObject.SetActive(false);
-           //     transform.localPosition = nowPos;
-           // }
         }
         
         
@@ -153,34 +139,92 @@ public class YiYiControll : MonoBehaviour
                 break;
         }
     }
+    /// <summary>
+    /// 在工厂内部按压tab事件，分离操作
+    //控制相机跟随，玩家与yiyi位置.目前直接转换isFollow=false会有莫名的问题，暂且转化时先把玩家隐藏，位置赋值到yiyi的位置，减缓跟随的效果；
+    /// </summary>
+    /// <param name="info"></param>
     private void OnKey_TabDownEvnet(object info)
     {
-        if (workEnv_Inside.gameObject.activeInHierarchy&& isEnterWork)
+        //切换至工厂外。
+        if (workEnv_Inside.gameObject.activeInHierarchy && isEnterWork)
         {
             if(player.GetComponent<SwitchRole>().isYiYi)
             //if (player.GetComponent<SwitchRole>().IsFollow == false)
             {
+                player.GetComponent<SwitchRole>().enabled = true;
+                player.GetComponent<PlayerMove>().enabled = true;
                 player.transform.localPosition = palyerNowPos;
+                nowPos = transform.localPosition;
                 workEnv.gameObject.SetActive(true);
                 workEnv_Inside.gameObject.SetActive(false);
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
                 player.transform.GetChild(0).gameObject.SetActive(true);
-
-                nowPos = transform.localPosition;
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
             }
         }
-        if (!workEnv_Inside.gameObject.activeInHierarchy && isEnterWork &&!player.GetComponent<SwitchRole>().isYiYi)//player.GetComponent<SwitchRole>().IsFollow)
+        //切换至工厂内.
+        if (!workEnv_Inside.gameObject.activeInHierarchy && isEnterWork && !player.GetComponent<SwitchRole>().isYiYi)//player.GetComponent<SwitchRole>().IsFollow)
         {
+            player.GetComponent<SwitchRole>().enabled = false;
+            player.GetComponent<PlayerMove>().enabled = false;
             palyerNowPos = player.transform.localPosition;
             cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
             workEnv.gameObject.SetActive(false);
             workEnv_Inside.gameObject.SetActive(true);
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
             player.transform.GetChild(0).gameObject.SetActive(false);
-            player.transform.position = new Vector2(nowPos.x,player.transform.localPosition.y);
+            player.transform.localPosition = new Vector3(nowPos.x, player.transform.localPosition.y,player.transform.localPosition.z);
             transform.localPosition = nowPos;
             cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
+        }
+    }
+    private void UnlockCircuit(object info)
+    {
+      cir.gameObject.SetActive(false);
+        isTotalunLocked = true;
+        StartCoroutine(CricuitAni());
+    }
+    //电路解密完做一个渐隐效果，可以考虑用Dotween,目前用携程来做
+    IEnumerator CricuitAni()
+    {
+        workEnv.gameObject.SetActive(true);
+        gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        player.transform.localPosition = new Vector3(6f, player.transform.localPosition.y, player.transform.localPosition.z);
+        player.transform.GetChild(0).gameObject.SetActive(true);
+        SpriteRenderer workEnv_Inside_Spr = workEnv_Inside.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        while (workEnv_Inside_Spr.color.a>=0.05)
+        {
+            yield return new WaitForSeconds(0.05f);
+            workEnv_Inside_Spr.color = new Color(1, 1, 1, workEnv_Inside_Spr.color.a - 0.05f);
+        }
+        workEnv_Inside.gameObject.SetActive(false);
+        PlayerManager.Instance().state = E_Player_State.Common;
+        player.GetComponent<SwitchRole>().enabled = true;
+        player.GetComponent<SwitchRole>().IsFollow = true;
+        player.GetComponent<PlayerMove>().enabled = true;
+        cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
+        StartCoroutine(Fade(workEnv.transform.GetChild(0).gameObject, false));
+    }
+
+    IEnumerator Fade(GameObject gameObj,bool isFade)//写一个渐变函数
+    {
+        SpriteRenderer spriteRenderer = gameObj.GetComponent<SpriteRenderer>();
+        if(isFade)
+        {
+            while (spriteRenderer.color.a > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+                spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a - 0.05f);
+            }
+        }
+        else
+        {
+            while (spriteRenderer.color.a < 1)
+            {
+                yield return new WaitForSeconds(0.05f);
+                spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a + 0.05f);
+            }
         }
     }
 }

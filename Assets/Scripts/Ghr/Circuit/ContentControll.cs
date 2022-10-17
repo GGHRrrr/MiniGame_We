@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ContentControll : MonoBehaviour
 {
+
     public static ContentControll instance;
     public List<ItemsControll> itemsList= new List<ItemsControll>();
     private void Awake()
@@ -40,6 +42,13 @@ public class ContentControll : MonoBehaviour
         if (isAllTrue)
         {
             Debug.Log("全部解锁进行下一步操作");
+            StartCoroutine(StartEvent_Circuit());
         }
+    }
+    IEnumerator StartEvent_Circuit()
+    {
+
+        yield return null;
+        EventManager.Instance().EventTrigger(EventTypeEnum.Unlock_Circuit.ToString(), "");
     }
 }

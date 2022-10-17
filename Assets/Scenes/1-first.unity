@@ -1334,11 +1334,6 @@ MonoBehaviour:
   myDir: 2
   trueDir: 0
   isTrue: 0
---- !u!1 &583496337 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8738995212046479866, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-  m_PrefabInstance: {fileID: 6730133219942061377}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584629792
 GameObject:
   m_ObjectHideFlags: 0
@@ -4648,11 +4643,6 @@ Transform:
   m_Father: {fileID: 2010516983}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1835740421 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9043248047766032904, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-  m_PrefabInstance: {fileID: 6730133219942061377}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1873545047
 GameObject:
   m_ObjectHideFlags: 0
@@ -5462,10 +5452,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1646794019}
     - target: {fileID: 3273209040420292055, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-      propertyPath: yiyi
-      value: 
-      objectReference: {fileID: 1835740421}
-    - target: {fileID: 3273209040420292055, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
       propertyPath: workEnv
       value: 
       objectReference: {fileID: 1162776073}
@@ -5473,14 +5459,6 @@ PrefabInstance:
       propertyPath: workInsideEnv
       value: 
       objectReference: {fileID: 2010516982}
-    - target: {fileID: 4186861922446204240, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4186861922446204240, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 2036575261
-      objectReference: {fileID: 0}
     - target: {fileID: 4787309694207731238, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
       propertyPath: box
       value: 
@@ -5493,10 +5471,6 @@ PrefabInstance:
       propertyPath: handle
       value: 
       objectReference: {fileID: 633981101}
-    - target: {fileID: 4787309694207731238, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 583496337}
     - target: {fileID: 4787309694207731238, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
       propertyPath: workEnv
       value: 
@@ -5553,10 +5527,6 @@ PrefabInstance:
       propertyPath: uiInventory
       value: 
       objectReference: {fileID: 1433180431}
-    - target: {fileID: 8948191838277826754, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d81c45ca27b147f41b72a620b6eb51ed, type: 3}
 --- !u!1 &8404912371761722349
