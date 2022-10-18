@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 public class YiYiControll : MonoBehaviour
-{  
+{
+    //音效组件
+    private AudioClip openSwitch;
+
     //初始相机跟随数值2.5 49 
     //进入工厂相机跟随数值2.5 15
     public GameObject workEnv;
@@ -31,6 +34,9 @@ public class YiYiControll : MonoBehaviour
         post = GameObject.Find("Post").gameObject;
         cam = GameObject.Find("Main Camera");
         palyerNowPos = player.transform.localPosition;
+
+        //音效
+        openSwitch = Resources.Load<AudioClip>("Audio/Sound/拉下电闸");
     }
     private void Update()
     {
@@ -52,8 +58,10 @@ public class YiYiControll : MonoBehaviour
                     handle.GetComponent<SpriteRenderer>().enabled = true;
                     Debug.Log("关闭开关了 ");
                 }
+                if (!player.GetComponent<AudioSource>().isPlaying)
+                    player.GetComponent<AudioSource>().PlayOneShot(openSwitch, 0.8f);
             }
-
+           
         }
         //玩家未进入时发生的事件
         if (!FirstControll.isPlayerEnterWork)

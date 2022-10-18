@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class ContentControll : MonoBehaviour
 {
+    //玩家对象（控制音效）
+    private GameObject player;
+    //开启卷闸门音效
+    private AudioClip openDoor;
 
     public static ContentControll instance;
     public List<ItemsControll> itemsList= new List<ItemsControll>();
@@ -19,6 +23,9 @@ public class ContentControll : MonoBehaviour
         {
             itemsList.Add(transform.GetChild(i).GetComponent<ItemsControll>());
         }
+
+        player = GameObject.Find("Player").transform.GetChild(0).gameObject;
+        openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     //首先进行初始化
     void init()
@@ -36,12 +43,18 @@ public class ContentControll : MonoBehaviour
             var item = itemsList[i];
             if (item.isTrue != true)
                 break;
-            if(item.isTrue==true&&i==itemsList.Count-1)
-                isAllTrue=true;
+            if (item.isTrue == true && i == itemsList.Count - 1)
+            {
+                isAllTrue = true;
+            }
+                
+
         }
         if (isAllTrue)
         {
             Debug.Log("全部解锁进行下一步操作");
+            if (!player.GetComponent<AudioSource>().isPlaying)
+                player.GetComponent<AudioSource>().PlayOneShot(openDoor, 0.8f);
             StartCoroutine(StartEvent_Circuit());
         }
     }

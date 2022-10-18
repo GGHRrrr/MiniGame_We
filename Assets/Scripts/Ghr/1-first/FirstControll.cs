@@ -16,6 +16,12 @@ public class FirstControll : MonoBehaviour
     //后处理
     private GameObject post;
 
+    //音效组件
+    private AudioSource audio;
+    //开门音效文件
+    private AudioClip cantOpenDoor;
+    private AudioClip openDoor;
+
     #endregion
     #region 判断条件
 
@@ -34,6 +40,9 @@ public class FirstControll : MonoBehaviour
     private void Start()
     {
         post = GameObject.Find("Post").gameObject;
+        audio = GetComponent<AudioSource>();
+        cantOpenDoor = Resources.Load<AudioClip>("Audio/Sound/门锁住打不开");
+        openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     private void Update()
     {
@@ -59,6 +68,12 @@ public class FirstControll : MonoBehaviour
                 else
                 {
                     Debug.Log("玩家在大门，播放音乐");
+                    //播放音效
+                    if (!audio.isPlaying)
+                    {
+                        audio.PlayOneShot(cantOpenDoor,0.8f);
+                    }
+                        
                 }
             } 
         }
