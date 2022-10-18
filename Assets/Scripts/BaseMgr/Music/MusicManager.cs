@@ -44,7 +44,7 @@ public class MusicManager : BaseManager<MusicManager>
             BGM = obj.AddComponent<AudioSource>();
         }
         //异步加载音乐资源
-        ResourcesManager.Instance().LoadAsync<AudioClip>("Music/BGM/" + name, (clip) =>
+        ResourcesManager.Instance().LoadAsync<AudioClip>("Audio/BGM/" + name, (clip) =>
          {
              BGM.clip = clip;
              BGM.volume = BGMVolume;
@@ -85,7 +85,7 @@ public class MusicManager : BaseManager<MusicManager>
             soundObj = new GameObject("Sound");
         }
         //当音效资源异步加载后 再添加一个音效
-        ResourcesManager.Instance().LoadAsync<AudioClip>("Sound/" + name, (clip) =>
+        ResourcesManager.Instance().LoadAsync<AudioClip>("Audio/Sound/" + name, (clip) =>
         {
             AudioSource source = soundObj.AddComponent<AudioSource>();
             source.loop = isLoop; // 设置是否循环

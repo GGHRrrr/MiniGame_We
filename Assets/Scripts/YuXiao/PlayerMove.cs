@@ -14,6 +14,9 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rigidbody;
     //动画组件
     private Animator anim;
+    //玩家音效组件
+    private AudioSource audio;
+    private AudioClip walkAudio;
 
     //移动速度
     public float moveSpeed;
@@ -30,6 +33,8 @@ public class PlayerMove : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
+        walkAudio = Resources.Load<AudioClip>("Audio/Sound/脚步声城市乡镇");
 
         yiyi = transform.parent.Find("yiyi");
         followPoint = transform.Find("FollowPoint");
@@ -56,9 +61,20 @@ public class PlayerMove : MonoBehaviour
     {
         rigidbody.velocity = new Vector3(moveH * moveSpeed, rigidbody.velocity.y,0);
         ToFollowPoint(false);
-        //切换动画
-        if (moveH > 0 || moveH < 0) anim.SetBool("run", true);
-        else anim.SetBool("run", false);
+        //切换动画，播放音效
+        if (moveH > 0 || moveH < 0)
+        {
+            anim.SetBool("walk", true);
+            if (!audio.isPlaying)
+                audio.PlayOneShot(walkAudio, 0.8f);
+        }
+        else
+        {
+            anim.SetBool("walk", false);
+            if (!audio.isPlaying)
+                audio.Stop();
+        } 
+           
     }
 
     private void Flip()
