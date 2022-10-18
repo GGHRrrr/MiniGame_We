@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 public class YiYiControll : MonoBehaviour
 {  
     //初始相机跟随数值2.5 49 
@@ -12,6 +13,7 @@ public class YiYiControll : MonoBehaviour
     public GameObject box;
     public GameObject cir;
     private GameObject cam;
+    private GameObject post;
     public static bool isTotalunLocked=false;//解密全部解锁
     public  bool isEnterWork = false;
     private bool isEnterWindow = false;
@@ -26,6 +28,7 @@ public class YiYiControll : MonoBehaviour
     }
     private void Start()
     {
+        post = GameObject.Find("Post").gameObject;
         cam = GameObject.Find("Main Camera");
         palyerNowPos = player.transform.localPosition;
     }
@@ -65,11 +68,11 @@ public class YiYiControll : MonoBehaviour
                     workEnv_Inside.SetActive(true);
                     player.GetComponent<SwitchRole>().enabled = false;
                     player.GetComponent<PlayerMove>().enabled = false;
-                    gameObject.transform.localPosition = new Vector3(125, transform.localPosition.y, transform.localPosition.z);
+                    gameObject.transform.localPosition = new Vector3(-9f, transform.localPosition.y, transform.localPosition.z);
                     player.transform.GetChild(0).gameObject.SetActive(false);
                     cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
-                    cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
+                    post.transform.GetChild(0).gameObject.SetActive(true);
                     //player.GetComponent<SwitchRole>().IsFollow = false;
                 }
             }//进入窗户
@@ -166,6 +169,7 @@ public class YiYiControll : MonoBehaviour
                 gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 player.transform.GetChild(0).gameObject.SetActive(true);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
+                post.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
         //切换至工厂内.
@@ -183,6 +187,7 @@ public class YiYiControll : MonoBehaviour
             player.transform.localPosition = new Vector3(nowPos.x, player.transform.localPosition.y,player.transform.localPosition.z);
             transform.localPosition = nowPos;
             cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
+            post.transform.GetChild(0).gameObject.SetActive(true);
         }
     }
     private void UnlockCircuit(object info)
@@ -194,9 +199,10 @@ public class YiYiControll : MonoBehaviour
     //电路解密完做一个渐隐效果，可以考虑用Dotween,目前用携程来做
     IEnumerator CricuitAni()
     {
-        yield return null;
+        yield return null;    
         workEnv.gameObject.SetActive(true);
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        post.transform.GetChild(0).gameObject.SetActive(false);
         player.transform.localPosition = new Vector3(6f, player.transform.localPosition.y, player.transform.localPosition.z);
         player.transform.GetChild(0).gameObject.SetActive(true);
         SpriteRenderer workEnv_Inside_Spr = workEnv_Inside.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
@@ -214,6 +220,7 @@ public class YiYiControll : MonoBehaviour
         cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
         StartCoroutine(Fade(workEnv.transform.GetChild(0).gameObject, false));
         gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
+        
     }
 
     IEnumerator Fade(GameObject gameObj,bool isFade)//写一个渐变函数
