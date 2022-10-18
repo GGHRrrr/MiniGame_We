@@ -2578,10 +2578,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6206301683866224883, guid: 56abdf8aaa8051349b3b58bafd920f9d, type: 3}
-      propertyPath: m_Name
-      value: PlayerPanel
-      objectReference: {fileID: 0}
     - target: {fileID: 6206301684005723650, guid: 56abdf8aaa8051349b3b58bafd920f9d, type: 3}
       propertyPath: followTarget
       value: 

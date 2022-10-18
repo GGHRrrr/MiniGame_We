@@ -5,6 +5,7 @@ using UnityEngine;
 public class FirstControll : MonoBehaviour
 {
     #region 物体
+    public GameObject e;
     //相机
     public GameObject cam;
     //人物
@@ -112,24 +113,27 @@ public class FirstControll : MonoBehaviour
         switch(collision.name)
         {
             case "breakWindow":
+                ShowPlayerE(true);
                 Debug.Log("碰到窗户了！");
-                
                 break;
             case "workDoor":
                 Debug.Log("碰到门了！");
+                ShowPlayerE(true);
                 isEnterDoor = true;
                 break;
             case "insideLeft":
                 isInsideLeft = true;
+                ShowPlayerE(true);
                 Debug.Log("碰到外边的门了！准备出去了");
                 break;
             case "insideRight":
                 isInsideRight=true;
+                ShowPlayerE(true);
                 Debug.Log("碰到里边的门了，准备进入下一层");
                 break;
-
                 case"under_left":
                 isUnderLeft = true;
+                ShowPlayerE(true);
                 Debug.Log("碰到地下一层的门了，准备下一层");
                 break;
         }
@@ -139,18 +143,23 @@ public class FirstControll : MonoBehaviour
         switch (collision.name)
         {
             case "breakWindow":
+                ShowPlayerE(false);
                 break;
             case "workDoor":
                 isEnterDoor = false;
+                ShowPlayerE(false);
                 break;
             case "insideLeft":
                 isInsideLeft = false;
+                ShowPlayerE(false);
                 break;
             case "insideRight":
                 isInsideRight = false;
+                ShowPlayerE(false);
                 break;
             case "under_left":
                 isUnderLeft = false;
+                ShowPlayerE(false);
                 break;
         }
     }
@@ -173,5 +182,18 @@ public class FirstControll : MonoBehaviour
                 spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a + 0.05f);
             }
         }
+    }
+      void ShowPlayerE(bool isEnter)
+    {
+            if (!gameObject.GetComponent<SwitchRole>().isYiYi && isEnter)
+            {
+                e.gameObject.SetActive(true);
+                StartCoroutine(Fade(e, true));
+            }
+            if (!gameObject.GetComponent<SwitchRole>().isYiYi && !isEnter)
+            {
+                e.gameObject.SetActive(false);
+                e.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+            }
     }
 }

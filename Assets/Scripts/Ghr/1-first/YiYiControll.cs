@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 public class YiYiControll : MonoBehaviour
-{  
+{
     //初始相机跟随数值2.5 49 
     //进入工厂相机跟随数值2.5 15
+    public GameObject e;
     public GameObject workEnv;
     public GameObject workEnv_Inside;
     public GameObject player;
@@ -122,12 +123,15 @@ public class YiYiControll : MonoBehaviour
             case "breakWindow":
                 Debug.Log("yiyi碰到窗户了！");
                 isEnterWindow = true;
+                ShowPlayerE(true);
                 break;
             case "handle(up)":
                 isEnterHandle = true;
+                ShowPlayerE(true);
                 break;
             case "box":
                 isEnterBox = true;
+                ShowPlayerE(true);
                 break;
         }
     }
@@ -137,12 +141,15 @@ public class YiYiControll : MonoBehaviour
             {
                 case "breakWindow":
                 isEnterWindow = false;
+                ShowPlayerE(false);
                 break;
             case "handle(up)":
                 isEnterHandle = false;
+                ShowPlayerE(false);
                 break;
             case "box":
                 isEnterBox = false;
+                ShowPlayerE(false);
                 break;
         }
     }
@@ -240,6 +247,22 @@ public class YiYiControll : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.05f);
                 spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a + 0.05f);
+            }
+        }
+    }
+    void ShowPlayerE(bool isEnter)
+    {
+        if(!FirstControll.isPlayerEnterWork&& player.GetComponent<SwitchRole>().isYiYi)
+        {
+            if ( isEnter)
+            {
+                e.gameObject.SetActive(true);
+                StartCoroutine(Fade(e, true));
+            }
+            if (!isEnter)
+            {
+                e.gameObject.SetActive(false);
+                e.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             }
         }
     }
