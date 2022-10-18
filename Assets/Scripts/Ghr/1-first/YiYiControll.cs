@@ -65,7 +65,7 @@ public class YiYiControll : MonoBehaviour
                     workEnv_Inside.SetActive(true);
                     player.GetComponent<SwitchRole>().enabled = false;
                     player.GetComponent<PlayerMove>().enabled = false;
-                    gameObject.transform.localPosition = new Vector3(23, transform.position.y, transform.position.z);
+                    gameObject.transform.localPosition = new Vector3(125, transform.localPosition.y, transform.localPosition.z);
                     player.transform.GetChild(0).gameObject.SetActive(false);
                     cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
@@ -84,7 +84,8 @@ public class YiYiControll : MonoBehaviour
                         box.GetComponent<BoxCollider2D>().enabled = false;
                         cir.gameObject.SetActive(true);
                         gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
-                        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                        //gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                        gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     }
 
                 }
@@ -98,7 +99,8 @@ public class YiYiControll : MonoBehaviour
                         box.GetComponent<BoxCollider2D>().enabled = true;
                         cir.gameObject.SetActive(false);
                         gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
-                        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                        //gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                        gameObject.transform.GetChild(0).gameObject.SetActive(true);
                     }
                 }
             }
@@ -160,7 +162,8 @@ public class YiYiControll : MonoBehaviour
                 nowPos = transform.localPosition;
                 workEnv.gameObject.SetActive(true);
                 workEnv_Inside.gameObject.SetActive(false);
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                //gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 player.transform.GetChild(0).gameObject.SetActive(true);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
             }
@@ -174,7 +177,8 @@ public class YiYiControll : MonoBehaviour
             cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
             workEnv.gameObject.SetActive(false);
             workEnv_Inside.gameObject.SetActive(true);
-            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            //gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
             player.transform.GetChild(0).gameObject.SetActive(false);
             player.transform.localPosition = new Vector3(nowPos.x, player.transform.localPosition.y,player.transform.localPosition.z);
             transform.localPosition = nowPos;

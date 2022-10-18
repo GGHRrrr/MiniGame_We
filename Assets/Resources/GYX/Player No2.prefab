@@ -161,7 +161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4819993885451946063
 Transform:
   m_ObjectHideFlags: 0
@@ -747,7 +747,6 @@ MonoBehaviour:
   handle: {fileID: 0}
   box: {fileID: 0}
   cir: {fileID: 0}
-  isTotalunLocked: 0
   isEnterWork: 0
 --- !u!1001 &1138594444186274522
 PrefabInstance:

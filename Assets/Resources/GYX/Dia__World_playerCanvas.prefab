@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.927, y: -2.1686}
-  m_SizeDelta: {x: 435.43, y: 134.83}
+  m_AnchoredPosition: {x: 22.927, y: 4.1607027}
+  m_SizeDelta: {x: 435.43, y: 261.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6206301683290932602
 CanvasRenderer:
@@ -115,8 +115,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.349, y: -2.025}
-  m_SizeDelta: {x: 44.698, y: 13.77}
+  m_AnchoredPosition: {x: 22.349, y: 4.161}
+  m_SizeDelta: {x: 44.698, y: 26.141}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6206301683606594228
 CanvasRenderer:
@@ -334,6 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel_dialogue: {fileID: 6206301683866224883}
   txt_dialogue: {fileID: 6206301683290931845}
+  Human: {fileID: 0}
+  Yiyi: {fileID: 0}
   dialogueLines: []
   currentLine: 0
   textInterval: 0.1
