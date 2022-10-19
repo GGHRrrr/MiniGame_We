@@ -54,10 +54,11 @@ public class Player : MonoBehaviour
                     Debug.Log("使用易拉罐,防止用户使用完卡关");
                 break;
             case Item.ItemType.shengzi:
-                if(item.amount <= 1)
-                {
-                    inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
-                }
+                EventManager.Instance().EventTrigger(EventTypeEnum.USEITEM_SHENGZI.ToString(), "");
+                //if(item.amount <= 1)
+                //{
+                //    inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
+                //}
                 break;
         }
     }
