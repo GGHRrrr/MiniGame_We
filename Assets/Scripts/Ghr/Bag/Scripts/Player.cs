@@ -55,6 +55,7 @@ public class Player : MonoBehaviour
                 break;
             case Item.ItemType.shengzi:
                 EventManager.Instance().EventTrigger(EventTypeEnum.USEITEM_SHENGZI.ToString(), "");
+                inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
                 //if(item.amount <= 1)
                 //{
                 //    inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });

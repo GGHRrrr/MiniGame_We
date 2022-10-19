@@ -145,6 +145,8 @@ public class YiYiControll : MonoBehaviour
                 ShowYiYiE(true);
                 break;
             case "shengzi":
+                GameObject.Find("Min Camera").gameObject.GetComponent<Camera>().enabled = true;
+                GameObject.Find("Main Camera").gameObject.GetComponent<Camera>().enabled = false;
                 qte.SetActive(true);
                 collision.gameObject.GetComponent<Animator>().enabled = true;
                 gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
