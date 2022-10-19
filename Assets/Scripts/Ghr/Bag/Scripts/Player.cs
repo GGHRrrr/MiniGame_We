@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     {
         //ItemWorld.SpawnItemWorld(new Vector3(0, 0), new Item { itemType = Item.ItemType.battery, amount = 1 });
         inventory.AddItem(new Item { itemType=Item.ItemType.yilaguan,amount=1});
+        inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
     }
     //private void OnTriggerEnter(Collider other)
     //{
@@ -44,8 +46,18 @@ public class Player : MonoBehaviour
         switch(item.itemType)
         {
             case Item.ItemType.yilaguan:
-                EventManager.Instance().EventTrigger(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), "");
-                Debug.Log("使用易拉罐");
+                    EventManager.Instance().EventTrigger(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), "");
+                if (item.amount <= 1)
+                {
+                    inventory.AddItem(new Item { itemType = Item.ItemType.yilaguan, amount = 1 });
+                }
+                    Debug.Log("使用易拉罐,防止用户使用完卡关");
+                break;
+            case Item.ItemType.shengzi:
+                if(item.amount <= 1)
+                {
+                    inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
+                }
                 break;
         }
     }

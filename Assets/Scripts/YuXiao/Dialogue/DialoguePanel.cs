@@ -168,6 +168,7 @@ public class DialoguePanel : MonoBehaviour
     //单独显示一句对话内容
     public void ShowTriggerDialogue(string dialogueInfo)
     {
+        panel_dialogue.gameObject.SetActive(true);
         string info = SetPosition(dialogueInfo, fixedPos);
         StartCoroutine(ScrollingOne(info));
     }

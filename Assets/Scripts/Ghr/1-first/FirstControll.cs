@@ -34,20 +34,15 @@ public class FirstControll : MonoBehaviour
     private bool isInsideRight = false;
     private bool isUnderLeft = false;
     #endregion
-    private void Awake()
-    {
-        
-    }
     private void Start()
     {
         post = GameObject.Find("Post").gameObject;
-        audio = GetComponent<AudioSource>();
+        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
         cantOpenDoor = Resources.Load<AudioClip>("Audio/Sound/门锁住打不开");
         openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     private void Update()
     {
-
         #region 玩家交互事件
         if (isEnterDoor)
         {
@@ -78,10 +73,11 @@ public class FirstControll : MonoBehaviour
                 }
             } 
         }
-        if(isEnterWindow)
+        if(isEnterWindow&&!isPlayerEnterWork)
         {
             if (Input.GetKeyDown(KeyCode.E))
-            { 
+            {
+                DialoguePanel.Instance.ShowTriggerDialogue("Human:YiYi,你先进去，将正门打开");
                 Debug.Log("玩家在窗户吗，输出文字");
             }
         }
@@ -129,6 +125,7 @@ public class FirstControll : MonoBehaviour
         {
             case "breakWindow":
                 ShowPlayerE(true);
+                isEnterWindow = true;
                 Debug.Log("碰到窗户了！");
                 break;
             case "workDoor":
@@ -159,6 +156,7 @@ public class FirstControll : MonoBehaviour
         {
             case "breakWindow":
                 ShowPlayerE(false);
+                isEnterWindow=false;
                 break;
             case "workDoor":
                 isEnterDoor = false;
@@ -210,5 +208,9 @@ public class FirstControll : MonoBehaviour
                 e.gameObject.SetActive(false);
                 e.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             }
+    }
+    void UseShengzi(object info)
+    {
+
     }
 }

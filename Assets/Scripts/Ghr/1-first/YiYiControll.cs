@@ -6,9 +6,10 @@ public class YiYiControll : MonoBehaviour
 {
     //音效组件
     private AudioClip openSwitch;
-
+    private AudioClip openDoor;
     //初始相机跟随数值2.5 49 
     //进入工厂相机跟随数值2.5 15
+    public GameObject e;
     public GameObject workEnv;
     public GameObject workEnv_Inside;
     public GameObject player;
@@ -37,6 +38,7 @@ public class YiYiControll : MonoBehaviour
 
         //音效
         openSwitch = Resources.Load<AudioClip>("Audio/Sound/拉下电闸");
+        openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     private void Update()
     {
@@ -81,6 +83,7 @@ public class YiYiControll : MonoBehaviour
                     cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
                     post.transform.GetChild(0).gameObject.SetActive(true);
+                    DialoguePanel.Instance.ShowTriggerDialogue("Yiyi:电路情况异常");
                     //player.GetComponent<SwitchRole>().IsFollow = false;
                 }
             }//进入窗户
@@ -130,12 +133,15 @@ public class YiYiControll : MonoBehaviour
             case "breakWindow":
                 Debug.Log("yiyi碰到窗户了！");
                 isEnterWindow = true;
+                ShowYiYiE(true);
                 break;
             case "handle(up)":
                 isEnterHandle = true;
+                ShowYiYiE(true);
                 break;
             case "box":
                 isEnterBox = true;
+                ShowYiYiE(true);
                 break;
         }
     }
@@ -145,12 +151,15 @@ public class YiYiControll : MonoBehaviour
             {
                 case "breakWindow":
                 isEnterWindow = false;
+                ShowYiYiE(false);
                 break;
             case "handle(up)":
                 isEnterHandle = false;
+                ShowYiYiE(false);
                 break;
             case "box":
                 isEnterBox = false;
+                ShowYiYiE(false);
                 break;
         }
     }
@@ -207,7 +216,9 @@ public class YiYiControll : MonoBehaviour
     //电路解密完做一个渐隐效果，可以考虑用Dotween,目前用携程来做
     IEnumerator CricuitAni()
     {
-        yield return null;    
+        yield return null;
+        if (!player.GetComponent<AudioSource>().isPlaying)
+            player.GetComponent<AudioSource>().PlayOneShot(openDoor, 0.8f);
         workEnv.gameObject.SetActive(true);
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
         post.transform.GetChild(0).gameObject.SetActive(false);
@@ -249,6 +260,19 @@ public class YiYiControll : MonoBehaviour
                 yield return new WaitForSeconds(0.05f);
                 spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a + 0.05f);
             }
+        }
+    }
+    void ShowYiYiE(bool isEnter)
+    {
+        if (player.GetComponent<SwitchRole>().isYiYi && isEnter)
+        {
+            e.gameObject.SetActive(true);
+            StartCoroutine(Fade(e, true));
+        }
+        if (player.GetComponent<SwitchRole>().isYiYi && !isEnter)
+        {
+            e.gameObject.SetActive(false);
+            e.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }
     }
 }

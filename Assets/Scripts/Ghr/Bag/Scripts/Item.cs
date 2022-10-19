@@ -12,6 +12,7 @@ public class Item
     public enum ItemType
     {
        yilaguan,
+       shengzi,
     }
     /// <summary>
     /// 道具的的类型，数量等属性的定义
@@ -29,6 +30,8 @@ public class Item
             default:
             case ItemType.yilaguan:
                 return ItemAssets.Instance.yilaguan_Spr;
+                case ItemType.shengzi:
+                return ItemAssets.Instance.shengzi_Spr;
         }
     }
 }
