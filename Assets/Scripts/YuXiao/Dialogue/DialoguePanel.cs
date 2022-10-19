@@ -23,7 +23,7 @@ public class DialoguePanel : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     #endregion

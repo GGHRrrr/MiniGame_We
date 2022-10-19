@@ -7,6 +7,12 @@ public class CanvasFollow : MonoBehaviour
     public Transform followTarget;
     public float smoothSpeed;
 
+    private void Start()
+    {
+        followTarget = GameObject.Find("Player/Human/DialoguePlayer").transform;
+        print(followTarget);
+    }
+
     void Update()
     {
         if (followTarget.transform.position.x != transform.position.x)

@@ -242,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -11.22, y: 0}
+  m_AnchoredPosition: {x: -11.219971, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6206301684005723660
@@ -334,8 +334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel_dialogue: {fileID: 6206301683866224883}
   txt_dialogue: {fileID: 6206301683290931845}
-  Human: {fileID: 0}
-  Yiyi: {fileID: 0}
   dialogueLines: []
   currentLine: 0
   textInterval: 0.1

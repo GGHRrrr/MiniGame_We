@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirstControll : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class FirstControll : MonoBehaviour
     private AudioSource audio;
     //开门音效文件
     private AudioClip cantOpenDoor;
-    private AudioClip openDoor;
 
     #endregion
     #region 判断条件
@@ -33,13 +33,13 @@ public class FirstControll : MonoBehaviour
     private bool isInsideLeft = false;
     private bool isInsideRight = false;
     private bool isUnderLeft = false;
+    private bool isNextLevel = false;
     #endregion
     private void Start()
     {
         post = GameObject.Find("Post").gameObject;
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
         cantOpenDoor = Resources.Load<AudioClip>("Audio/Sound/门锁住打不开");
-        openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     private void Update()
     {
@@ -117,6 +117,17 @@ public class FirstControll : MonoBehaviour
                 yiyi.transform.localPosition = new Vector3(130f, yiyi.transform.localPosition.y, yiyi.transform.localPosition.z);
             }
         }
+
+        //进入下一关
+        if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                int count = SceneManager.sceneCount;
+                if (count < 2)
+                    SceneManager.LoadSceneAsync(count + 1);
+            }
+        }
         #endregion
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -143,10 +154,15 @@ public class FirstControll : MonoBehaviour
                 ShowPlayerE(true);
                 Debug.Log("碰到里边的门了，准备进入下一层");
                 break;
-                case"under_left":
+            case"under_left":
                 isUnderLeft = true;
                 ShowPlayerE(true);
                 Debug.Log("碰到地下一层的门了，准备下一层");
+                break;
+            case "NextLevel":
+                ShowPlayerE(true);
+                Debug.Log("碰到下一关的门了，准备进入下一关");
+                isNextLevel = true;
                 break;
         }
     }
@@ -173,6 +189,10 @@ public class FirstControll : MonoBehaviour
             case "under_left":
                 isUnderLeft = false;
                 ShowPlayerE(false);
+                break;
+            case "NextLevel":
+                ShowPlayerE(false);
+                isNextLevel = false;
                 break;
         }
     }

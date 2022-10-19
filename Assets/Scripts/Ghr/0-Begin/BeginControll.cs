@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class BeginControll : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class BeginControll : MonoBehaviour
     GameObject playerPar;//角色父物体
     GameObject player;//角色
     GameObject yiYI;//机器人
+
+    public GameObject e;
+
+    private bool isNextLevel = false;
+
     private void Awake()
     {
         EventManager.Instance().AddEventListener(EventTypeEnum.TALKWITH_YIYI.ToString(), TalkWith_YiYi);
@@ -30,6 +36,24 @@ public class BeginControll : MonoBehaviour
         player= playerPar.transform.GetChild(0).gameObject;
         yiYI = playerPar.transform.GetChild(1).gameObject;
         StartCoroutine(PlayOpenningAni());
+    }
+
+    private void Update()
+    {
+        //进入下一关
+        if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                int count = SceneManager.GetActiveScene().buildIndex;
+                print(count);
+                if (count < 2)
+                {
+                    SceneManager.LoadSceneAsync(count + 1);
+                }
+                    
+            }
+        }
     }
 
     /// <summary>
@@ -147,12 +171,28 @@ public class BeginControll : MonoBehaviour
             case "Environments_Fanmaiji":
                 Debug.Log("我碰到贩卖机了");//可以做老虎机玩法,有时间再说
                 break;
+            case "NextLevel":
+                ShowPlayerE(true);
+                Debug.Log("碰到下一关的门了，准备进入下一关");
+                isNextLevel = true;
+                break;
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (isTouchGar == true)
             garbage = collision.gameObject;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        switch (collision.gameObject.name)
+        {
+            case "NextLevel":
+                ShowPlayerE(false);
+                isNextLevel = false;
+                break;
+        }
     }
     #region 触碰垃圾桶
     void UseYilaguan_Garbage(object info)
@@ -166,5 +206,43 @@ public class BeginControll : MonoBehaviour
             EventManager.Instance().RemoveEventListener(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), UseYilaguan_Garbage);
         }
     }
+    #endregion
+
+    #region 显示玩家交互
+    void ShowPlayerE(bool isEnter)
+    {
+        if (!gameObject.GetComponent<SwitchRole>().isYiYi && isEnter)
+        {
+            e.gameObject.SetActive(true);
+            StartCoroutine(Fade(e, true));
+        }
+        if (!gameObject.GetComponent<SwitchRole>().isYiYi && !isEnter)
+        {
+            e.gameObject.SetActive(false);
+            e.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
+    }
+
+    IEnumerator Fade(GameObject gameObj, bool isFade)//写一个渐变函数
+    {
+        SpriteRenderer spriteRenderer = gameObj.GetComponent<SpriteRenderer>();
+        if (isFade)
+        {
+            while (spriteRenderer.color.a > 0)
+            {
+                yield return new WaitForSeconds(0.05f);
+                spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a - 0.05f);
+            }
+        }
+        else
+        {
+            while (spriteRenderer.color.a < 1)
+            {
+                yield return new WaitForSeconds(0.05f);
+                spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a + 0.05f);
+            }
+        }
+    }
+
     #endregion
 }

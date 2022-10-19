@@ -53,16 +53,24 @@ public class SwitchRole : MonoBehaviour
         pos = yiyi.localPosition;
         isFollow = true;
         //Ìí¼ÓÇÐ»»×´Ì¬ÊÂ¼þ
-        EventManager.Instance().AddEventListener("KeyDown", SwitchRoleFunc);
+        //EventManager.Instance().AddEventListener("KeyDown", SwitchRoleFunc);
 
     }
 
-    private void SwitchRoleFunc(object key)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            IsFollow = !IsFollow;
+        }
+    }
+
+    /*private void SwitchRoleFunc(object key)
     {
         KeyCode keyCode = (KeyCode)key;
         if (keyCode == KeyCode.Tab)
         {
             IsFollow = !IsFollow;
         }
-    }
+    }*/
 }
