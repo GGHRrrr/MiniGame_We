@@ -14,7 +14,7 @@ public class QteControll : MonoBehaviour
     public GameObject arrow;//往返的箭头
     public Transform leftPoint;//左边终点位置
     public Transform rightPoint;//右边终点位置
-
+    public GameObject black;
     [SerializeField] private MoveType moveType;//移动类型
     [SerializeField] private float moveSpeed;//移动速度
 
@@ -73,10 +73,15 @@ public class QteControll : MonoBehaviour
             if (Mathf.Abs( arrow.transform.localPosition.x - mid.transform.localPosition.x)<= 0.5f)
             {
                 Debug.Log("成功");
-                yiyi.GetComponent<YiyiMove>().moveSpeed = 10;
-                player.GetComponent<PlayerMove>().moveSpeed = 7;
-                shengzi.gameObject.SetActive(false);
-                gameObject.SetActive(false);
+                if(player.transform.position.x-gameObject.transform.position.x<0)
+                {
+                    QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
+                }
+                else
+                {
+                    QteJump(new Vector3(165f, player.transform.localPosition.y, player.transform.localPosition.z));
+                }
+
             }
             else
             {
@@ -86,5 +91,20 @@ public class QteControll : MonoBehaviour
                 Debug.Log("失败");
             }
         }
+    }
+    void QteJump(Vector3 trans)
+    {
+        yiyi.GetComponent<YiyiMove>().moveSpeed = 10;
+        player.GetComponent<PlayerMove>().moveSpeed = 7;
+        shengzi.gameObject.SetActive(false);
+        shengzi.gameObject.GetComponent<Animator>().enabled = false;
+        shengzi.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        GameObject.Find("Main Camera").gameObject.GetComponent<Camera>().enabled = true;
+        GameObject.Find("Min Camera").gameObject.GetComponent<Camera>().enabled = false;
+        player.GetComponent<SwitchRole>().IsFollow = true;
+        yiyi.transform.GetChild(3).gameObject.SetActive(false);
+        player.transform.localPosition = trans;
+        player.GetComponent<Animator>().Play("getUp");
+        gameObject.SetActive(false);
     }
 }
