@@ -16,6 +16,7 @@ public class YiYiControll : MonoBehaviour
     public GameObject handle;
     public GameObject box;
     public GameObject cir;
+    public GameObject qte;
     private GameObject cam;
     private GameObject post;
     public static bool isTotalunLocked=false;//解密全部解锁
@@ -142,6 +143,13 @@ public class YiYiControll : MonoBehaviour
             case "box":
                 isEnterBox = true;
                 ShowYiYiE(true);
+                break;
+            case "shengzi":
+                qte.SetActive(true);
+                collision.gameObject.GetComponent<Animator>().enabled = true;
+                gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
+                player.GetComponent<PlayerMove>().moveSpeed = 0;
+                Debug.Log("碰到绳子开始qte玩法");
                 break;
         }
     }

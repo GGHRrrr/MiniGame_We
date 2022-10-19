@@ -25,7 +25,6 @@ public class FirstControll : MonoBehaviour
 
     #endregion
     #region 判断条件
-
     public static bool isPlayerEnterWork = false;
     public static bool isNowEnter = false;
     private bool isEnterDoor=false;
@@ -33,7 +32,12 @@ public class FirstControll : MonoBehaviour
     private bool isInsideLeft = false;
     private bool isInsideRight = false;
     private bool isUnderLeft = false;
+    private bool isEnterHole = false;
     #endregion
+    private void Awake()
+    {
+        EventManager.Instance().AddEventListener(EventTypeEnum.USEITEM_SHENGZI.ToString(), UseShengzi);
+    }
     private void Start()
     {
         post = GameObject.Find("Post").gameObject;
@@ -148,6 +152,10 @@ public class FirstControll : MonoBehaviour
                 ShowPlayerE(true);
                 Debug.Log("碰到地下一层的门了，准备下一层");
                 break;
+            case "holetrigger":
+                isEnterHole = true;
+                Debug.Log("碰到坑了");
+                break;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -173,6 +181,9 @@ public class FirstControll : MonoBehaviour
             case "under_left":
                 isUnderLeft = false;
                 ShowPlayerE(false);
+                break;
+            case "holetrigger":
+                isEnterHole = false;
                 break;
         }
     }
@@ -211,6 +222,10 @@ public class FirstControll : MonoBehaviour
     }
     void UseShengzi(object info)
     {
-
+        if(isEnterHole)
+        {
+            var shengzi = GameObject.Find("Envrionments/WorkImage").transform.GetChild(1).gameObject;
+            shengzi.SetActive(true);
+        }
     }
 }

@@ -19,8 +19,9 @@ public class QteControll : MonoBehaviour
     [SerializeField] private float moveSpeed;//移动速度
 
     public bool isPress = false;//是否按压
-
-
+    public GameObject player;
+    public GameObject yiyi;
+    public GameObject shengzi;
     private void OnEnable()
     {
         InitQte();
@@ -37,9 +38,10 @@ public class QteControll : MonoBehaviour
     }
     private void Update()
     {
-        PressKey();
-        if (isPress==false)
-         ArrowMove();
+         PressKey();
+        if (isPress == false)
+            //ArrowMove();
+            Invoke("ArrowMove", 0.5f);
     }
     /// <summary>
     /// 循环移动
@@ -68,12 +70,19 @@ public class QteControll : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         { 
             isPress = true;
-            if (Mathf.Abs( arrow.transform.localPosition.x - mid.transform.localPosition.x)<= 0.1f)
+            if (Mathf.Abs( arrow.transform.localPosition.x - mid.transform.localPosition.x)<= 0.5f)
             {
                 Debug.Log("成功");
+                yiyi.GetComponent<YiyiMove>().moveSpeed = 10;
+                player.GetComponent<PlayerMove>().moveSpeed = 7;
+                shengzi.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
             else
             {
+                InitQte();
+                //isPress = false;
+                Invoke("ArrowMove", 1f);
                 Debug.Log("失败");
             }
         }
