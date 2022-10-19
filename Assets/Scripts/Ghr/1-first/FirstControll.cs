@@ -127,7 +127,7 @@ public class FirstControll : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                int count = SceneManager.sceneCount;
+                int count = SceneManager.GetActiveScene().buildIndex ;
                 if (count < 2)
                     SceneManager.LoadSceneAsync(count + 1);
             }
