@@ -163,7 +163,7 @@ public class DialoguePanel : MonoBehaviour
             //禁用跟随组件
             cf.enabled = false;
             //交互物体说的话
-            transform.position = fixedPos.position;
+            transform.position = fixedPos.position + Vector3.up * 2;
             //print(fixedPos.position);
             res = info;
         }
