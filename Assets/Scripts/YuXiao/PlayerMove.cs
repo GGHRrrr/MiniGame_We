@@ -52,7 +52,8 @@ public class PlayerMove : MonoBehaviour
             moveH = Input.GetAxisRaw("Horizontal");
             //print(moveH);
             //moveV = Input.GetAxisRaw("Vertical");
-            Move();
+            if (!DialoguePanel.Instance.IsDialogue)
+                Move();
             Flip();
         }
        

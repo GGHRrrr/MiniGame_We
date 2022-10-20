@@ -247,7 +247,8 @@ public class FirstControll : MonoBehaviour
                 isEnterHole = true;
                 Debug.Log("碰到坑了");
                 //触发对话
-                DialoguePanel.Instance.ShowTriggerDialogue("Human:也许我需要另寻他法。");
+                string[] dialogues = { "Human:也许我需要另寻他法。" };
+                DialoguePanel.Instance.ShowDialogue(dialogues);
                 break;
             case "outPostDoor":
                 ShowPlayerE(true);

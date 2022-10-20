@@ -27,6 +27,15 @@ public class DialoguePanel : MonoBehaviour
     }
 
     #endregion
+    //布尔变量，监听玩家的对话行为
+    public bool IsDialogue
+    {
+        get
+        {
+            if (panel_dialogue.activeInHierarchy) return true;
+            return false;
+        }
+    }
 
     //对话面板对象
     public GameObject panel_dialogue;
@@ -86,30 +95,39 @@ public class DialoguePanel : MonoBehaviour
     {
         //当点击鼠标左键(空格)，在面板激活的情况下，在文字显示完成的情况下
         if ((Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)) 
-            && panel_dialogue.activeInHierarchy 
-            && !isScrolling)
+            && panel_dialogue.activeInHierarchy )
         {
-            
-            //切换下一句
-            currentLine++;
-
-            //判断数组是否越界
-            if (currentLine >= dialogueLines.Length)
+            if (isScrolling)
             {
-                panel_dialogue.SetActive(false);
-                cf.enabled = true;
+                //如果文字正在滚动，按一下显现全部文字
+                StopAllCoroutines();
+                //dialogueLines[currentLine] = SetPosition(dialogueLines[currentLine], fixedPos);
+                txt_dialogue.text = dialogueLines[currentLine];
+                
+                isScrolling = !isScrolling;
             }
             else
             {
-                //设置对话位置(拿到对话内容)
-                dialogueLines[currentLine] = SetPosition(dialogueLines[currentLine],fixedPos);
-                //txt_dialogue.text = dialogueLines[currentLine];
-                cf.enabled = true;
-                //开启协程
-                StartCoroutine(ScrollingText());
-            }
-               
+                //如果文字播放完成
+                //切换下一句
+                currentLine++;
 
+                //判断数组是否越界
+                if (currentLine >= dialogueLines.Length)
+                {
+                    panel_dialogue.SetActive(false);
+                    cf.enabled = true;
+                }
+                else
+                {
+                    //设置对话位置(拿到对话内容)
+                    dialogueLines[currentLine] = SetPosition(dialogueLines[currentLine], fixedPos);
+                    //txt_dialogue.text = dialogueLines[currentLine];
+                    cf.enabled = true;
+                    //开启协程
+                    StartCoroutine(ScrollingText());
+                }
+            }
         }
     }
 

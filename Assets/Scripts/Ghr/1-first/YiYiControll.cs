@@ -84,7 +84,8 @@ public class YiYiControll : MonoBehaviour
                     cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
                     post.transform.GetChild(0).gameObject.SetActive(true);
-                    DialoguePanel.Instance.ShowTriggerDialogue("Yiyi:电路情况异常");
+                    string[] dialogues = { "Yiyi:电路情况异常" };
+                    DialoguePanel.Instance.ShowDialogue(dialogues);
                     //player.GetComponent<SwitchRole>().IsFollow = false;
                 }
             }//进入窗户

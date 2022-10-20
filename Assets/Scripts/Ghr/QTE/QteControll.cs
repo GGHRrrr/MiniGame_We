@@ -72,7 +72,8 @@ public class QteControll : MonoBehaviour
     }
     void dia()
     {
-        DialoguePanel.Instance.ShowTriggerDialogue("Yiyi:6!(= =)");
+        string[] info = { "Yiyi:6!(= =)" };
+        DialoguePanel.Instance.ShowDialogue(info);
     }
     /// <summary>
     /// 按键反馈
@@ -88,7 +89,8 @@ public class QteControll : MonoBehaviour
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
                     QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
-                    DialoguePanel.Instance.ShowTriggerDialogue("Human:有惊无险，呼......身法如何？");
+                    string[] info = { "Human:有惊无险，呼......身法如何？" };
+                    DialoguePanel.Instance.ShowDialogue(info);
                     Invoke("dia", 2f);
                 }
                 else
