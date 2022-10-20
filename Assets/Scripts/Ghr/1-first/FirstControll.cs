@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,7 @@ public class FirstControll : MonoBehaviour
     public GameObject workEnv;
     public GameObject workInsideEnv;
     public GameObject workInsidUnder;
+    public GameObject outPostRoom;
     //后处理
     private GameObject post;
 
@@ -27,13 +29,15 @@ public class FirstControll : MonoBehaviour
     #region 判断条件
     public static bool isPlayerEnterWork = false;
     public static bool isNowEnter = false;
-    private bool isEnterDoor=false;
-    private bool isEnterWindow = false;
-    private bool isInsideLeft = false;
-    private bool isInsideRight = false;
-    private bool isUnderLeft = false;
-    private bool isNextLevel = false;
-    private bool isEnterHole = false;
+     bool isEnterDoor=false;
+     bool isEnterWindow = false;
+     bool isInsideLeft = false;
+     bool isInsideRight = false;
+     bool isUnderLeft = false;
+     bool isNextLevel = false;
+     bool isEnterHole = false;
+     bool isEnterOutPostDoor = false;
+     bool isExitOutPost = false;
     #endregion
     private void Awake()
     {
@@ -121,9 +125,37 @@ public class FirstControll : MonoBehaviour
                 yiyi.transform.localPosition = new Vector3(130f, yiyi.transform.localPosition.y, yiyi.transform.localPosition.z);
             }
         }
-
-        //进入下一关
-        if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
+        //进入哨站
+        if(isEnterOutPostDoor&!gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            //49. 2.5
+            //44.5/47   44
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                //cam.transform.position = new Vector3(44, cam.transform.position.y, cam.transform.position.z);
+                cam.GetComponent<CameraFollow>().maxPos = new Vector2(47, 0);
+                cam.GetComponent<CameraFollow>().minPos = new Vector2(44.5f, 0);
+                cam.transform.position = new Vector3(45, cam.transform.position.y, cam.transform.position.z);
+                gameObject.transform.localPosition = new Vector3(203f, transform.localPosition.y, transform.localPosition.z);
+                outPostRoom.SetActive(true);
+                workEnv.SetActive(false);
+            }
+            
+        }
+        //离开哨站
+        if (isExitOutPost && !gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                outPostRoom.SetActive(false);
+                workEnv.SetActive(true);
+                cam.GetComponent<CameraFollow>().maxPos = new Vector2(49f, 0);
+                cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
+                gameObject.transform.localPosition = new Vector3(230f, transform.localPosition.y, transform.localPosition.z);
+            }
+        }
+            //进入下一关
+            if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -167,11 +199,22 @@ public class FirstControll : MonoBehaviour
                 isEnterHole = true;
                 Debug.Log("碰到坑了");
                 break;
+            case "outPostDoor":
+                ShowPlayerE(true);
+                isEnterOutPostDoor = true;
+                Debug.Log("碰到哨站了，准备进入");
+                break;
+            case "outpostleft":
+                ShowPlayerE(true);
+                isExitOutPost = true;
+                Debug.Log("准备离开哨站");
+                break;
             case "NextLevel":
                 ShowPlayerE(true);
                 Debug.Log("碰到下一关的门了，准备进入下一关");
                 isNextLevel = true;
                 break;
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -204,6 +247,15 @@ public class FirstControll : MonoBehaviour
                 break;
             case "holetrigger":
                 isEnterHole = false;
+                ShowPlayerE(false);
+                break;
+            case "outPostDoor":
+                isEnterOutPostDoor = false;
+                ShowPlayerE(false);
+                break;
+            case "outpostleft":
+                ShowPlayerE(false);
+                isExitOutPost = false;
                 break;
         }
     }
