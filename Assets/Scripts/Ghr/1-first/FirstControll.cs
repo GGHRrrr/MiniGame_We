@@ -177,11 +177,6 @@ public class FirstControll : MonoBehaviour
             isEndDia = false;
             //移动位置，防止重复触发对话
             transform.position = new Vector3(transform.position.x + 2, transform.position.y,transform.position.z);
-            //触发对话，取消控制移动
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            GetComponent<PlayerMove>().anim.SetBool("walk",false);
-            GetComponent<PlayerMove>().enabled = false;
-            GetComponent<SwitchRole>().enabled = false;
             
             print("已关闭移动");
             string[] dialogues =
@@ -194,13 +189,7 @@ public class FirstControll : MonoBehaviour
             DialoguePanel.Instance.ShowDialogue(dialogues);
             
         }
-        //当对话播放完成时，开启移动权限
-        if (!dialogueFrame.activeInHierarchy)
-        {
-            GetComponent<PlayerMove>().enabled = true;
-            GetComponent<SwitchRole>().enabled = true;
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        }
+        
 
         //进入下一关
         if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)

@@ -73,7 +73,7 @@ public class QteControll : MonoBehaviour
     /// </summary>
     void PressKey()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         { 
             isPress = true;
             if (Mathf.Abs( arrow.transform.localPosition.x - mid.transform.localPosition.x)<= 0.5f)

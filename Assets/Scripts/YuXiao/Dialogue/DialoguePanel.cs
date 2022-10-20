@@ -32,7 +32,10 @@ public class DialoguePanel : MonoBehaviour
     {
         get
         {
-            if (panel_dialogue.activeInHierarchy) return true;
+            if (panel_dialogue.activeInHierarchy)
+            {
+                return true;
+            }
             return false;
         }
     }

@@ -53,8 +53,16 @@ public class PlayerMove : MonoBehaviour
             //print(moveH);
             //moveV = Input.GetAxisRaw("Vertical");
             if (!DialoguePanel.Instance.IsDialogue)
+            {
+                rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
                 Move();
-            Flip();
+                Flip();
+            }
+            else
+            {
+                rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+                anim.SetBool("walk", false);
+            }  
         }
        
     }
