@@ -22,6 +22,10 @@ public class QteControll : MonoBehaviour
     public GameObject player;
     public GameObject yiyi;
     public GameObject shengzi;
+
+    //音效
+    private AudioSource audio;
+    private AudioClip fall;
     private void OnEnable()
     {
         InitQte();
@@ -31,6 +35,10 @@ public class QteControll : MonoBehaviour
     /// </summary>
     void InitQte()
     {
+        //音效
+        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
+        fall = Resources.Load<AudioClip>("Audio/Sound/跳跃落地-带衣服声");
+
         moveType = MoveType.right;
         moveSpeed = Random.Range(10f, 25f);
         isPress = false;
@@ -106,5 +114,8 @@ public class QteControll : MonoBehaviour
         player.transform.localPosition = trans;
         player.GetComponent<Animator>().Play("getUp");
         gameObject.SetActive(false);
+        //音效
+        if (!audio.isPlaying)
+            audio.PlayOneShot(fall, 0.8f);
     }
 }
