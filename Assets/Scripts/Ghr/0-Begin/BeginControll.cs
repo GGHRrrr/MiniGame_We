@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class BeginControll : MonoBehaviour
 {
+    //音效
+    private AudioSource audio;
+    private AudioClip moveGarbage;
+
     //过场动画
     private 
     Camera minCamera;//特写摄像机
@@ -29,6 +33,11 @@ public class BeginControll : MonoBehaviour
     }
     private void Start()
     {
+        //音效
+        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
+        moveGarbage = Resources.Load<AudioClip>("Audio/Sound/移动垃圾桶");
+
+
         minCamera = GameObject.Find("MinCamera").GetComponent<Camera>();
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         openingAniPoint = GameObject.Find("Opening_Animation");
@@ -201,6 +210,10 @@ public class BeginControll : MonoBehaviour
         if (isTouchGar)
         {
             Debug.Log("执行了吗");
+            //移动垃圾桶音效
+            if (!audio.isPlaying)
+                audio.PlayOneShot(moveGarbage, 0.8f);
+
             garbage.transform.localPosition = new Vector2(garbage.transform.localPosition.x, garbage.transform.localPosition.y + 0.5f);
             garbage.transform.GetChild(1).GetComponent<Collider2D>().enabled = false;
             EventManager.Instance().RemoveEventListener(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), UseYilaguan_Garbage);
