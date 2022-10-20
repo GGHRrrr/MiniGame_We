@@ -70,6 +70,10 @@ public class QteControll : MonoBehaviour
                 break;
         }
     }
+    void dia()
+    {
+        DialoguePanel.Instance.ShowTriggerDialogue("Yiyi:6!(= =)");
+    }
     /// <summary>
     /// 按键反馈
     /// </summary>
@@ -84,6 +88,8 @@ public class QteControll : MonoBehaviour
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
                     QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
+                    DialoguePanel.Instance.ShowTriggerDialogue("Human:身法如何？");
+                    Invoke("dia", 2f);
                 }
                 else
                 {
