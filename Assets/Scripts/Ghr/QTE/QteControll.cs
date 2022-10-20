@@ -22,10 +22,7 @@ public class QteControll : MonoBehaviour
     public GameObject player;
     public GameObject yiyi;
     public GameObject shengzi;
-
-    //音效
-    private AudioSource audio;
-    private AudioClip fall;
+    
     private void OnEnable()
     {
         InitQte();
@@ -35,10 +32,6 @@ public class QteControll : MonoBehaviour
     /// </summary>
     void InitQte()
     {
-        //音效
-        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
-        fall = Resources.Load<AudioClip>("Audio/Sound/跳跃落地-带衣服声");
-
         moveType = MoveType.right;
         moveSpeed = Random.Range(10f, 25f);
         isPress = false;
@@ -88,7 +81,7 @@ public class QteControll : MonoBehaviour
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
                     QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
-                    DialoguePanel.Instance.ShowTriggerDialogue("Human:有惊无险，呼......身法如何？");
+                    DialoguePanel.Instance.ShowTriggerDialogue("Human:身法如何？");
                     Invoke("dia", 2f);
                 }
                 else
@@ -113,6 +106,7 @@ public class QteControll : MonoBehaviour
         shengzi.gameObject.SetActive(false);
         shengzi.gameObject.GetComponent<Animator>().enabled = false;
         shengzi.transform.localRotation = new Quaternion(0, 0, 0, 0);
+        shengzi.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).transform.localRotation = new Quaternion(0, 0, 0, 0);
         GameObject.Find("Main Camera").gameObject.GetComponent<Camera>().enabled = true;
         GameObject.Find("Min Camera").gameObject.GetComponent<Camera>().enabled = false;
         player.GetComponent<SwitchRole>().IsFollow = true;
@@ -120,8 +114,5 @@ public class QteControll : MonoBehaviour
         player.transform.localPosition = trans;
         player.GetComponent<Animator>().Play("getUp");
         gameObject.SetActive(false);
-        //音效
-        if (!audio.isPlaying)
-            audio.PlayOneShot(fall, 0.8f);
     }
 }
