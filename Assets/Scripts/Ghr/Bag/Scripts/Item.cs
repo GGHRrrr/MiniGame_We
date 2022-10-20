@@ -13,6 +13,7 @@ public class Item
     {
        yilaguan,
        shengzi,
+       shenfenpai,
     }
     /// <summary>
     /// 道具的的类型，数量等属性的定义
@@ -30,8 +31,10 @@ public class Item
             default:
             case ItemType.yilaguan:
                 return ItemAssets.Instance.yilaguan_Spr;
-                case ItemType.shengzi:
+            case ItemType.shengzi:
                 return ItemAssets.Instance.shengzi_Spr;
+            case ItemType.shenfenpai:
+                return ItemAssets.Instance.shenfenpai_Spr;
         }
     }
 }

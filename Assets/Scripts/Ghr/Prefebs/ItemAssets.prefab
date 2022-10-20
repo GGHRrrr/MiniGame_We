@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b2d6cd83555607478b69cf27a5b9ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yilaguan_Spr: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  yilaguan_Spr: {fileID: 21300000, guid: 813c7e1ef74171f40bafef32ec673485, type: 3}
+  shengzi_Spr: {fileID: 21300000, guid: 2610875a49134394d8b4e8094cc4559c, type: 3}
+  shenfenpai_Spr: {fileID: 21300000, guid: 63174a2b6690a4240b7bcb474bf4bcbf, type: 3}
   pfItemWorld: {fileID: 2989855471095696997, guid: b8b6e552613faba4694e248f01a03f6a, type: 3}

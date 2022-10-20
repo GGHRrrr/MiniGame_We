@@ -22,5 +22,6 @@ public class ItemAssets : MonoBehaviour
 
     public Sprite yilaguan_Spr;
     public Sprite shengzi_Spr;
+    public Sprite shenfenpai_Spr;
     public Transform pfItemWorld;
 }

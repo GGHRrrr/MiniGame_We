@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -149,9 +148,9 @@ public class FirstControll : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.E))
             {
                 //cam.transform.position = new Vector3(44, cam.transform.position.y, cam.transform.position.z);
-                cam.GetComponent<CameraFollow>().maxPos = new Vector2(47, 0);
-                cam.GetComponent<CameraFollow>().minPos = new Vector2(44.5f, 0);
-                cam.transform.position = new Vector3(45, cam.transform.position.y, cam.transform.position.z);
+                cam.GetComponent<CameraFollow>().maxPos = new Vector2(46, 0);
+                cam.GetComponent<CameraFollow>().minPos = new Vector2(45.6f, 0);
+                cam.transform.position = new Vector3(45.6f, cam.transform.position.y, cam.transform.position.z);
                 gameObject.transform.localPosition = new Vector3(203f, transform.localPosition.y, transform.localPosition.z);
                 outPostRoom.SetActive(true);
                 workEnv.SetActive(false);

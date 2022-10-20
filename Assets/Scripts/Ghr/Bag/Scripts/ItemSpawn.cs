@@ -30,6 +30,10 @@ public class ItemSpawn : MonoBehaviour
                 item= new Item { itemType = Item.ItemType.shengzi,amount = currAmount };
                 itemWorld.SetItem(item);
                 break;
+            case Item.ItemType.shenfenpai:
+                item = new Item { itemType = Item.ItemType.shenfenpai, amount = currAmount };
+                itemWorld.SetItem(item);
+                break;
         }
     }
 }
