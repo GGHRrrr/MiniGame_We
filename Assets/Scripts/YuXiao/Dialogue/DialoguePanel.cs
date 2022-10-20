@@ -62,7 +62,7 @@ public class DialoguePanel : MonoBehaviour
     }
 
     //面板的显示
-    public void ShowDialogue(string[] info , Transform fixedPos)
+    public void ShowDialogue(string[] info , Transform fixedPos = null)
     {
         //如果说当前已经在对话阶段，可以直接返回
         if (panel_dialogue.activeInHierarchy) return;

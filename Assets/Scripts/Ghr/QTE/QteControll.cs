@@ -88,7 +88,7 @@ public class QteControll : MonoBehaviour
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
                     QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
-                    DialoguePanel.Instance.ShowTriggerDialogue("Human:身法如何？");
+                    DialoguePanel.Instance.ShowTriggerDialogue("Human:有惊无险，呼......身法如何？");
                     Invoke("dia", 2f);
                 }
                 else

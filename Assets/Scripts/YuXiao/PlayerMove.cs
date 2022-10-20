@@ -13,7 +13,8 @@ public class PlayerMove : MonoBehaviour
     //刚体组件
     private Rigidbody2D rigidbody;
     //动画组件
-    private Animator anim;
+    [HideInInspector]
+    public Animator anim;
     //玩家音效组件
     private AudioSource audio;
     private AudioClip walkAudio;

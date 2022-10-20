@@ -24,6 +24,9 @@ public class FirstControll : MonoBehaviour
     private AudioSource audio;
     //开门音效文件
     private AudioClip cantOpenDoor;
+    //对话框
+    public GameObject dialogueFrame;
+    
 
     #endregion
     #region 判断条件
@@ -38,6 +41,9 @@ public class FirstControll : MonoBehaviour
      bool isEnterHole = false;
      bool isEnterOutPostDoor = false;
      bool isExitOutPost = false;
+    bool isEndDia = false;
+    //判断首次交互
+    private bool isFirst = true;
     #endregion
     private void Awake()
     {
@@ -85,7 +91,8 @@ public class FirstControll : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                DialoguePanel.Instance.ShowTriggerDialogue("Human:YiYi,你先进去，将正门打开");
+                string[] dialogues = { "Human:YiYi,你先进去，将正门打开。", "Yiyi:收到！" };
+                DialoguePanel.Instance.ShowDialogue(dialogues);
                 Debug.Log("玩家在窗户吗，输出文字");
             }
         }
@@ -108,6 +115,14 @@ public class FirstControll : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
+                //触发对话
+                string[] dialogues =
+                {
+                    "Human:这下捅了Yiyi窝了。",
+                    "Yiyi:SPY-007量产侦察机器人，人类值得信赖的好伙伴。",
+                    "Human:如果你突然关机混了进去，我肯定会把你和它们搞混的吧。"
+                };
+                DialoguePanel.Instance.ShowDialogue(dialogues);
                 workInsidUnder.gameObject.SetActive(true);
                 workInsideEnv.SetActive(false);
                 transform.localPosition = new Vector3(-10f, transform.localPosition.y, transform.localPosition.z);
@@ -119,6 +134,7 @@ public class FirstControll : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
+                
                 workInsidUnder.SetActive(false);
                 workInsideEnv.SetActive(true);
                 gameObject.transform.localPosition = new Vector3(130f, transform.localPosition.y, transform.localPosition.z);
@@ -154,8 +170,40 @@ public class FirstControll : MonoBehaviour
                 gameObject.transform.localPosition = new Vector3(230f, transform.localPosition.y, transform.localPosition.z);
             }
         }
-            //进入下一关
-            if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
+
+        //触发关卡结束对话
+        if (isEndDia && !gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            isEndDia = false;
+            //移动位置，防止重复触发对话
+            transform.position = new Vector3(transform.position.x + 2, transform.position.y,transform.position.z);
+            //触发对话，取消控制移动
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<PlayerMove>().anim.SetBool("walk",false);
+            GetComponent<PlayerMove>().enabled = false;
+            GetComponent<SwitchRole>().enabled = false;
+            
+            print("已关闭移动");
+            string[] dialogues =
+            {
+                "Human:人们都已经撤离了这座城市，是时候该踏上新的行程了。",
+                "Yiyi:下一处地点是稀望镇，但经过推算，那里依旧不存在人类生存的可能。",
+                "Human:也许吧。但那里是我们通往下一城市的必经之处，也许我们会有新的收获。",
+                "Human:看，就在那里。"
+            };
+            DialoguePanel.Instance.ShowDialogue(dialogues);
+            
+        }
+        //当对话播放完成时，开启移动权限
+        if (!dialogueFrame.activeInHierarchy)
+        {
+            GetComponent<PlayerMove>().enabled = true;
+            GetComponent<SwitchRole>().enabled = true;
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        }
+
+        //进入下一关
+        if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -198,6 +246,8 @@ public class FirstControll : MonoBehaviour
             case "holetrigger":
                 isEnterHole = true;
                 Debug.Log("碰到坑了");
+                //触发对话
+                DialoguePanel.Instance.ShowTriggerDialogue("Human:也许我需要另寻他法。");
                 break;
             case "outPostDoor":
                 ShowPlayerE(true);
@@ -208,6 +258,11 @@ public class FirstControll : MonoBehaviour
                 ShowPlayerE(true);
                 isExitOutPost = true;
                 Debug.Log("准备离开哨站");
+                break;
+            case "endDia":
+                //到达地图末尾，关闭主角的移动，进行对话，对话完毕开启移动
+                isEndDia = true;
+                Debug.Log("到达地图末尾");
                 break;
             case "NextLevel":
                 ShowPlayerE(true);
@@ -257,8 +312,51 @@ public class FirstControll : MonoBehaviour
                 ShowPlayerE(false);
                 isExitOutPost = false;
                 break;
+            case "endDia":
+                //到达地图末尾，关闭主角的移动，进行对话，对话完毕开启移动
+                isEndDia = false;
+                break;
         }
     }
+
+    //与机器人碰撞交互
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.collider.name)
+        {
+            case "guardRobot":
+                //判断是否为首次交互且判断是否存在身份卡(后续背包添加)
+                //TODO:不存在身份卡,条件后面改
+                if (false)
+                {
+                    if (isFirst)
+                    {
+                        print("首次交互，无身份卡");
+                        string[] dialogues = { "无身份卡者禁止通行。" };
+                        DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
+                        isFirst = false;
+                    }
+                    else
+                    {
+                        //多次交互，无身份卡
+                        print("多次交互，无身份卡");
+                        string[] dialogues = { "警告！无身份卡者禁止通行！" };
+                        DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
+                    }
+                }
+                else
+                {
+                    //已存在身份卡
+                    string[] dialogues = { "身份识别通过，允许通行。" };
+                    DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
+                    collision.collider.transform.position = new Vector3(collision.collider.transform.position.x, collision.collider.transform.position.y + 0.5f, collision.collider.transform.position.z);
+                    collision.collider.GetComponent<BoxCollider2D>().enabled = false;
+                }
+                break;
+                
+        }
+    }
+
     IEnumerator Fade(GameObject gameObj, bool isFade)//写一个渐变函数
     {
         SpriteRenderer spriteRenderer = gameObj.GetComponent<SpriteRenderer>();
