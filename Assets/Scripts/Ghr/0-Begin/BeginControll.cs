@@ -37,7 +37,6 @@ public class BeginControll : MonoBehaviour
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
         moveGarbage = Resources.Load<AudioClip>("Audio/Sound/移动垃圾桶");
 
-
         minCamera = GameObject.Find("MinCamera").GetComponent<Camera>();
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         openingAniPoint = GameObject.Find("Opening_Animation");
@@ -45,6 +44,7 @@ public class BeginControll : MonoBehaviour
         player= playerPar.transform.GetChild(0).gameObject;
         yiYI = playerPar.transform.GetChild(1).gameObject;
         StartCoroutine(PlayOpenningAni());
+
     }
 
     private void Update()
@@ -106,6 +106,7 @@ public class BeginControll : MonoBehaviour
             yiYI.GetComponent<Animator>().enabled = false;
             //yiYI.GetComponent<Animator>().Play("viviidle");
             //切换对象，捡易拉罐逻辑，yiyi颜文字表情
+            
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             //回去之后移动回复,暂时用测试脚本代替
             player.GetComponent<PlayerMove>().enabled = true;
