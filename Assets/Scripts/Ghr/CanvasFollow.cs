@@ -15,7 +15,8 @@ public class CanvasFollow : MonoBehaviour
 
     void Update()
     {
-        if (followTarget.transform.position.x != transform.position.x)
+        if (followTarget.position.x != transform.GetChild(0).position.x ||
+            followTarget.position.y != transform.GetChild(0).position.y)
         {
             Vector3 pos;
             pos = new Vector3(followTarget.position.x, transform.position.y,10);

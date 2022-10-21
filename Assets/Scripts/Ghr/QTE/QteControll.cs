@@ -22,6 +22,10 @@ public class QteControll : MonoBehaviour
     public GameObject player;
     public GameObject yiyi;
     public GameObject shengzi;
+
+    //音效相关
+    private AudioSource audio;
+    private AudioClip fall;
     
     private void OnEnable()
     {
@@ -36,6 +40,9 @@ public class QteControll : MonoBehaviour
         moveSpeed = Random.Range(10f, 25f);
         isPress = false;
         arrow.transform.localPosition = leftPoint.localPosition;
+
+        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
+        fall = Resources.Load<AudioClip>("Audio/Sound/跳跃落地-带衣服声");
     }
     private void Update()
     {
@@ -82,15 +89,23 @@ public class QteControll : MonoBehaviour
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
                     QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
-                    string[] info = { "Human:有惊无险，呼......身法如何？" };
+                    string[] info = 
+                    {
+                        "Human:有惊无险，呼......身法如何？",
+                        "Yiyi:Yiyi:6!(= =)"
+                    };
                     DialoguePanel.Instance.ShowDialogue(info);
-                    Invoke("dia", 2f);
+                    //Invoke("dia", 2f);
                 }
                 else
                 {
                     QteJump(new Vector3(165f, player.transform.localPosition.y, player.transform.localPosition.z));
                 }
-
+                //播放音效
+                if (!audio.isPlaying)
+                {
+                    audio.PlayOneShot(fall, 0.8f);
+                }
             }
             else
             {

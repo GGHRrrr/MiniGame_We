@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         if (PlayerManager.Instance().state == E_Player_State.Common)
         {
@@ -124,23 +124,25 @@ public class PlayerMove : MonoBehaviour
        * 开始复位的初始速度v0
          *不断刷新的两点距离s
           物理模型：机器人从初始点以v0为moveSpeed的初速度向目标点复位，通过a = v²/ 2s求出加速度，其中实时计算终点的距离st，通过 v = √2ast 计算实时速度，当到达目标点时，yiyi恰好停下来
-        */
-         
+*/
+
+
         float s = Vector3.Distance(yiyi.position, followPoint.position);
         //如果是回归状态，则速度可以使用另设的recoverSpeed
         float a = (recoverSpeed * recoverSpeed) / (2 * s);
         //如果是普通跟随状态，则速度与人物速度相同即可保持平滑
-        if (!isBack) a = (moveSpeed * moveSpeed) / (2 * s);
+        //if (!isBack) 
+            //a = (moveSpeed * moveSpeed) / (2 * s);
 
-        while (Vector3.Distance(yiyi.position, followPoint.position) > 1.5f)
+        while (Vector3.Distance(yiyi.position, followPoint.position) > 1.0f)
         {
             //速度方向
             Vector3 direction = (followPoint.position - yiyi.position).normalized;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForFixedUpdate();
             //s = Mathf.Max(Vector3.Distance(yiyi.position, followPoint.position),s);
             s = Vector3.Distance(yiyi.position, followPoint.position);
             float vt = Mathf.Sqrt(2 * a * s);
-            yiyi.transform.Translate(vt * direction * 0.0002f);
+            yiyi.transform.Translate(vt * direction * Time.fixedDeltaTime * 0.001f);
             //print("距离" + s);
         }
         //yiyi.GetComponent<Rigidbody>().velocity = Vector3.zero;

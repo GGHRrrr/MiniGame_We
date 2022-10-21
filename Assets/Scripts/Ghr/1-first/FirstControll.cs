@@ -175,7 +175,7 @@ public class FirstControll : MonoBehaviour
         {
             isEndDia = false;
             //移动位置，防止重复触发对话
-            transform.position = new Vector3(transform.position.x + 2, transform.position.y,transform.position.z);
+            transform.position = new Vector3(transform.position.x + 1, transform.position.y,transform.position.z);
             
             print("已关闭移动");
             string[] dialogues =

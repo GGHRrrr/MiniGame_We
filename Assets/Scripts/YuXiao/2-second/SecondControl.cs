@@ -90,7 +90,7 @@ public class SecondControl : MonoBehaviour
                 };
                 //´¥·¢¶Ô»°
                 DialoguePanel.Instance.ShowDialogue(info,Transport.transform);
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z) + Vector3.left;
+                transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
             }
             else
             {
