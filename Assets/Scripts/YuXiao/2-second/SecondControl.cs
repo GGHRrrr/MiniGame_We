@@ -8,18 +8,37 @@ public class SecondControl : MonoBehaviour
 
     #region 状态变量
     private bool isFlowerShop;
+    //一枝花对话
     private bool isFlower;
     private bool isFirstFlower = true;
     private bool isTransport;
+    private bool isEnterRest;
+    //厨师对话
+    private bool isCooker;
+    private bool firstCooker = true;
+    private bool firstFinish = true;
+    //出门
+    private bool isExit;
     #endregion
 
     #region 游戏对象
     public GameObject Transport;
+    //场景
+    public GameObject Restaround;
+    public GameObject Village;
+    //NPC
+    public Transform waiter;
+    public Transform cooker;
+    //Yiyi
+    private Transform Yiyi;
+    //相机
+    private Camera cam;
     #endregion
 
     void Start()
     {
-        
+        cam = Camera.main;
+        Yiyi = transform.parent.Find("yiyi").transform;
     }
 
     
@@ -104,6 +123,127 @@ public class SecondControl : MonoBehaviour
             }
             
         }
+
+        //触发了进入餐厅
+        if (isEnterRest && !GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                //进入餐厅
+                Restaround.SetActive(true);
+                Village.SetActive(false);
+                transform.position = new Vector3(4, transform.position.y, transform.position.z);
+                Yiyi.position = new Vector3(1, Yiyi.position.y, Yiyi.position.z);
+                //摄像机阈值
+                cam.GetComponent<CameraFollow>().minPos = new Vector2(9.4f ,0);
+                cam.GetComponent<CameraFollow>().maxPos = new Vector2(35.3f, 0);
+
+                //触发对话
+                string[] info =
+                {
+                    "欢迎光临本店，如需用餐请选取空闲位置坐下等待服务。",
+                    "Human:菜单可以过目一下吗？",
+                    "请用。",
+                    "Human:请来一份招牌的三明治吧",
+                    "原料短缺，详情请咨询我们的厨师长尼克。"
+                };
+                DialoguePanel.Instance.ShowDialogue(info, waiter);
+            }
+        }
+
+        //与厨师交互
+        if (isCooker && !GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (firstCooker)
+                {
+                    //第一次与厨师交互
+                    string[] info =
+                    {
+                        "Human:你好，请来一份招牌的三明治。",
+                        "三明治的原料已经使用完了。",
+                        "我已经很多年没有制作过它了。",
+                        "如果你能制作出这样的三明治，我可以送你一张车票。",
+                        "这是许多年前一位客人留下的，似乎是想让我转赠给前来赴约的顾客。",
+                        "如果你能制作出这样的三明治，我可以送你一张车票。"
+                    };
+                    DialoguePanel.Instance.ShowDialogue(info, cooker);
+                    firstCooker = false;
+                }
+                else
+                {
+                    //不是首次交互
+                    if (true)
+                    {
+                        //未制作出三明治
+                        string[] info =
+                        {
+                            "如果你能制作出这样的三明治，我可以送你一张车票。"
+                        };
+                        DialoguePanel.Instance.ShowDialogue(info, cooker);
+                    }
+                    else
+                    {
+                        if (firstFinish)
+                        {
+                            //已制作出三明治，首次交互
+                            string[] info =
+                            {
+                                "Human:三明治制作完成了。",
+                                "是我许久未见的三明治了。",
+                                "虽然看起来与我曾经制作的三明治有些不同。",
+                                "这是车票，带上它吧。",
+                                "一路顺风，我的客人。"
+                            };
+                            DialoguePanel.Instance.ShowDialogue(info, cooker);
+                            firstFinish = false;
+                            //TODO:回收三明治
+                            //TODO:获得车票
+                        }
+                        else
+                        {
+                            string[] info =
+                            {
+                                "一路顺风，我的客人。"
+                            };
+                            DialoguePanel.Instance.ShowDialogue(info, cooker);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        //出门逻辑(分为有车票和无车票)
+        if (isExit && !GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                //出餐厅
+                Restaround.SetActive(false);
+                Village.SetActive(true);
+                transform.localPosition = new Vector3(118, transform.position.y, transform.position.z);
+                Yiyi.localPosition = new Vector3(115, Yiyi.position.y, Yiyi.position.z);
+                //摄像机阈值
+                cam.GetComponent<CameraFollow>().minPos = new Vector2(3, 0);
+                cam.GetComponent<CameraFollow>().maxPos = new Vector2(41, 0);
+
+                //如果有车票(触发对话)
+                //TODO:修改条件
+                if (true)
+                {
+                    string[] info =
+                    {
+                        "Human:原来“他”没有去赴约么......",
+                        "Human:那为什么，在信息中，他却说他和“他”刚一起吃完饭呢？",
+                        "Yiyi:从理性的角度分析，他们并非同一个人。",
+                        "Human:也许真是如此吧。"
+                    };
+                    DialoguePanel.Instance.ShowDialogue(info);
+                }
+            }
+        }
     }
 
     #region 触发器相关
@@ -123,6 +263,21 @@ public class SecondControl : MonoBehaviour
                 isFlower = true;
                 print("触碰到伸出的花");
                 break;
+            case "EnterRest":
+                ShowPlayerE(true);
+                isEnterRest = true;
+                print("碰到餐厅门槛");
+                break;
+            case "Cooker":
+                ShowPlayerE(true);
+                isCooker = true;
+                print("碰到厨师");
+                break;
+            case "Exit":
+                ShowPlayerE(true);
+                isExit = true;
+                print("碰到出口，按E离开");
+                break;
         }
     }
 
@@ -139,6 +294,18 @@ public class SecondControl : MonoBehaviour
             case "Flower":
                 ShowPlayerE(false);
                 isFlower = false;
+                break;
+            case "EnterRest":
+                ShowPlayerE(false);
+                isEnterRest = false;
+                break;
+            case "Cooker":
+                ShowPlayerE(false);
+                isCooker = false;
+                break;
+            case "Exit":
+                ShowPlayerE(false);
+                isExit = false;
                 break;
         }
     }
