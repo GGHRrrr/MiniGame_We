@@ -132,8 +132,8 @@ public class SecondControl : MonoBehaviour
                 //进入餐厅
                 Restaround.SetActive(true);
                 Village.SetActive(false);
-                transform.position = new Vector3(4, transform.position.y, transform.position.z);
-                Yiyi.position = new Vector3(1, Yiyi.position.y, Yiyi.position.z);
+                transform.position = new Vector3(40, transform.position.y, transform.position.z);
+                Yiyi.position = new Vector3(43, Yiyi.position.y, Yiyi.position.z);
                 //摄像机阈值
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(9.4f ,0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(35.3f, 0);
