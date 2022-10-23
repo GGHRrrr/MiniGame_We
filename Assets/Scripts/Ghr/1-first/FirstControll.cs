@@ -169,27 +169,7 @@ public class FirstControll : MonoBehaviour
                 gameObject.transform.localPosition = new Vector3(230f, transform.localPosition.y, transform.localPosition.z);
             }
         }
-
-        //触发关卡结束对话
-        if (isEndDia && !gameObject.GetComponent<SwitchRole>().isYiYi)
-        {
-            isEndDia = false;
-            //移动位置，防止重复触发对话
-            transform.position = new Vector3(transform.position.x + 1, transform.position.y,transform.position.z);
-            
-            print("已关闭移动");
-            string[] dialogues =
-            {
-                "Human:人们都已经撤离了这座城市，是时候该踏上新的行程了。",
-                "Yiyi:下一处地点是稀望镇，但经过推算，那里依旧不存在人类生存的可能。",
-                "Human:也许吧。但那里是我们通往下一城市的必经之处，也许我们会有新的收获。",
-                "Human:看，就在那里。"
-            };
-            DialoguePanel.Instance.ShowDialogue(dialogues);
-            
-        }
         
-
         //进入下一关
         if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
