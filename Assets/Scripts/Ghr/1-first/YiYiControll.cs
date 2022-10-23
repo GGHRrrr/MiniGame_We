@@ -87,6 +87,7 @@ public class YiYiControll : MonoBehaviour
                     Debug.Log("???¡¤????");
                     if (cir.gameObject.activeSelf == false)
                     {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
                         box.GetComponent<BoxCollider2D>().enabled = false;
                         cir.gameObject.SetActive(true);
                         gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
@@ -101,6 +102,7 @@ public class YiYiControll : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = true;
                         box.GetComponent<BoxCollider2D>().enabled = true;
                         cir.gameObject.SetActive(false);
                         gameObject.GetComponent<YiyiMove>().moveSpeed = 10;

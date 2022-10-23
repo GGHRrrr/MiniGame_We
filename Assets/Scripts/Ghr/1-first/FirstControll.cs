@@ -9,6 +9,7 @@ public class FirstControll : MonoBehaviour
     #region 物体
     public GameObject e;
     public GameObject touying;
+    public GameObject mimaxiang;
     //相机
     public GameObject cam;
     //人物
@@ -31,8 +32,10 @@ public class FirstControll : MonoBehaviour
 
     #endregion
     #region 判断条件
-    public static bool isPlayerEnterWork = false;
-    public static bool isNowEnter = false;
+    
+     public static bool isPlayerEnterWork = false;
+     public static bool isNowEnter = false;
+     public  bool isHaveShenfen = false;
      bool isEnterDoor=false;
      bool isEnterWindow = false;
      bool isInsideLeft = false;
@@ -117,8 +120,10 @@ public class FirstControll : MonoBehaviour
         //进入地下一层
         if(isInsideRight && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            
+            if (Input.GetKeyDown(KeyCode.E))
             {
+                post.SetActive(true);
                 //触发对话
                 string[] dialogues =
                 {
@@ -138,7 +143,7 @@ public class FirstControll : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                
+                post.SetActive(false);
                 workInsidUnder.SetActive(false);
                 workInsideEnv.SetActive(true);
                 gameObject.transform.localPosition = new Vector3(130f, transform.localPosition.y, transform.localPosition.z);
@@ -204,8 +209,25 @@ public class FirstControll : MonoBehaviour
                 }
             }
         }
-        //离开哨站
-        if (isExitOutPost && !gameObject.GetComponent<SwitchRole>().isYiYi)
+        if (isEnterMima & !gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if(!mimaxiang.activeInHierarchy)
+                {
+                    mimaxiang.SetActive(true);
+                    gameObject.GetComponent<PlayerMove>().moveSpeed = 0;
+                }
+                else
+                {
+                    mimaxiang.SetActive(false);
+                    gameObject.GetComponent<PlayerMove>().moveSpeed = 7;
+                }
+                
+            }
+        }
+            //离开哨站
+            if (isExitOutPost && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -288,6 +310,11 @@ public class FirstControll : MonoBehaviour
 
             case "ca":
                 isEnterTouying = true;
+                e.gameObject.SetActive(true);
+                break;
+            case "mima":
+                isEnterMima = true;
+                ShowPlayerE(true);
                 break;
         }
     }
@@ -340,6 +367,11 @@ public class FirstControll : MonoBehaviour
                 touying.gameObject.SetActive(false);
                 daPanel.SetActive(false);
                 daPanel.transform.GetChild(1).GetComponent<Text>().text = "";
+                e.gameObject.SetActive(false);
+                break;
+            case "mima":
+                isEnterMima = false;
+                ShowPlayerE(false);
                 break;
         }
     }
@@ -352,7 +384,7 @@ public class FirstControll : MonoBehaviour
             case "guardRobot":
                 //判断是否为首次交互且判断是否存在身份卡(后续背包添加)
                 //TODO:不存在身份卡,条件后面改
-                if (false)
+                if (isHaveShenfen==false)
                 {
                     if (isFirst)
                     {

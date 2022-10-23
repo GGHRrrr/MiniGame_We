@@ -334,6 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panel_dialogue: {fileID: 6206301683866224883}
   txt_dialogue: {fileID: 6206301683290931845}
+  Human: {fileID: 0}
+  Yiyi: {fileID: 0}
   dialogueLines: []
   currentLine: 0
   textInterval: 0.1
