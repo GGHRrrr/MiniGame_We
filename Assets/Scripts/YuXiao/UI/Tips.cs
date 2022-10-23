@@ -18,7 +18,7 @@ public class Tips : MonoBehaviour
             if (isShow)
             {
                 //显示
-                txt_Tip.text = "A D：移动\nTab：切换移动方式\n空格：切换对话\nE：交互\n（按F隐藏该面板）";
+                txt_Tip.text = "A D：移动\nTab：切换移动方式\n空格：切换对话\nE：交互\n点击左下角可使用道具\n(按F隐藏该面板)";
             }
             else
             {

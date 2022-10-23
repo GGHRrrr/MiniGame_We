@@ -70,7 +70,6 @@ public class SecondControl : MonoBehaviour
                     string[] info =
                     {
                         "Human:真美啊。",
-                        "Human:如果我有一把剪刀，我一定会把你带走。"
                     };
                     //触发对话
                     DialoguePanel.Instance.ShowDialogue(info);
@@ -78,19 +77,8 @@ public class SecondControl : MonoBehaviour
                 }
                 else
                 {
-                    if (false)
-                    {
-                        //TODO:无剪刀时的逻辑
-                        string[] info =
-                        {
-                            "Human:如果我有一把剪刀，我一定会把你带走。"
-                        };
-                        DialoguePanel.Instance.ShowDialogue(info);
-                    }
-                    else
-                    {
-                        //TODO:有剪刀时的逻辑
-                    }
+                    //多次对话
+                    //TODO:将花儿加入背包
 
                 }
                 
@@ -144,8 +132,8 @@ public class SecondControl : MonoBehaviour
                     "欢迎光临本店，如需用餐请选取空闲位置坐下等待服务。",
                     "Human:菜单可以过目一下吗？",
                     "请用。",
-                    "Human:请来一份招牌的三明治吧",
-                    "原料短缺，详情请咨询我们的厨师长尼克。"
+                    "Human:终焉之花，听起来好有意境。",
+                    "鸡尾酒类现调酒饮品请咨询酒保。"
                 };
                 DialoguePanel.Instance.ShowDialogue(info, waiter);
             }
@@ -161,10 +149,10 @@ public class SecondControl : MonoBehaviour
                     //第一次与厨师交互
                     string[] info =
                     {
-                        "Human:你好，请来一份招牌的三明治。",
-                        "三明治的原料已经使用完了。",
-                        "我已经很多年没有制作过它了。",
-                        "如果你能制作出这样的三明治，我可以送你一张车票。",
+                        "Human:你好，请来一杯终焉之花。",
+                        "抱歉，该酒所需的原料已经用完了。",
+                        "我已经很多年没有制作过它了，但即便如此，它依旧是本店的招牌。",
+                        "如果你能制作出这杯酒，我可以送你一张车票。",
                         "这是许多年前一位客人留下的，似乎是想让我转赠给前来赴约的顾客。",
                         "如果你能制作出这样的三明治，我可以送你一张车票。"
                     };
@@ -190,9 +178,9 @@ public class SecondControl : MonoBehaviour
                             //已制作出三明治，首次交互
                             string[] info =
                             {
-                                "Human:三明治制作完成了。",
-                                "是我许久未见的三明治了。",
-                                "虽然看起来与我曾经制作的三明治有些不同。",
+                                "Human:终焉之花制作完成了。",
+                                "它可真美。",
+                                "只可惜我从未，也无法品尝它的味道。",
                                 "这是车票，带上它吧。",
                                 "一路顺风，我的客人。"
                             };
