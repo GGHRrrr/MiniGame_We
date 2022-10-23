@@ -23,7 +23,7 @@ public class Tips : MonoBehaviour
             else
             {
                 //隐藏
-                txt_Tip.text = "(按F显示操作提示面板)";
+                txt_Tip.text = "";
             }
         }
     }
