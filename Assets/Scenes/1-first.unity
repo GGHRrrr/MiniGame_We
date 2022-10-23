@@ -3469,15 +3469,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mid: {fileID: 1406597538}
   arrow: {fileID: 207496796}
-  leftPoint: {fileID: 0}
-  rightPoint: {fileID: 0}
-  black: {fileID: 0}
+  leftPoint: {fileID: 1620215784}
+  rightPoint: {fileID: 1167108030}
   moveType: 0
   moveSpeed: 0
   isPress: 0
-  player: {fileID: 0}
-  yiyi: {fileID: 0}
-  shengzi: {fileID: 0}
+  player: {fileID: 7245688232145766076}
+  yiyi: {fileID: 7245688232145766075}
+  shengzi: {fileID: 607016765}
 --- !u!1 &1011432141
 GameObject:
   m_ObjectHideFlags: 0
@@ -7872,6 +7871,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03e271428a50ce04084ec1bae048e68d, type: 3}
+--- !u!1 &7245688232145766075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4483517097681986222, guid: 03e271428a50ce04084ec1bae048e68d, type: 3}
+  m_PrefabInstance: {fileID: 7245688232145766074}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7245688232145766076 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3314694017601533530, guid: 03e271428a50ce04084ec1bae048e68d, type: 3}
+  m_PrefabInstance: {fileID: 7245688232145766074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8404912371761722349
 GameObject:
   m_ObjectHideFlags: 0
