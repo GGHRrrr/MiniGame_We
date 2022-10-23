@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,9 @@ public class PhoneMessageDialog : PhoneUIBase
     [SerializeField] public Transform MessagesPannelParent;
     [SerializeField] public GameObject MessagesPannelPrefab;  //ÏûÏ¢´°¿Ú¸¸
     private Dictionary<string, GameObject> MessageDic = new Dictionary<string, GameObject>();
+    private List<PhoneElementBtn> _Buttons = new List<PhoneElementBtn>();
+
+    public static int UnReadMessagesSub = 0;
 
     public void Init()
     {
@@ -27,23 +32,40 @@ public class PhoneMessageDialog : PhoneUIBase
             var PanObj = Instantiate(MessagesPannelPrefab, MessagesPannelParent);
             PhoneMessagesPanel Pan = PanObj.GetComponent<PhoneMessagesPanel>();
             Pan.InitPanel(data[i].messageBlocks);
+            Pan.ReflectButton = Btn;
             MessageDic[data[i].name] = PanObj;
             Btn.UserBtn.onClick.AddListener(delegate
             {
                 OnCilckUserBtn(Btn.Id);
                 ButtonRefresh();
-                Btn.OnClickLog();
+                Btn.OnClickMessage();
             });
-            if (i != 0)
-                PanObj.SetActive(false);
-            else
-            {
-                PanObj.SetActive(true);
-            }
+            PanObj.SetActive(false);
+            _Buttons.Add(Btn);
         }
+        _Buttons[_Buttons.Count-1].OnClickImage.SetActive(true);
+        MessageDic[_Buttons[_Buttons.Count-1].Id].SetActive(true);
         base.Init();
     }
 
+    public override void Show()
+    {
+        foreach (var item in MessageDic)
+        {
+            if (item.Value.activeSelf)
+            {
+                item.Value.GetComponent<PhoneMessagesPanel>().ShowMessage();
+            }
+        }
+        base.Show();
+    }
+
+    public async void InterNewMessage(KeyValuePair<string, int> NameID)
+    {
+        PhoneMessageBlock data = PhoneModel.Instance().MPhoneData.userDic[NameID.Key].messageBlocksDic[NameID.Value];
+        MessageDic[NameID.Key].GetComponent<PhoneMessagesPanel>().InterMessage(data);
+    }
+    
     public void OnCilckUserBtn(string key)
     {
         foreach (var Obj in MessageDic.Values)
@@ -51,11 +73,15 @@ public class PhoneMessageDialog : PhoneUIBase
             Obj.SetActive(false);
         }
         MessageDic[key].SetActive(true);
+        MessageDic[key].GetComponent<PhoneMessagesPanel>().ShowMessage();
     }
 
     public void ButtonRefresh()
     {
-        
+        for (int i = 0; i < _Buttons.Count; i++)
+        {
+            _Buttons[i].OnClickImage.SetActive(false);
+        }
     }
     
     public readonly static string PATH = "PhonePrefab/PhoneMessageDialog";

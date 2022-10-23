@@ -11,6 +11,8 @@ public class PhoneElementBtn : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Time;
     [SerializeField] public GameObject OnClickImage;
     [SerializeField] public GameObject UnReadLog;
+    [SerializeField] public GameObject UnReadMessage;
+    [SerializeField] public TextMeshProUGUI UnReadMessagesNum;
     public string Id;
 
     public void Init(PhoneMessageWindow data)
@@ -34,6 +36,15 @@ public class PhoneElementBtn : MonoBehaviour
         {
             UnReadLog.SetActive(false);
             PhoneLogsDialog.NewLogsNum--;
+        }
+    }
+
+    public void OnClickMessage()
+    {
+        OnClickImage.SetActive(true);
+        if (UnReadMessage.activeSelf)
+        {
+            UnReadMessage.SetActive(false);
         }
     }
 }

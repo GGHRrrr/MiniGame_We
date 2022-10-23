@@ -11,6 +11,8 @@ public class PhoneWindowDialog : PhoneUIBase
     [SerializeField] public Button logsBtn;
     [SerializeField] public TextMeshProUGUI unReadNum;
     [SerializeField] public GameObject NewLogs;
+    [SerializeField] public GameObject NewMessages;
+    [SerializeField] public TextMeshProUGUI UnReadNum;
 
     public readonly static string PATH = "PhonePrefab/PhoneWindowDialog";
 
@@ -29,6 +31,18 @@ public class PhoneWindowDialog : PhoneUIBase
         else
         {
             NewLogs.SetActive(false);
+        }
+
+        if (PhoneMessageDialog.UnReadMessagesSub > 0)
+        {
+            NewMessages.SetActive(true);
+            unReadNum.gameObject.SetActive(true);
+            unReadNum.text = PhoneMessageDialog.UnReadMessagesSub.ToString();
+        }
+        else
+        {
+            NewMessages.SetActive(false);
+            unReadNum.gameObject.SetActive(false);
         }
     }
 }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhoneUIHandler : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class PhoneUIHandler : MonoBehaviour
     private PhoneLogsDialog mphoneLogsDialog;
     private GameObject Parent;
 
+    private bool HasInit = false;
     void Start()
     {
         Init();
@@ -23,20 +26,26 @@ public class PhoneUIHandler : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.I))
             EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),1);
+        if(Input.GetKeyDown(KeyCode.J))
+            EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                new KeyValuePair<string,int>("Alice",1));
     }
 
     public void Init()
     {
+        if (HasInit) return;
         PhoneModel.Instance().Init();
-        Parent = GameObject.Find("Canvas");
+        Parent = GameObject.Find("PhoneCanvas");
         mphoneItemDialog = CreateDialog<PhoneItemDialog>(PhoneItemDialog.PATH, Parent.GetComponent<Transform>());
         mphoneWindowDialog = CreateDialog<PhoneWindowDialog>(PhoneWindowDialog.PATH, Parent.GetComponent<Transform>());
         mphoneMessageDialog = CreateDialog<PhoneMessageDialog>(PhoneMessageDialog.PATH, Parent.GetComponent<Transform>());
         mphoneLogsDialog = CreateDialog<PhoneLogsDialog>(PhoneLogsDialog.PATH, Parent.GetComponent<Transform>());
 
         EventManager.Instance().AddEventListener(EventTypeEnum.INTER_LOG.ToString(), InterLogs);
+        EventManager.Instance().AddEventListener(EventTypeEnum.INTER_MESSAGE.ToString(), InterMessages);
+        
         
         mphoneItemDialog.Init();
         mphoneWindowDialog.Init();
@@ -52,6 +61,11 @@ public class PhoneUIHandler : MonoBehaviour
         
         mphoneWindowDialog.logsBtn.onClick.AddListener(OnClickLogs);
         mphoneLogsDialog.BackBtn.onClick.AddListener(OnClickLogsBack);
+        
+        DontDestroyOnLoad(Parent);
+        DontDestroyOnLoad(this);
+
+        HasInit = true;
     }
 
     public void InterLogs(object ID)
@@ -59,6 +73,14 @@ public class PhoneUIHandler : MonoBehaviour
         int id = (int)ID;
         mphoneLogsDialog.InterNewLog(id);
         mphoneItemDialog.RefreshIcon();
+    }
+
+    public void InterMessages(object NameID)
+    {
+        KeyValuePair<string, int> nameID = (KeyValuePair<string, int>) NameID;
+        mphoneMessageDialog.InterNewMessage(nameID);
+        mphoneItemDialog.RefreshIcon();
+        
     }
 
     #region ¥∞ø⁄œ‘ æ…Ë÷√

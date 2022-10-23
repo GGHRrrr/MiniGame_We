@@ -26,15 +26,15 @@ public class PhoneModel : BaseManager<PhoneModel>
         
         PhoneMessageWindow data = new PhoneMessageWindow();
         data.name = "Alice";
-        for (int i = 0; i < PhoneMessageAliceModel.PhoneLogsData.Count; i++)
+        for (int i = 0; i < PhoneMessageAliceModel.Configs.Count; i++)
         {
-            PhoneMessageAliceModel item = PhoneMessageAliceModel.PhoneLogsData[i];
+            PhoneMessageAliceModel item = PhoneMessageAliceModel.Configs[i];
             if (i == 0)
             {
                 tempPhoneMessageBlock = new PhoneMessageBlock();
                 tempPhoneMessageBlock.InterID = item.MessageInter;
             }
-            else if (item.TimeID != PhoneMessageAliceModel.PhoneLogsData[i - 1].TimeID)
+            else if (item.TimeID != PhoneMessageAliceModel.Configs[i - 1].TimeID)
             {
                 data.messageBlocks.Add(tempPhoneMessageBlock);
                 if(tempPhoneMessageBlock.InterID > 0)
@@ -48,7 +48,75 @@ public class PhoneModel : BaseManager<PhoneModel>
             messageData.messageType = (MessageType)(item.Type - 1);
             tempPhoneMessageBlock.messages.Add(messageData);
 
-            if (i == PhoneMessageAliceModel.PhoneLogsData.Count - 1)
+            if (i == PhoneMessageAliceModel.Configs.Count - 1)
+            {
+                data.messageBlocks.Add(tempPhoneMessageBlock);
+                if(tempPhoneMessageBlock.InterID > 0) 
+                    data.messageBlocksDic.Add(tempPhoneMessageBlock.InterID,tempPhoneMessageBlock);
+                MPhoneData.users.Add(data);
+                MPhoneData.userDic.Add(data.name,data);
+            }
+        }
+        
+        data = new PhoneMessageWindow();
+        data.name = "Aric";
+        for (int i = 0; i < PhoneMessageAricModel.Configs.Count; i++)
+        {
+            PhoneMessageAricModel item = PhoneMessageAricModel.Configs[i];
+            if (i == 0)
+            {
+                tempPhoneMessageBlock = new PhoneMessageBlock();
+                tempPhoneMessageBlock.InterID = item.MessageInter;
+            }
+            else if (item.TimeID != PhoneMessageAricModel.Configs[i - 1].TimeID)
+            {
+                data.messageBlocks.Add(tempPhoneMessageBlock);
+                if(tempPhoneMessageBlock.InterID > 0)
+                    data.messageBlocksDic.Add(tempPhoneMessageBlock.InterID,tempPhoneMessageBlock);
+                tempPhoneMessageBlock = new PhoneMessageBlock();
+                tempPhoneMessageBlock.InterID = item.MessageInter;
+            }
+
+            PhoneMessage messageData = new PhoneMessage();
+            messageData.messagesContext = item.MessageContext;
+            messageData.messageType = (MessageType)(item.Type - 1);
+            tempPhoneMessageBlock.messages.Add(messageData);
+
+            if (i == PhoneMessageAricModel.Configs.Count - 1)
+            {
+                data.messageBlocks.Add(tempPhoneMessageBlock);
+                if(tempPhoneMessageBlock.InterID > 0) 
+                    data.messageBlocksDic.Add(tempPhoneMessageBlock.InterID,tempPhoneMessageBlock);
+                MPhoneData.users.Add(data);
+                MPhoneData.userDic.Add(data.name,data);
+            }
+        }
+        
+        data = new PhoneMessageWindow();
+        data.name = "Hank";
+        for (int i = 0; i < PhoneMessageHankModel.Configs.Count; i++)
+        {
+            PhoneMessageHankModel item = PhoneMessageHankModel.Configs[i];
+            if (i == 0)
+            {
+                tempPhoneMessageBlock = new PhoneMessageBlock();
+                tempPhoneMessageBlock.InterID = item.MessageInter;
+            }
+            else if (item.TimeID != PhoneMessageHankModel.Configs[i - 1].TimeID)
+            {
+                data.messageBlocks.Add(tempPhoneMessageBlock);
+                if(tempPhoneMessageBlock.InterID > 0)
+                    data.messageBlocksDic.Add(tempPhoneMessageBlock.InterID,tempPhoneMessageBlock);
+                tempPhoneMessageBlock = new PhoneMessageBlock();
+                tempPhoneMessageBlock.InterID = item.MessageInter;
+            }
+
+            PhoneMessage messageData = new PhoneMessage();
+            messageData.messagesContext = item.MessageContext;
+            messageData.messageType = (MessageType)(item.Type - 1);
+            tempPhoneMessageBlock.messages.Add(messageData);
+
+            if (i == PhoneMessageHankModel.Configs.Count - 1)
             {
                 data.messageBlocks.Add(tempPhoneMessageBlock);
                 if(tempPhoneMessageBlock.InterID > 0) 
@@ -61,4 +129,5 @@ public class PhoneModel : BaseManager<PhoneModel>
         tempPhoneMessageBlock = null;
         hasInit = true;
     }
+    
 }
