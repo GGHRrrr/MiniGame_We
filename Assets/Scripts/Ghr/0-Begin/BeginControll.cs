@@ -8,18 +8,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class BeginControll : MonoBehaviour
 {
-    //ÒôÐ§
+    //ï¿½ï¿½Ð§
     private AudioSource audio;
     private AudioClip moveGarbage;
 
-    //¹ý³¡¶¯»­
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private 
-    Camera minCamera;//ÌØÐ´ÉãÏñ»ú
-    Camera mainCamera;//Ö÷ÉãÏñ»ú
-    GameObject openingAniPoint;//¿ª³¡¶¯»­
-    GameObject playerPar;//½ÇÉ«¸¸ÎïÌå
-    GameObject player;//½ÇÉ«
-    GameObject yiYI;//»úÆ÷ÈË
+    Camera minCamera;//ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½
+    Camera mainCamera;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    GameObject openingAniPoint;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    GameObject playerPar;//ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    GameObject player;//ï¿½ï¿½É«
+    GameObject yiYI;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     public GameObject e;
 
@@ -33,9 +33,9 @@ public class BeginControll : MonoBehaviour
     }
     private void Start()
     {
-        //ÒôÐ§
+        //ï¿½ï¿½Ð§
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
-        moveGarbage = Resources.Load<AudioClip>("Audio/Sound/ÒÆ¶¯À¬»øÍ°");
+        moveGarbage = Resources.Load<AudioClip>("Audio/Sound/ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Í°");
 
         minCamera = GameObject.Find("MinCamera").GetComponent<Camera>();
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -49,7 +49,7 @@ public class BeginControll : MonoBehaviour
 
     private void Update()
     {
-        //½øÈëÏÂÒ»¹Ø
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
         if (isNextLevel && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -66,12 +66,12 @@ public class BeginControll : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ªÊ¼¹ý³¡¶¯»­£¬Ò×À­¹ÞÌØÐ´ÇÐ»»µÈ
+    /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Ð»ï¿½ï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     IEnumerator PlayOpenningAni()
     {
-        //½ûÓÃÍæ¼ÒÒÆ¶¯
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
         player.GetComponent<PlayerMove>().enabled = false;
         yield return new WaitForSecondsRealtime(2f) ;
         Animator opAni = openingAniPoint.transform.GetChild(0).GetComponent<Animator>();
@@ -90,7 +90,7 @@ public class BeginControll : MonoBehaviour
         }
     }
     /// <summary>
-    /// YIYI¿ª³¡¼ñÒ×À­¹Þ¶¯»­
+    /// YIYIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¶ï¿½ï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     IEnumerator PlayYiYiAni()
@@ -105,10 +105,10 @@ public class BeginControll : MonoBehaviour
             yiYI.transform.GetChild(0).GetComponent<Animator>().Play("Idle");
             yiYI.GetComponent<Animator>().enabled = false;
             //yiYI.GetComponent<Animator>().Play("viviidle");
-            //ÇÐ»»¶ÔÏó£¬¼ñÒ×À­¹ÞÂß¼­£¬yiyiÑÕÎÄ×Ö±íÇé
+            //ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ó£¬¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½yiyiï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½
             
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
-            //»ØÈ¥Ö®ºóÒÆ¶¯»Ø¸´,ÔÝÊ±ÓÃ²âÊÔ½Å±¾´úÌæ
+            //ï¿½ï¿½È¥Ö®ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½Ø¸ï¿½,ï¿½ï¿½Ê±ï¿½Ã²ï¿½ï¿½Ô½Å±ï¿½ï¿½ï¿½ï¿½ï¿½
             player.GetComponent<PlayerMove>().enabled = true;
         }
         else
@@ -117,26 +117,26 @@ public class BeginControll : MonoBehaviour
         }
     }
     /// <summary>
-    /// yiyi¶Ô»°ÊÂ¼þ
+    /// yiyiï¿½Ô»ï¿½ï¿½Â¼ï¿½
     /// </summary>
     /// <param name="info"></param>
      void TalkWith_YiYi(object info)
     {
-        Debug.Log("yiyiËµ»°");
+        Debug.Log("yiyiËµï¿½ï¿½");
     }
     /// <summary>
-    /// Íæ¼Ò¶Ô»°ÊÂ¼þ
+    /// ï¿½ï¿½Ò¶Ô»ï¿½ï¿½Â¼ï¿½
     /// </summary>
     /// <param name="info"></param>
     void TalkWith_Player(object info)
     {
-        Debug.Log("Íæ¼ÒËµ»°");
+        Debug.Log("ï¿½ï¿½ï¿½Ëµï¿½ï¿½");
     }
     /// <summary>
-    /// Íæ¼ÒÅö×²ÊÂ¼þ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½Â¼ï¿½
     /// </summary>
     /// <param name="collision"></param>
-     bool isTouchGar = false;//ÊÇ·ñ´¥Åö¹ý
+     bool isTouchGar = false;//ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
      GameObject garbage;
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -144,10 +144,10 @@ public class BeginControll : MonoBehaviour
         switch (collision.gameObject.name)
         {
             case "Environments_Garbage":
-                Debug.Log("ÎÒÅöµ½À¬»øÍ°ÁË");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ï¿½");
                 //if (isTouchGar == false)
                 //{
-                //    //Î´´¥Åö¹ýÔò´¥·¢¶Ô»°;
+                //    //Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò´¥·ï¿½ï¿½Ô»ï¿½;
                 //    isTouchGar = !isTouchGar;
                 //}
                 //else
@@ -167,10 +167,10 @@ public class BeginControll : MonoBehaviour
         switch(collision.gameObject.name)
         {
             case "Environments_Garbage":
-                Debug.Log("ÎÒÅöµ½À¬»øÍ°ÁË");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ï¿½");
                 if (isTouchGar == false)
                 {
-                    //Î´´¥Åö¹ýÔò´¥·¢¶Ô»°;
+                    //Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò´¥·ï¿½ï¿½Ô»ï¿½;
                     isTouchGar = !isTouchGar;
                 }
                 //else
@@ -179,11 +179,11 @@ public class BeginControll : MonoBehaviour
                 //}
                 break;
             case "Environments_Fanmaiji":
-                Debug.Log("ÎÒÅöµ½··Âô»úÁË");//¿ÉÒÔ×öÀÏ»¢»úÍæ·¨,ÓÐÊ±¼äÔÙËµ
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ï¿½æ·¨,ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ëµ
                 break;
             case "NextLevel":
                 ShowPlayerE(true);
-                Debug.Log("Åöµ½ÏÂÒ»¹ØµÄÃÅÁË£¬×¼±¸½øÈëÏÂÒ»¹Ø");
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Øµï¿½ï¿½ï¿½ï¿½Ë£ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½");
                 isNextLevel = true;
                 break;
         }
@@ -204,14 +204,14 @@ public class BeginControll : MonoBehaviour
                 break;
         }
     }
-    #region ´¥ÅöÀ¬»øÍ°
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°
     void UseYilaguan_Garbage(object info)
     {
-        Debug.Log("Ö´ÐÐÁËÂð1");
+        Debug.Log("Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1");
         if (isTouchGar)
         {
-            Debug.Log("Ö´ÐÐÁËÂð");
-            //ÒÆ¶¯À¬»øÍ°ÒôÐ§
+            Debug.Log("Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+            //ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ï¿½Ð§
             if (!audio.isPlaying)
                 audio.PlayOneShot(moveGarbage, 0.8f);
 
@@ -222,7 +222,7 @@ public class BeginControll : MonoBehaviour
     }
     #endregion
 
-    #region ÏÔÊ¾Íæ¼Ò½»»¥
+    #region ï¿½ï¿½Ê¾ï¿½ï¿½Ò½ï¿½ï¿½ï¿½
     void ShowPlayerE(bool isEnter)
     {
         if (!gameObject.GetComponent<SwitchRole>().isYiYi && isEnter)
@@ -237,7 +237,7 @@ public class BeginControll : MonoBehaviour
         }
     }
 
-    IEnumerator Fade(GameObject gameObj, bool isFade)//Ð´Ò»¸ö½¥±äº¯Êý
+    IEnumerator Fade(GameObject gameObj, bool isFade)//Ð´Ò»ï¿½ï¿½ï¿½ï¿½ï¿½äº¯ï¿½ï¿½
     {
         SpriteRenderer spriteRenderer = gameObj.GetComponent<SpriteRenderer>();
         if (isFade)

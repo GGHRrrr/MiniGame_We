@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 public class YiYiControll : MonoBehaviour
 {
-    //音效组件
+    //??Ч???
     private AudioClip openSwitch;
     private AudioClip openDoor;
-    //初始相机跟随数值2.5 49 
-    //进入工厂相机跟随数值2.5 15
+    //?????????????2.5 49 
+    //????????????????2.5 15
     public GameObject e;
     public GameObject workEnv;
     public GameObject workEnv_Inside;
@@ -19,7 +19,7 @@ public class YiYiControll : MonoBehaviour
     public GameObject qte;
     private GameObject cam;
     private GameObject post;
-    public static bool isTotalunLocked=false;//解密全部解锁
+    public static bool isTotalunLocked=false;//???????????
     public  bool isEnterWork = false;
     private bool isEnterWindow = false;
     private bool isEnterHandle = false;
@@ -37,14 +37,14 @@ public class YiYiControll : MonoBehaviour
         cam = GameObject.Find("Main Camera");
         palyerNowPos = player.transform.localPosition;
 
-        //音效
-        openSwitch = Resources.Load<AudioClip>("Audio/Sound/拉下电闸");
-        openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
+        //??Ч
+        openSwitch = Resources.Load<AudioClip>("Audio/Sound/??????");
+        openDoor = Resources.Load<AudioClip>("Audio/Sound/???????????");
     }
     private void Update()
     {
-        #region yiyi交互事件
-        //打开关闭把手
+        #region yiyi???????
+        //???????
         if (isEnterHandle)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -53,27 +53,27 @@ public class YiYiControll : MonoBehaviour
                 {
                     handle.transform.GetChild(0).gameObject.SetActive(true);
                     handle.GetComponent<SpriteRenderer>().enabled = false;
-                    Debug.Log("打开开关了");
+                    Debug.Log("???????");
                 }
                 else
                 {
                     handle.transform.GetChild(0).gameObject.SetActive(false);
                     handle.GetComponent<SpriteRenderer>().enabled = true;
-                    Debug.Log("关闭开关了 ");
+                    Debug.Log("???????? ");
                 }
                 if (!player.GetComponent<AudioSource>().isPlaying)
                     player.GetComponent<AudioSource>().PlayOneShot(openSwitch, 0.8f);
             }
            
         }
-        //玩家未进入时发生的事件
+        //???δ??????????????
         if (!FirstControll.isPlayerEnterWork)
         {
             if (isEnterWindow)
             {
                 if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<SwitchRole>().isYiYi)
                 {
-                    Debug.Log("yiyi在窗户吗，进入仓库");
+                    Debug.Log("yiyi????????????");
                     isEnterWork = true;
                     workEnv.SetActive(false);
                     workEnv_Inside.SetActive(true);
@@ -84,17 +84,17 @@ public class YiYiControll : MonoBehaviour
                     cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
                     post.transform.GetChild(0).gameObject.SetActive(true);
-                    string[] dialogues = { "Yiyi:电路情况异常" };
+                    string[] dialogues = { "Yiyi:??·?????" };
                     DialoguePanel.Instance.ShowDialogue(dialogues);
                     //player.GetComponent<SwitchRole>().IsFollow = false;
                 }
-            }//进入窗户
-            //与电路箱交互,打开关闭电路箱
+            }//??????
+            //???·?佻??,?????·??
             if (isEnterBox)
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("打开电路解谜");
+                    Debug.Log("???·????");
                     if (cir.gameObject.activeSelf == false)
                     {
                         box.GetComponent<BoxCollider2D>().enabled = false;
@@ -120,7 +120,7 @@ public class YiYiControll : MonoBehaviour
                     }
                 }
             }
-            //在场景内部，按压tab机器人和玩家分离操作
+            //?????????????tab????????????????
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 EventManager.Instance().EventTrigger(EventTypeEnum.KeyDown_Tab.ToString(), "");
@@ -133,7 +133,7 @@ public class YiYiControll : MonoBehaviour
         switch (collision.name)
         {
             case "breakWindow":
-                Debug.Log("yiyi碰到窗户了！");
+                Debug.Log("yiyi???????????");
                 isEnterWindow = true;
                 ShowYiYiE(true);
                 break;
@@ -152,7 +152,7 @@ public class YiYiControll : MonoBehaviour
                 collision.gameObject.GetComponent<Animator>().enabled = true;
                 gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
                 player.GetComponent<PlayerMove>().moveSpeed = 0;
-                Debug.Log("碰到绳子开始qte玩法");
+                Debug.Log("??????????qte?淨");
                 break;
         }
     }
@@ -175,13 +175,13 @@ public class YiYiControll : MonoBehaviour
         }
     }
     /// <summary>
-    /// 在工厂内部按压tab事件，分离操作
-    //控制相机跟随，玩家与yiyi位置.目前直接转换isFollow=false会有莫名的问题，暂且转化时先把玩家隐藏，位置赋值到yiyi的位置，减缓跟随的效果；
+    /// ???????????tab????????????
+    //??????????棬?????yiyiλ??.????????isFollow=false????????????????????????????????λ??????yiyi??λ????????????Ч????
     /// </summary>
     /// <param name="info"></param>
     private void OnKey_TabDownEvnet(object info)
     {
-        //切换至工厂外。
+        //?л?????????
         if (workEnv_Inside.gameObject.activeInHierarchy && isEnterWork)
         {
             if(player.GetComponent<SwitchRole>().isYiYi)
@@ -200,7 +200,7 @@ public class YiYiControll : MonoBehaviour
                 post.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
-        //切换至工厂内.
+        //?л?????????.
         if (!workEnv_Inside.gameObject.activeInHierarchy && isEnterWork && !player.GetComponent<SwitchRole>().isYiYi)//player.GetComponent<SwitchRole>().IsFollow)
         {
             player.GetComponent<SwitchRole>().enabled = false;
@@ -224,7 +224,7 @@ public class YiYiControll : MonoBehaviour
         isTotalunLocked = true;
         StartCoroutine(CricuitAni());
     }
-    //电路解密完做一个渐隐效果，可以考虑用Dotween,目前用携程来做
+    //??·???????????????Ч?????????????Dotween,????Я??????
     IEnumerator CricuitAni()
     {
         yield return null;
@@ -253,7 +253,7 @@ public class YiYiControll : MonoBehaviour
         
     }
 
-    IEnumerator Fade(GameObject gameObj,bool isFade)//写一个渐变函数
+    IEnumerator Fade(GameObject gameObj,bool isFade)//д??????亯??
     {
         SpriteRenderer spriteRenderer = gameObj.GetComponent<SpriteRenderer>();
         if(isFade)

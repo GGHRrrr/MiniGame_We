@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         }
     }
     /// <summary>
-    /// 玩家使用道具产生的影响
+    /// ?????????????????
     /// </summary>
     /// <param name="item"></param>
     private void useItem(Item item)
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
                 {
                     inventory.AddItem(new Item { itemType = Item.ItemType.yilaguan, amount = 1 });
                 }
-                    Debug.Log("使用易拉罐,防止用户使用完卡关");
+                    Debug.Log("?????????,?????????????");
                 break;
             case Item.ItemType.shengzi:
                 EventManager.Instance().EventTrigger(EventTypeEnum.USEITEM_SHENGZI.ToString(), "");

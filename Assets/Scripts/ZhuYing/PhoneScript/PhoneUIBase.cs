@@ -11,7 +11,7 @@ public class PhoneUIBase : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Show()
+    public virtual void Show()
     {
         gameObject.SetActive(true);
     }

@@ -9,19 +9,31 @@ public class PhoneElementBtn : MonoBehaviour
     [SerializeField] public Button UserBtn;
     [SerializeField] public TextMeshProUGUI Title;
     [SerializeField] public TextMeshProUGUI Time;
-    private string name;
+    [SerializeField] public GameObject OnClickImage;
+    [SerializeField] public GameObject UnReadLog;
+    public string Id;
 
     public void Init(PhoneMessageWindow data)
     {
         Title.text = data.name;
-        Time.text = data.updateTime;
-        this.name = data.name;
+        Time.text = data.messageBlocks[0].messages[0].messagesContext;
+        this.Id = data.name;
     }
 
     public void Init(PhoneLogs data)
     {
         Title.text = data.title;
         Time.text = data.date;
-        this.name = data.title;
+        this.Id = data.title;
+    }
+
+    public void OnClickLog()
+    {
+        OnClickImage.SetActive(true);
+        if (UnReadLog.activeSelf)
+        {
+            UnReadLog.SetActive(false);
+            PhoneLogsDialog.NewLogsNum--;
+        }
     }
 }

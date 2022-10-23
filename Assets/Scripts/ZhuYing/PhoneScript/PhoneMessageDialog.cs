@@ -14,10 +14,11 @@ public class PhoneMessageDialog : PhoneUIBase
     //private Dictionary<string,PhoneMessageUserBtn> UserBtns = new Dictionary<string,PhoneMessageUserBtn>();
     [SerializeField] public Transform MessagesPannelParent;
     [SerializeField] public GameObject MessagesPannelPrefab;  //ÏûÏ¢´°¿Ú¸¸
-    private Dictionary<string, GameObject> MessageDic;
+    private Dictionary<string, GameObject> MessageDic = new Dictionary<string, GameObject>();
 
-    public void Init(List<PhoneMessageWindow> data)
+    public void Init()
     {
+        List<PhoneMessageWindow> data = PhoneModel.Instance().MPhoneData.users;
         for (int i = 0; i < data.Count; i++)
         {
             var BtnObj = Instantiate(MessageBtnPrefab, UserListParent);
@@ -25,15 +26,22 @@ public class PhoneMessageDialog : PhoneUIBase
             Btn.Init(data[i]);
             var PanObj = Instantiate(MessagesPannelPrefab, MessagesPannelParent);
             PhoneMessagesPanel Pan = PanObj.GetComponent<PhoneMessagesPanel>();
-            Pan.InitPanel(data[i].messages);
+            Pan.InitPanel(data[i].messageBlocks);
             MessageDic[data[i].name] = PanObj;
             Btn.UserBtn.onClick.AddListener(delegate
             {
-                OnCilckUserBtn(Btn.name);
+                OnCilckUserBtn(Btn.Id);
+                ButtonRefresh();
+                Btn.OnClickLog();
             });
-            if(i!=0)
+            if (i != 0)
                 PanObj.SetActive(false);
+            else
+            {
+                PanObj.SetActive(true);
+            }
         }
+        base.Init();
     }
 
     public void OnCilckUserBtn(string key)
@@ -43,6 +51,11 @@ public class PhoneMessageDialog : PhoneUIBase
             Obj.SetActive(false);
         }
         MessageDic[key].SetActive(true);
+    }
+
+    public void ButtonRefresh()
+    {
+        
     }
     
     public readonly static string PATH = "PhonePrefab/PhoneMessageDialog";

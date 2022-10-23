@@ -11,5 +11,7 @@ public enum EventTypeEnum
     USEITEM_SHENGZI,//使用绳子
     KeyDown_Tab,      //Tab按键
     Unlock_Circuit, //电路全部解锁
-    Anima_Fade//渐变动画
+    Anima_Fade,//渐变动画
+    INTER_LOG,//更新日志
+    INTER_MESSAGE//更新消息
 }

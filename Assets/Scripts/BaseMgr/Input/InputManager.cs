@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : BaseManager<InputManager>
 {
-    //是否开启该模块功能
+    //?????????鹦??
     private bool isStart = true;
 
     public InputManager()
@@ -12,7 +12,7 @@ public class InputManager : BaseManager<InputManager>
         MonoManager.Instance().AddUpdateListener(InputUpdate);
     }
 
-    //切换开启状态
+    //?л???????
     public void SwitchStates(bool isOpen)
     {
         isStart = isOpen;
@@ -30,12 +30,12 @@ public class InputManager : BaseManager<InputManager>
         CheckKeyCode(KeyCode.F);
     }
 
-    //检测按键函数
+    //?????????
     private void CheckKeyCode(KeyCode keycode)
     {
         if (Input.GetKeyDown(keycode))
         {
-            //事件中心分发按下抬起
+            //????????????????
             EventManager.Instance().EventTrigger("KeyDown", keycode);
         }else if (Input.GetKeyUp(keycode))
         {

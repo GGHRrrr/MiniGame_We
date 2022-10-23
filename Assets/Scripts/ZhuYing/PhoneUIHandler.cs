@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,13 +18,25 @@ public class PhoneUIHandler : MonoBehaviour
         Init();
     }
 
+    /// <summary>
+    /// Test
+    /// </summary>
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+            EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),1);
+    }
+
     public void Init()
     {
+        PhoneModel.Instance().Init();
         Parent = GameObject.Find("Canvas");
         mphoneItemDialog = CreateDialog<PhoneItemDialog>(PhoneItemDialog.PATH, Parent.GetComponent<Transform>());
         mphoneWindowDialog = CreateDialog<PhoneWindowDialog>(PhoneWindowDialog.PATH, Parent.GetComponent<Transform>());
         mphoneMessageDialog = CreateDialog<PhoneMessageDialog>(PhoneMessageDialog.PATH, Parent.GetComponent<Transform>());
         mphoneLogsDialog = CreateDialog<PhoneLogsDialog>(PhoneLogsDialog.PATH, Parent.GetComponent<Transform>());
+
+        EventManager.Instance().AddEventListener(EventTypeEnum.INTER_LOG.ToString(), InterLogs);
         
         mphoneItemDialog.Init();
         mphoneWindowDialog.Init();
@@ -41,6 +54,15 @@ public class PhoneUIHandler : MonoBehaviour
         mphoneLogsDialog.BackBtn.onClick.AddListener(OnClickLogsBack);
     }
 
+    public void InterLogs(object ID)
+    {
+        int id = (int)ID;
+        mphoneLogsDialog.InterNewLog(id);
+        mphoneItemDialog.RefreshIcon();
+    }
+
+    #region ¥∞ø⁄œ‘ æ…Ë÷√
+
     public void OnClickItem()
     {
         mphoneItemDialog.Hide();
@@ -49,8 +71,8 @@ public class PhoneUIHandler : MonoBehaviour
 
     public void OnClickMessage()
     {
-        mphoneWindowDialog.Hide();
         mphoneMessageDialog.Show();
+        mphoneWindowDialog.Hide();
     }
 
     public void OnClickMessageBack()
@@ -61,13 +83,13 @@ public class PhoneUIHandler : MonoBehaviour
 
     public void OnClickLogs()
     {
-        mphoneItemDialog.Hide();
         mphoneLogsDialog.Show();
+        mphoneWindowDialog.Hide();
     }
     
     public void OnClickLogsBack()
     {
-        mphoneItemDialog.Show();
+        mphoneWindowDialog.Show();
         mphoneLogsDialog.Hide();
     }
 
@@ -78,6 +100,8 @@ public class PhoneUIHandler : MonoBehaviour
         mphoneLogsDialog.Hide();
         mphoneItemDialog.Show();
     }
+
+    #endregion
 
     public T CreateDialog<T>(string Path,Transform Parent)
     {
