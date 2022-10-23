@@ -205,7 +205,7 @@ public class SecondControl : MonoBehaviour
             }
         }
 
-        //µ÷¾ÆÂß¼­
+        //TODO:µ÷¾ÆÂß¼­
         if (isBartender && !GetComponent<SwitchRole>().isYiYi)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -222,8 +222,8 @@ public class SecondControl : MonoBehaviour
                 //³ö²ÍÌü
                 Restaround.SetActive(false);
                 Village.SetActive(true);
-                transform.localPosition = new Vector3(118, transform.position.y, transform.position.z);
-                Yiyi.localPosition = new Vector3(115, Yiyi.position.y, Yiyi.position.z);
+                transform.localPosition = new Vector3(152, 1, transform.position.z);
+                Yiyi.localPosition = new Vector3(149, Yiyi.position.y, Yiyi.position.z);
                 //ÉãÏñ»úãÐÖµ
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(3, 0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(41, 0);
