@@ -17,6 +17,8 @@ public class SecondControl : MonoBehaviour
     private bool isCooker;
     private bool firstCooker = true;
     private bool firstFinish = true;
+    //调酒
+    private bool isBartender;
     //出门
     private bool isExit;
     #endregion
@@ -203,6 +205,15 @@ public class SecondControl : MonoBehaviour
             }
         }
 
+        //TODO:调酒逻辑
+        if (isBartender && !GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                //进入调酒UI页面
+            }
+        }
+
         //出门逻辑(分为有车票和无车票)
         if (isExit && !GetComponent<SwitchRole>().isYiYi)
         {
@@ -211,8 +222,8 @@ public class SecondControl : MonoBehaviour
                 //出餐厅
                 Restaround.SetActive(false);
                 Village.SetActive(true);
-                transform.localPosition = new Vector3(118, transform.position.y, transform.position.z);
-                Yiyi.localPosition = new Vector3(115, Yiyi.position.y, Yiyi.position.z);
+                transform.localPosition = new Vector3(152, 1, transform.position.z);
+                Yiyi.localPosition = new Vector3(149, Yiyi.position.y, Yiyi.position.z);
                 //摄像机阈值
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(3, 0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(41, 0);
@@ -266,6 +277,11 @@ public class SecondControl : MonoBehaviour
                 isExit = true;
                 print("碰到出口，按E离开");
                 break;
+            case "雪克壶":
+                ShowPlayerE(true);
+                isBartender = true;
+                print("碰到雪克壶，按E进行调酒");
+                break;
         }
     }
 
@@ -294,6 +310,10 @@ public class SecondControl : MonoBehaviour
             case "Exit":
                 ShowPlayerE(false);
                 isExit = false;
+                break;
+            case "雪克壶":
+                ShowPlayerE(false);
+                isBartender = false;
                 break;
         }
     }

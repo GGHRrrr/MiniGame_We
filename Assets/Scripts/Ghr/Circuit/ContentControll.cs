@@ -9,7 +9,9 @@ public class ContentControll : MonoBehaviour
     private GameObject player;
     //ø™∆ÙæÌ’¢√≈“Ù–ß
     private AudioClip openDoor;
-
+    public GameObject light;
+    public GameObject post;
+    public GameObject cir;
     public static ContentControll instance;
     public List<ItemsControll> itemsList= new List<ItemsControll>();
     private void Awake()
@@ -21,6 +23,7 @@ public class ContentControll : MonoBehaviour
         init();
         for (int i = 0; i < transform.childCount; i++)
         {
+            if(transform.GetChild(i).GetComponent<ItemsControll>())
             itemsList.Add(transform.GetChild(i).GetComponent<ItemsControll>());
         }
 
@@ -61,7 +64,9 @@ public class ContentControll : MonoBehaviour
     IEnumerator StartEvent_Circuit()
     {
 
-        yield return null;
+        light.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        post.gameObject.SetActive(false);
         EventManager.Instance().EventTrigger(EventTypeEnum.Unlock_Circuit.ToString(), "");
     }
 }

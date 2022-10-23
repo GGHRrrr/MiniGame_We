@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-  enum MoveType
+  enum Move
 {
     left,
     right
@@ -14,7 +14,6 @@ public class QteControll : MonoBehaviour
     public GameObject arrow;//往返的箭头
     public Transform leftPoint;//左边终点位置
     public Transform rightPoint;//右边终点位置
-    public GameObject black;
     [SerializeField] private MoveType moveType;//移动类型
     [SerializeField] private float moveSpeed;//移动速度
 

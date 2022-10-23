@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.Rendering;
 public class YiYiControll : MonoBehaviour
 {
-    //??Ч???
     private AudioClip openSwitch;
     private AudioClip openDoor;
-    //?????????????2.5 49 
-    //????????????????2.5 15
+    //2.5 49 
+    //2.5 15
     public GameObject e;
     public GameObject workEnv;
     public GameObject workEnv_Inside;
@@ -19,7 +18,7 @@ public class YiYiControll : MonoBehaviour
     public GameObject qte;
     private GameObject cam;
     private GameObject post;
-    public static bool isTotalunLocked=false;//???????????
+    public static bool isTotalunLocked=false;
     public  bool isEnterWork = false;
     private bool isEnterWindow = false;
     private bool isEnterHandle = false;
@@ -36,15 +35,12 @@ public class YiYiControll : MonoBehaviour
         post = GameObject.Find("Post").gameObject;
         cam = GameObject.Find("Main Camera");
         palyerNowPos = player.transform.localPosition;
-
-        //??Ч
-        openSwitch = Resources.Load<AudioClip>("Audio/Sound/??????");
-        openDoor = Resources.Load<AudioClip>("Audio/Sound/???????????");
+        openSwitch = Resources.Load<AudioClip>("Audio/Sound/拉下电闸");
+        openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     private void Update()
     {
-        #region yiyi???????
-        //???????
+        #region 
         if (isEnterHandle)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -53,20 +49,17 @@ public class YiYiControll : MonoBehaviour
                 {
                     handle.transform.GetChild(0).gameObject.SetActive(true);
                     handle.GetComponent<SpriteRenderer>().enabled = false;
-                    Debug.Log("???????");
                 }
                 else
                 {
                     handle.transform.GetChild(0).gameObject.SetActive(false);
                     handle.GetComponent<SpriteRenderer>().enabled = true;
-                    Debug.Log("???????? ");
                 }
                 if (!player.GetComponent<AudioSource>().isPlaying)
                     player.GetComponent<AudioSource>().PlayOneShot(openSwitch, 0.8f);
             }
            
         }
-        //???δ??????????????
         if (!FirstControll.isPlayerEnterWork)
         {
             if (isEnterWindow)
@@ -77,19 +70,16 @@ public class YiYiControll : MonoBehaviour
                     isEnterWork = true;
                     workEnv.SetActive(false);
                     workEnv_Inside.SetActive(true);
-                    player.GetComponent<SwitchRole>().enabled = false;
                     player.GetComponent<PlayerMove>().enabled = false;
                     gameObject.transform.localPosition = new Vector3(-9f, transform.localPosition.y, transform.localPosition.z);
                     player.transform.GetChild(0).gameObject.SetActive(false);
                     cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15, 0);
                     post.transform.GetChild(0).gameObject.SetActive(true);
-                    string[] dialogues = { "Yiyi:??·?????" };
+                    string[] dialogues = { "Yiyi:电路情况异常" };
                     DialoguePanel.Instance.ShowDialogue(dialogues);
-                    //player.GetComponent<SwitchRole>().IsFollow = false;
                 }
-            }//??????
-            //???·?佻??,?????·??
+            }
             if (isEnterBox)
             {
                 if (Input.GetKeyDown(KeyCode.E))
@@ -97,10 +87,10 @@ public class YiYiControll : MonoBehaviour
                     Debug.Log("???·????");
                     if (cir.gameObject.activeSelf == false)
                     {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
                         box.GetComponent<BoxCollider2D>().enabled = false;
                         cir.gameObject.SetActive(true);
                         gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
-                        //gameObject.GetComponent<SpriteRenderer>().enabled = false;
                         gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     }
 
@@ -112,15 +102,14 @@ public class YiYiControll : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        gameObject.GetComponent<BoxCollider2D>().enabled = true;
                         box.GetComponent<BoxCollider2D>().enabled = true;
                         cir.gameObject.SetActive(false);
                         gameObject.GetComponent<YiyiMove>().moveSpeed = 10;
-                        //gameObject.GetComponent<SpriteRenderer>().enabled = true;
                         gameObject.transform.GetChild(0).gameObject.SetActive(true);
                     }
                 }
             }
-            //?????????????tab????????????????
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 EventManager.Instance().EventTrigger(EventTypeEnum.KeyDown_Tab.ToString(), "");
@@ -133,7 +122,6 @@ public class YiYiControll : MonoBehaviour
         switch (collision.name)
         {
             case "breakWindow":
-                Debug.Log("yiyi???????????");
                 isEnterWindow = true;
                 ShowYiYiE(true);
                 break;
@@ -152,7 +140,6 @@ public class YiYiControll : MonoBehaviour
                 collision.gameObject.GetComponent<Animator>().enabled = true;
                 gameObject.GetComponent<YiyiMove>().moveSpeed = 0;
                 player.GetComponent<PlayerMove>().moveSpeed = 0;
-                Debug.Log("??????????qte?淨");
                 break;
         }
     }
@@ -174,42 +161,30 @@ public class YiYiControll : MonoBehaviour
                 break;
         }
     }
-    /// <summary>
-    /// ???????????tab????????????
-    //??????????棬?????yiyiλ??.????????isFollow=false????????????????????????????????λ??????yiyi??λ????????????Ч????
-    /// </summary>
-    /// <param name="info"></param>
     private void OnKey_TabDownEvnet(object info)
     {
-        //?л?????????
         if (workEnv_Inside.gameObject.activeInHierarchy && isEnterWork)
         {
             if(player.GetComponent<SwitchRole>().isYiYi)
-            //if (player.GetComponent<SwitchRole>().IsFollow == false)
             {
-                player.GetComponent<SwitchRole>().enabled = true;
                 player.GetComponent<PlayerMove>().enabled = true;
                 player.transform.localPosition = palyerNowPos;
                 nowPos = transform.localPosition;
                 workEnv.gameObject.SetActive(true);
                 workEnv_Inside.gameObject.SetActive(false);
-                //gameObject.GetComponent<SpriteRenderer>().enabled = false;
                 gameObject.transform.GetChild(0).gameObject.SetActive(false);
                 player.transform.GetChild(0).gameObject.SetActive(true);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(49, 0);
                 post.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
-        //?л?????????.
         if (!workEnv_Inside.gameObject.activeInHierarchy && isEnterWork && !player.GetComponent<SwitchRole>().isYiYi)//player.GetComponent<SwitchRole>().IsFollow)
         {
-            player.GetComponent<SwitchRole>().enabled = false;
             player.GetComponent<PlayerMove>().enabled = false;
             palyerNowPos = player.transform.localPosition;
             cam.transform.position = new Vector3(14f, cam.transform.position.y, cam.transform.position.z);
             workEnv.gameObject.SetActive(false);
             workEnv_Inside.gameObject.SetActive(true);
-            //gameObject.GetComponent<SpriteRenderer>().enabled = true;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             player.transform.GetChild(0).gameObject.SetActive(false);
             player.transform.localPosition = new Vector3(nowPos.x, player.transform.localPosition.y,player.transform.localPosition.z);
@@ -224,7 +199,6 @@ public class YiYiControll : MonoBehaviour
         isTotalunLocked = true;
         StartCoroutine(CricuitAni());
     }
-    //??·???????????????Ч?????????????Dotween,????Я??????
     IEnumerator CricuitAni()
     {
         yield return null;
@@ -253,7 +227,7 @@ public class YiYiControll : MonoBehaviour
         
     }
 
-    IEnumerator Fade(GameObject gameObj,bool isFade)//д??????亯??
+    IEnumerator Fade(GameObject gameObj,bool isFade)
     {
         SpriteRenderer spriteRenderer = gameObj.GetComponent<SpriteRenderer>();
         if(isFade)

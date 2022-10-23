@@ -26,7 +26,6 @@ public class ItemsControll : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        EventManager.Instance().EventTrigger(EventTypeEnum.Unlock_Circuit.ToString(), "");
         switch (myDir)
         {
             case DirectionType.up:
