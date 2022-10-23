@@ -17,6 +17,8 @@ public class SecondControl : MonoBehaviour
     private bool isCooker;
     private bool firstCooker = true;
     private bool firstFinish = true;
+    //调酒
+    private bool isBartender;
     //出门
     private bool isExit;
     #endregion
@@ -203,6 +205,15 @@ public class SecondControl : MonoBehaviour
             }
         }
 
+        //调酒逻辑
+        if (isBartender && !GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                //进入调酒UI页面
+            }
+        }
+
         //出门逻辑(分为有车票和无车票)
         if (isExit && !GetComponent<SwitchRole>().isYiYi)
         {
@@ -266,6 +277,11 @@ public class SecondControl : MonoBehaviour
                 isExit = true;
                 print("碰到出口，按E离开");
                 break;
+            case "雪克壶":
+                ShowPlayerE(true);
+                isBartender = true;
+                print("碰到雪克壶，按E进行调酒");
+                break;
         }
     }
 
@@ -294,6 +310,10 @@ public class SecondControl : MonoBehaviour
             case "Exit":
                 ShowPlayerE(false);
                 isExit = false;
+                break;
+            case "雪克壶":
+                ShowPlayerE(false);
+                isBartender = false;
                 break;
         }
     }
