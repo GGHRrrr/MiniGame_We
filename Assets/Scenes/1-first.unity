@@ -3479,6 +3479,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
+=======
+--- !u!114 &1008499056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008499052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a6cec826579ad4d98d20b1138ace30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mid: {fileID: 1406597538}
+  arrow: {fileID: 207496796}
+  leftPoint: {fileID: 0}
+  rightPoint: {fileID: 0}
+  black: {fileID: 0}
+  moveType: 0
+  moveSpeed: 0
+  isPress: 0
+  player: {fileID: 0}
+  yiyi: {fileID: 0}
+  shengzi: {fileID: 0}
+>>>>>>> parent of fce9119 (#一些调整)
 --- !u!1 &1011432141
 GameObject:
   m_ObjectHideFlags: 0
