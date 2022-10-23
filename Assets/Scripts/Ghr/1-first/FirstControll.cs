@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class FirstControll : MonoBehaviour
 {
     #region 物体
     public GameObject e;
+    public GameObject touying;
     //相机
     public GameObject cam;
     //人物
@@ -25,7 +27,7 @@ public class FirstControll : MonoBehaviour
     private AudioClip cantOpenDoor;
     //对话框
     public GameObject dialogueFrame;
-    
+    public GameObject daPanel;
 
     #endregion
     #region 判断条件
@@ -40,9 +42,12 @@ public class FirstControll : MonoBehaviour
      bool isEnterHole = false;
      bool isEnterOutPostDoor = false;
      bool isExitOutPost = false;
-    bool isEndDia = false;
+     bool isEndDia = false;
+     bool isEnterTouying = false;
+     bool isEnterMima = false;
     //判断首次交互
     private bool isFirst = true;
+    int touyingCount = 0;
     #endregion
     private void Awake()
     {
@@ -157,6 +162,48 @@ public class FirstControll : MonoBehaviour
             }
             
         }
+        //进入投影
+        if(isEnterTouying & !gameObject.GetComponent<SwitchRole>().isYiYi)
+        {
+            
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                if (!touying.activeInHierarchy)
+                    touying.gameObject.SetActive(true);
+                if (!daPanel.activeInHierarchy)
+                    daPanel.SetActive(true);
+                if (touyingCount < 8)
+                    touyingCount++;
+                Debug.Log(touyingCount);
+                switch (touyingCount)
+                {
+                    case 1:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "今天是我最后一次在这里站岗了";
+                        break;
+                    case 2:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "人们已经离开了这座城市，而我也将随最后一批人员进行转移";
+                        break;
+                    case 3:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "具体转移的原因上级没有明确说明，但我只需要完成自己的本职工作就好";
+                        break;
+                    case 4:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "前往新的城市，我也将彻底与过去的自己告别,身份卡也不再需要";
+                        break;
+                    case 5:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "我将它放在了密码盒中，如果遇上有需要的人就拿走吧";
+                        break;
+                    case 6:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "密码是1025，我的编号";
+                        break;
+                    case 7:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "再见，故乡";
+                        break;
+                    case 8:
+                        daPanel.transform.GetChild(1).GetComponent<Text>().text = "我的编号是1025，可不要忘了";
+                        break;
+                }
+            }
+        }
         //离开哨站
         if (isExitOutPost && !gameObject.GetComponent<SwitchRole>().isYiYi)
         {
@@ -239,6 +286,9 @@ public class FirstControll : MonoBehaviour
                 isNextLevel = true;
                 break;
 
+            case "ca":
+                isEnterTouying = true;
+                break;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -284,6 +334,12 @@ public class FirstControll : MonoBehaviour
             case "endDia":
                 //到达地图末尾，关闭主角的移动，进行对话，对话完毕开启移动
                 isEndDia = false;
+                break;
+            case "ca":
+                isEnterTouying = false;
+                touying.gameObject.SetActive(false);
+                daPanel.SetActive(false);
+                daPanel.transform.GetChild(1).GetComponent<Text>().text = "";
                 break;
         }
     }
