@@ -12,6 +12,7 @@ public class SettingsOpen : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         settings.onClick.AddListener(() =>
         {
             print("设置被按下");
