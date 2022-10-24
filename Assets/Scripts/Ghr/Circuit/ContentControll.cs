@@ -7,6 +7,7 @@ public class ContentControll : MonoBehaviour
 {
     //玩家对象（控制音效）
     private GameObject player;
+    private GameObject yiyi;
     //开启卷闸门音效
     private AudioClip openDoor;
     public GameObject light;
@@ -28,6 +29,7 @@ public class ContentControll : MonoBehaviour
         }
 
         player = GameObject.Find("Player").transform.GetChild(0).gameObject;
+        yiyi = GameObject.Find("Player").transform.GetChild(1).gameObject;
         openDoor = Resources.Load<AudioClip>("Audio/Sound/打开卷匝门声音");
     }
     //首先进行初始化
@@ -63,7 +65,7 @@ public class ContentControll : MonoBehaviour
     }
     IEnumerator StartEvent_Circuit()
     {
-
+        yiyi.GetComponent<BoxCollider2D>().enabled = true;
         light.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         post.gameObject.SetActive(false);
