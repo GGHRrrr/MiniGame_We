@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
-using UnityEditor;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.UI;
