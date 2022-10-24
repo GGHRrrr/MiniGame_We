@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 425.335, y: -50.505}
-  m_SizeDelta: {x: 850.67, y: 23.01}
+  m_AnchoredPosition: {x: 425.335, y: -52.505}
+  m_SizeDelta: {x: 850.67, y: 27.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2075415087654174807
 CanvasRenderer:
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23
-  m_fontSizeBase: 23
+  m_fontSize: 27
+  m_fontSizeBase: 27
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -231,7 +231,9 @@ MonoBehaviour:
   SendMessage: {fileID: 3209491775034919772}
   SendBox: {fileID: 5742654104863658596}
   ChatBox: {fileID: 2631666669970150528}
+  ReflectButton: {fileID: 0}
   unReadNum: 0
+  HastoSend: 0
 --- !u!1 &3209491775034919772
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 425.335, y: -296.52502}
+  m_AnchoredPosition: {x: 425.335, y: -85.505}
   m_SizeDelta: {x: 850.67, y: 93.009995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1433463729042551521
@@ -357,7 +359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 425.335, y: -156.01501}
+  m_AnchoredPosition: {x: 425.335, y: -118.005005}
   m_SizeDelta: {x: 850.67, y: 158.01001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8995251634635045674

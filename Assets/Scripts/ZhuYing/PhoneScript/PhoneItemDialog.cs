@@ -25,7 +25,7 @@ public class PhoneItemDialog : PhoneUIBase
 
     public void RefreshIcon()
     {
-        if (PhoneLogsDialog.NewLogsNum > 0 || PhoneMessageDialog.UnReadMessagesSub > 0)
+        if (PhoneLogsDialog.NewLogsNum > 0 || PhoneMessageDialog.UnReadMessagesSub > 0 || PhoneMessageDialog.ToSendMessages > 0)
         {
             NewIcon.SetActive(true);
         }

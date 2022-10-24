@@ -243,7 +243,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7837347196100721999}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -319,11 +319,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7837347196100721999}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.9, y: -2}
+  m_AnchoredPosition: {x: 1.9000015, y: -2}
   m_SizeDelta: {x: 201, y: 116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5613409566024508069
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -396,10 +396,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7601719597649059110}
   - {fileID: 3950529117208425293}
   - {fileID: 7449690946772801048}
   - {fileID: 5985207960569593567}
-  - {fileID: 7601719597649059110}
   - {fileID: 6817116516095453250}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -542,12 +542,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7837347196100721999}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20.900024, y: -15.399994}
-  m_SizeDelta: {x: 124.34, y: 34.6506}
+  m_AnchoredPosition: {x: 7.2413, y: -15.399994}
+  m_SizeDelta: {x: 175.7655, y: 34.6506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1861155221260570645
 CanvasRenderer:
@@ -577,7 +577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "9\u670817\u65E5"
+  m_text: "2030\u5E749\u670817\u65E5"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 640bb2c5ea01c954698480ddd160b3e6, type: 2}
   m_sharedMaterial: {fileID: -3768357408518697704, guid: 640bb2c5ea01c954698480ddd160b3e6, type: 2}
@@ -677,11 +677,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7837347196100721999}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20.902016, y: 19.251015}
+  m_AnchoredPosition: {x: -4.3739853, y: 19.251015}
   m_SizeDelta: {x: 124.3361, y: 34.6515}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &989412132040861828

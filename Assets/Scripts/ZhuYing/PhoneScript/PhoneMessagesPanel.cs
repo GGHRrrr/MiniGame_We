@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine.UI;
 using Task = System.Threading.Tasks.Task;
 
@@ -20,6 +21,7 @@ public class PhoneMessagesPanel : MonoBehaviour
 
     [HideInInspector]public List<PhoneMessage> UnReadMessages = new List<PhoneMessage>();
     [HideInInspector]public int unReadNum = 0;
+    [HideInInspector] public bool HastoSend = false;
 
     public void InitPanel(List<PhoneMessageBlock> data)
     {
@@ -30,6 +32,8 @@ public class PhoneMessagesPanel : MonoBehaviour
             for (int j = 0; j < data[i].messages.Count; j++)
             {
                 LoadMessage(data[i].messages[j]);
+                if(data[i].messages[j].messageType == MessageType.Time)
+                    ReflectButton.Time.text = data[i].messages[j].messagesContext;
             }
         }
     }
@@ -42,27 +46,44 @@ public class PhoneMessagesPanel : MonoBehaviour
             UnReadMessages.Add(data.messages[i]);
         }
 
-        if (unReadNum == 0) Isfirst = true;
+        if (unReadNum == 0 && !HastoSend) Isfirst = true;
+        if (!Isfirst) return;
+        
         while (UnReadMessages.Count > 0)
         {
             PhoneMessage mesdata = UnReadMessages[0];
             if (mesdata.messageType == MessageType.Send)
+            {
+                if (unReadNum == 0) HastoSend = true;
                 break;
+            }
             if (mesdata.messageType == MessageType.Received)
                 unReadNum++;
+            if (mesdata.messageType == MessageType.Time)
+            {
+                ReflectButton.Time.text = mesdata.messagesContext;
+                ReflectButton.transform.SetSiblingIndex(0);
+            }
             LoadMessage(mesdata);
             UnReadMessages.Remove(mesdata);
         }
         ReflectButton.UnReadMessage.SetActive(true);
-        ReflectButton.UnReadMessagesNum.text = unReadNum.ToString();
-        if (Isfirst) PhoneMessageDialog.UnReadMessagesSub += unReadNum;
-        
+        if (!HastoSend)
+            ReflectButton.UnReadMessagesNum.text = unReadNum.ToString();
+        else
+            ReflectButton.UnReadMessagesNum.text = "!";
+        PhoneMessageDialog.UnReadMessagesSub += unReadNum;
+        if (HastoSend) PhoneMessageDialog.ToSendMessages++;
+
         Debug.Log("消息已加载");
     }
 
     public async void ShowMessage()
     {
+        ReflectButton.UnReadMessage.SetActive(false);
         PhoneMessageDialog.UnReadMessagesSub -= unReadNum;
+        if (HastoSend) PhoneMessageDialog.ToSendMessages--;
+        HastoSend = false;
         unReadNum = 0;
         await Delay(2500);
         while (UnReadMessages.Count > 0)
@@ -70,6 +91,7 @@ public class PhoneMessagesPanel : MonoBehaviour
             PhoneMessage mesdata = UnReadMessages[0];
             LoadMessage(mesdata);
             UnReadMessages.Remove(mesdata);
+            int time = 1000 + mesdata.messagesContext.Length * 75;
             await Delay(2000);
         }
     }

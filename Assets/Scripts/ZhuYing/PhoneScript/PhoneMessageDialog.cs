@@ -20,6 +20,7 @@ public class PhoneMessageDialog : PhoneUIBase
     private List<PhoneElementBtn> _Buttons = new List<PhoneElementBtn>();
 
     public static int UnReadMessagesSub = 0;
+    public static int ToSendMessages = 0;
 
     public void Init()
     {
@@ -31,8 +32,8 @@ public class PhoneMessageDialog : PhoneUIBase
             Btn.Init(data[i]);
             var PanObj = Instantiate(MessagesPannelPrefab, MessagesPannelParent);
             PhoneMessagesPanel Pan = PanObj.GetComponent<PhoneMessagesPanel>();
-            Pan.InitPanel(data[i].messageBlocks);
             Pan.ReflectButton = Btn;
+            Pan.InitPanel(data[i].messageBlocks);
             MessageDic[data[i].name] = PanObj;
             Btn.UserBtn.onClick.AddListener(delegate
             {

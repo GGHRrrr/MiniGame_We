@@ -29,7 +29,7 @@ public class PhoneUIHandler : MonoBehaviour
             EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),1);
         if(Input.GetKeyDown(KeyCode.J))
             EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
-                new KeyValuePair<string,int>("Alice",1));
+                new KeyValuePair<string,int>("Alice",2));
     }
 
     public void Init()
@@ -79,7 +79,6 @@ public class PhoneUIHandler : MonoBehaviour
         KeyValuePair<string, int> nameID = (KeyValuePair<string, int>) NameID;
         mphoneMessageDialog.InterNewMessage(nameID);
         mphoneItemDialog.RefreshIcon();
-        
     }
 
     #region ¥∞ø⁄œ‘ æ…Ë÷√

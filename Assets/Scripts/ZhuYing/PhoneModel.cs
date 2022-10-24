@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using MEEC.ExportedConfigs;
 
@@ -44,7 +45,7 @@ public class PhoneModel : BaseManager<PhoneModel>
             }
 
             PhoneMessage messageData = new PhoneMessage();
-            messageData.messagesContext = item.MessageContext;
+            messageData.messagesContext =MessageChange(item.MessageContext);
             messageData.messageType = (MessageType)(item.Type - 1);
             tempPhoneMessageBlock.messages.Add(messageData);
 
@@ -78,7 +79,7 @@ public class PhoneModel : BaseManager<PhoneModel>
             }
 
             PhoneMessage messageData = new PhoneMessage();
-            messageData.messagesContext = item.MessageContext;
+            messageData.messagesContext =MessageChange(item.MessageContext);
             messageData.messageType = (MessageType)(item.Type - 1);
             tempPhoneMessageBlock.messages.Add(messageData);
 
@@ -112,7 +113,7 @@ public class PhoneModel : BaseManager<PhoneModel>
             }
 
             PhoneMessage messageData = new PhoneMessage();
-            messageData.messagesContext = item.MessageContext;
+            messageData.messagesContext =MessageChange(item.MessageContext);
             messageData.messageType = (MessageType)(item.Type - 1);
             tempPhoneMessageBlock.messages.Add(messageData);
 
@@ -128,6 +129,13 @@ public class PhoneModel : BaseManager<PhoneModel>
 
         tempPhoneMessageBlock = null;
         hasInit = true;
+    }
+
+    string MessageChange(string input)
+    {
+        for (int i = 15; i < input.Length; i += 16)
+                input = input.Insert(i, "\n");
+        return input;
     }
     
 }

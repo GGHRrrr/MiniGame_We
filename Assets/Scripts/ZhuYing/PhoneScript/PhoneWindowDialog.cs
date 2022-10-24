@@ -33,11 +33,13 @@ public class PhoneWindowDialog : PhoneUIBase
             NewLogs.SetActive(false);
         }
 
-        if (PhoneMessageDialog.UnReadMessagesSub > 0)
+        if (PhoneMessageDialog.UnReadMessagesSub > 0 || PhoneMessageDialog.ToSendMessages > 0)
         {
             NewMessages.SetActive(true);
             unReadNum.gameObject.SetActive(true);
             unReadNum.text = PhoneMessageDialog.UnReadMessagesSub.ToString();
+            if(PhoneMessageDialog.ToSendMessages > 0)
+                unReadNum.text = "!";
         }
         else
         {
