@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: ae072e281b3e6b34980efe42008f0018
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - FZXS12
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c2d9037aa6cfa184baf1027e28097416, type: 3}
+  - {fileID: 12800000, guid: 767f46bae84202049bd54781f4c5936e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

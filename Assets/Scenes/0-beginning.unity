@@ -2836,6 +2836,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8403565515951754600, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
+      propertyPath: m_Text
+      value: "\u5411\u5DE6\u79FB\u52A8\uFF1A\t\t\t\tA\n\u5411\u53F3\u79FB\u52A8\uFF1A\t\t\t\tD\n\u5207\u6362\u73A9\u5BB6
+        / Yiyi\uFF1A\t\tTab\n\u4E0B\u4E00\u53E5\u5BF9\u8BDD\uFF1A\t\t\t\t\u7A7A\u683C
+        / \u9F20\u6807\u5DE6\u952E\n\u4E0E\u7269\u4F53\u4EA4\u4E92\uFF1A\t\t\t\tE\n\u4F7F\u7528\u9053\u5177(\u5DE6/\u53F3\u4E0B\u89D2)\t\t\u9F20\u6807\u70B9\u51FB"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403565515951754607, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1345.4583
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403565515951754607, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 182.848
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403565516052426241, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403565516575597968, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -641
+      objectReference: {fileID: 0}
     - target: {fileID: 8403565516876695796, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2923,6 +2945,10 @@ PrefabInstance:
     - target: {fileID: 8403565516876695807, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
       propertyPath: m_Name
       value: SettingsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403565516876695807, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fbe82f1e8e47634a964be43caf7cb3f, type: 3}
