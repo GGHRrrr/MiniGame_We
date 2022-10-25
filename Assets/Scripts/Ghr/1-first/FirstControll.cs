@@ -30,6 +30,8 @@ public class FirstControll : MonoBehaviour
     public GameObject dialogueFrame;
     public GameObject daPanel;
 
+    public GameObject black;
+
     #endregion
     #region 判断条件
     
@@ -245,12 +247,33 @@ public class FirstControll : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                int count = SceneManager.GetActiveScene().buildIndex ;
-                if (count < 2)
-                    SceneManager.LoadSceneAsync(count + 1);
+                StartCoroutine(Anim3(black));
             }
         }
         #endregion
+    }
+
+    IEnumerator Anim3(GameObject panel)//写一个渐变函数
+    {
+        Image img = panel.GetComponent<Image>();
+
+        while (img.color.a < 1)
+        {
+            yield return new WaitForSeconds(0.05f);
+            img.color = new Color(0, 0, 0, img.color.a + 0.05f);
+        }
+        //完全黑幕了改变物体状态
+        //切换场景
+        //当前关卡编号
+        int num = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(num + 1);
+        yield return new WaitForSeconds(0.5f);
+
+        while (img.color.a > 0)
+        {
+            yield return new WaitForSeconds(0.05f);
+            img.color = new Color(0, 0, 0, img.color.a - 0.05f);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

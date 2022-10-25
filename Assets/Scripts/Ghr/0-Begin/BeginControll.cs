@@ -20,8 +20,10 @@ public class BeginControll : MonoBehaviour
     GameObject playerPar;//��ɫ������
     GameObject player;//��ɫ
     GameObject yiYI;//������
+    
 
     public GameObject e;
+    public GameObject black;
 
     private bool isNextLevel = false;
 
@@ -56,14 +58,31 @@ public class BeginControll : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                int count = SceneManager.GetActiveScene().buildIndex;
-                print(count);
-                if (count < 2)
-                {
-                    SceneManager.LoadSceneAsync(count + 1);
-                }
-                    
+                StartCoroutine(Anim3(black));
             }
+        }
+    }
+
+    IEnumerator Anim3(GameObject panel)//写一个渐变函数
+    {
+        Image img = panel.GetComponent<Image>();
+
+        while (img.color.a < 1)
+        {
+            yield return new WaitForSeconds(0.05f);
+            img.color = new Color(0, 0, 0, img.color.a + 0.05f);
+        }
+        //完全黑幕了改变物体状态
+        //切换场景
+        //当前关卡编号
+        int num = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(num + 1);
+        yield return new WaitForSeconds(0.5f);
+
+        while (img.color.a > 0)
+        {
+            yield return new WaitForSeconds(0.05f);
+            img.color = new Color(0, 0, 0, img.color.a - 0.05f);
         }
     }
 
