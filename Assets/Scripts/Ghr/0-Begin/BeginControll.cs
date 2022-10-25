@@ -24,7 +24,7 @@ public class BeginControll : MonoBehaviour
 
     public GameObject e;
     public GameObject black;
-
+    public GameObject diaPanel;
     private bool isNextLevel = false;
 
     private void Awake()
@@ -94,7 +94,12 @@ public class BeginControll : MonoBehaviour
     {
         //��������ƶ�
         player.GetComponent<PlayerMove>().enabled = false;
+        yield return new WaitForSecondsRealtime(0.5f);
+        diaPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = "YiYi,快去把易拉罐捡回来！";
+        diaPanel.SetActive(true);
         yield return new WaitForSecondsRealtime(2f) ;
+        diaPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = "";
+        diaPanel.SetActive(false);
         Animator opAni = openingAniPoint.transform.GetChild(0).GetComponent<Animator>();
         AnimatorStateInfo stateinfo = opAni.GetCurrentAnimatorStateInfo(0);
         if (stateinfo.IsName("yilaguanAni") && (stateinfo.normalizedTime > 1.0f))
@@ -127,10 +132,15 @@ public class BeginControll : MonoBehaviour
             yiYI.GetComponent<Animator>().enabled = false;
             //yiYI.GetComponent<Animator>().Play("viviidle");
             //�л����󣬼��������߼���yiyi�����ֱ���
-            
             mainCamera.gameObject.GetComponent<CameraFollow>().enabled = true;
             //��ȥ֮���ƶ��ظ�,��ʱ�ò��Խű�����
             player.GetComponent<PlayerMove>().enabled = true;
+            yield return new WaitForSeconds(0.5f);
+                diaPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = "按TAB切换角色";
+            diaPanel.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            diaPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = "";
+            diaPanel.SetActive(false);
         }
         else
         {
@@ -235,7 +245,10 @@ public class BeginControll : MonoBehaviour
             //�ƶ�����Ͱ��Ч
             if (!audio.isPlaying)
                 audio.PlayOneShot(moveGarbage, 0.8f);
-
+            string[] a = new string[1];
+            a[0] = "垃圾···收集完成，需要···处理垃圾";
+            garbage.GetComponent<Talkable>().lines = a;
+            DialoguePanel.Instance.ShowDialogue(garbage.GetComponent<Talkable>().lines, garbage.transform.GetChild(0).transform);
             garbage.transform.localPosition = new Vector2(garbage.transform.localPosition.x, garbage.transform.localPosition.y + 0.5f);
             garbage.transform.GetChild(1).GetComponent<Collider2D>().enabled = false;
             EventManager.Instance().RemoveEventListener(EventTypeEnum.USEITEMS_YILAGUAN.ToString(), UseYilaguan_Garbage);
