@@ -8,7 +8,9 @@ public class ThirdController : MonoBehaviour
 {
 
     private Animator anim;
+    private Rigidbody2D rigidbody;
     public GameObject e;
+    public Transform endDia;
     //书本UI
     public GameObject book;
     //yiyi对象
@@ -29,12 +31,16 @@ public class ThirdController : MonoBehaviour
     private bool isBook;
     //是否已经点亮了火堆
     private bool isFire = false;
+    //是否达成自动行走条件
+    private bool isWalk = false;
     //是否达成通关条件
     private bool isSuccess = false;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        rigidbody = GetComponent<Rigidbody2D>();
+
         //播放BGM
         MusicManager.Instance().PlayBGM("荒原bgm");
         //挡风沙行走
@@ -57,8 +63,11 @@ public class ThirdController : MonoBehaviour
         if (!dialoguePanel.activeInHierarchy && isFire)
         {
             StartCoroutine(Anim2(black));
+            
             isFire = false;
         }
+
+        if (isWalk) transform.Translate(new Vector2(3 * Time.deltaTime, 0));
 
         if (!dialoguePanel.activeInHierarchy && isSuccess)
         {
@@ -80,6 +89,11 @@ public class ThirdController : MonoBehaviour
                 ShowPlayerE(true);
                 isBook = true;
                 print("触碰到交互用书");
+                break;
+            case "endDia":
+                isSuccess = true;
+                isWalk = false;
+                GetComponent<Animator>().SetBool("walk", false);
                 break;
         }
     }
@@ -155,7 +169,7 @@ public class ThirdController : MonoBehaviour
         GetComponent<Animator>().SetBool("sittiing", true);
         //关闭跟随
         GetComponent<PlayerMove>().enabled = false;
-
+        yield return new WaitForSeconds(0.5f);
         while (img.color.a > 0)
         {
             yield return new WaitForSeconds(0.05f);
@@ -194,9 +208,10 @@ public class ThirdController : MonoBehaviour
             img.color = new Color(0, 0, 0, img.color.a + 0.05f);
         }
         //完全黑幕了改变物体状态
-        //修改主角动作和位置
-        transform.localPosition = new Vector3(168, transform.position.y, transform.position.z);
+        GetComponent<Animator>().SetBool("sittiing", false);
+        
         //GetComponent<Animator>().SetBool("sittiing", true);
+        yield return new WaitForSeconds(0.5f);
 
         while (img.color.a > 0)
         {
@@ -204,8 +219,10 @@ public class ThirdController : MonoBehaviour
             img.color = new Color(0, 0, 0, img.color.a - 0.05f);
         }
 
+        GetComponent<Animator>().SetBool("walk", true);
+        isWalk = true;
         //触发对话
-        string[] info =
+        /*string[] info =
         {
             "Human:.....",
             "Human:该打起精神了。",
@@ -215,8 +232,8 @@ public class ThirdController : MonoBehaviour
             "Human::......夕阳真美啊。"
         };
 
-        DialoguePanel.Instance.ShowDialogue(info);
-        isSuccess = true;
+        DialoguePanel.Instance.ShowDialogue(info);*/
+
     }
 
     IEnumerator Anim3(GameObject panel)//写一个渐变函数
@@ -233,6 +250,7 @@ public class ThirdController : MonoBehaviour
         //当前关卡编号
         int num = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadSceneAsync(num + 1);
+        yield return new WaitForSeconds(0.5f);
 
         while (img.color.a > 0)
         {
