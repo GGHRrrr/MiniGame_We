@@ -44,6 +44,8 @@ public class BeginControll : MonoBehaviour
         player= playerPar.transform.GetChild(0).gameObject;
         yiYI = playerPar.transform.GetChild(1).gameObject;
         StartCoroutine(PlayOpenningAni());
+        //播放BGM
+        MusicManager.Instance().PlayBGM("城市BGM");
 
     }
 

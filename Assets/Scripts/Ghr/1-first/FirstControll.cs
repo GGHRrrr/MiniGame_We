@@ -61,6 +61,7 @@ public class FirstControll : MonoBehaviour
         post = GameObject.Find("Post").gameObject;
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
         cantOpenDoor = Resources.Load<AudioClip>("Audio/Sound/门锁住打不开");
+        
     }
     private void Update()
     {
@@ -309,10 +310,12 @@ public class FirstControll : MonoBehaviour
                 break;
 
             case "ca":
+                ShowPlayerE(true);
                 isEnterTouying = true;
                 e.gameObject.SetActive(true);
                 break;
             case "mima":
+                ShowPlayerE(true);
                 isEnterMima = true;
                 ShowPlayerE(true);
                 break;
@@ -400,6 +403,8 @@ public class FirstControll : MonoBehaviour
                         string[] dialogues = { "警告！无身份卡者禁止通行！" };
                         DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
                     }
+                    //哨兵切换动作
+                    collision.collider.GetComponent<Animator>().SetTrigger("Nopass");
                 }
                 else
                 {
@@ -408,6 +413,8 @@ public class FirstControll : MonoBehaviour
                     DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
                     collision.collider.transform.position = new Vector3(collision.collider.transform.position.x, collision.collider.transform.position.y + 0.5f, collision.collider.transform.position.z);
                     collision.collider.GetComponent<BoxCollider2D>().enabled = false;
+                    //哨兵切换动作
+                    collision.collider.GetComponent<Animator>().SetTrigger("Pass");
                 }
                 break;
                 

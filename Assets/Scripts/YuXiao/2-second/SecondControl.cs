@@ -41,6 +41,8 @@ public class SecondControl : MonoBehaviour
     {
         cam = Camera.main;
         Yiyi = transform.parent.Find("yiyi").transform;
+        //≤•∑≈BGM
+        MusicManager.Instance().PlayBGM("œÁ’ÚBGM");
     }
 
     
