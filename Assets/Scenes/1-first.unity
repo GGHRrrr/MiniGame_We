@@ -5760,6 +5760,11 @@ Transform:
   m_Father: {fileID: 1162776074}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1630136159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1743359864, guid: 606433e84d0718843be597881d04358f, type: 3}
+  m_PrefabInstance: {fileID: 1498979231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1634643325
 GameObject:
   m_ObjectHideFlags: 0
@@ -7845,6 +7850,10 @@ PrefabInstance:
       propertyPath: workEnv
       value: 
       objectReference: {fileID: 1162776073}
+    - target: {fileID: 4871319814510646983, guid: 03e271428a50ce04084ec1bae048e68d, type: 3}
+      propertyPath: mapPanel
+      value: 
+      objectReference: {fileID: 1630136159}
     - target: {fileID: 4871319814510646983, guid: 03e271428a50ce04084ec1bae048e68d, type: 3}
       propertyPath: mimaxiang
       value: 

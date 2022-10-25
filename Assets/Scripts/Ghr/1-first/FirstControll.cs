@@ -19,6 +19,7 @@ public class FirstControll : MonoBehaviour
     public GameObject workInsideEnv;
     public GameObject workInsidUnder;
     public GameObject outPostRoom;
+    public GameObject mapPanel;
     //后处理
     private GameObject post;
 
@@ -255,8 +256,10 @@ public class FirstControll : MonoBehaviour
 
     IEnumerator Anim3(GameObject panel)//写一个渐变函数
     {
+        mapPanel.SetActive(true);
+        mapPanel.GetComponent<MapControll>().ShowMapAni(1);
         Image img = panel.GetComponent<Image>();
-
+        yield return new WaitForSeconds(2f);
         while (img.color.a < 1)
         {
             yield return new WaitForSeconds(0.05f);

@@ -1097,6 +1097,7 @@ MonoBehaviour:
   workInsideEnv: {fileID: 0}
   workInsidUnder: {fileID: 0}
   outPostRoom: {fileID: 0}
+  mapPanel: {fileID: 0}
   dialogueFrame: {fileID: 0}
   daPanel: {fileID: 0}
   black: {fileID: 0}

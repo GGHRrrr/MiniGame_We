@@ -25,6 +25,7 @@ public class BeginControll : MonoBehaviour
     public GameObject e;
     public GameObject black;
     public GameObject diaPanel;
+    public GameObject mapPanel;
     private bool isNextLevel = false;
 
     private void Awake()
@@ -65,8 +66,10 @@ public class BeginControll : MonoBehaviour
 
     IEnumerator Anim3(GameObject panel)//写一个渐变函数
     {
+        mapPanel.SetActive(true);
+        mapPanel.GetComponent<MapControll>().ShowMapAni(0);
         Image img = panel.GetComponent<Image>();
-
+        yield return new WaitForSeconds(2f);
         while (img.color.a < 1)
         {
             yield return new WaitForSeconds(0.05f);
