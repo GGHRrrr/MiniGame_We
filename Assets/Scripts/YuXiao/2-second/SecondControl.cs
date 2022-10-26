@@ -178,7 +178,7 @@ public class SecondControl : MonoBehaviour
                         "我已经很多年没有制作过它了，但即便如此，它依旧是本店的招牌。",
                         "如果你能制作出这杯酒，我可以送你一张车票。",
                         "这是许多年前一位客人留下的，似乎是想让我转赠给前来赴约的顾客。",
-                        "如果你能制作出这样的三明治，我可以送你一张车票。"
+                        "如果你能制作出这样的鸡尾酒，我可以送你一张车票。"
                     };
                     DialoguePanel.Instance.ShowDialogue(info, cooker);
                     firstCooker = false;
@@ -193,7 +193,7 @@ public class SecondControl : MonoBehaviour
                         //未制作出三明治
                         string[] info =
                         {
-                            "如果你能制作出这样的三明治，我可以送你一张车票。"
+                            "如果你能制作出这样的鸡尾酒，我可以送你一张车票。"
                         };
                         DialoguePanel.Instance.ShowDialogue(info, cooker);
                     }
