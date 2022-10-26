@@ -49,9 +49,6 @@ public class BeginControll : MonoBehaviour
         StartCoroutine(PlayOpenningAni());
         //播放BGM
         MusicManager.Instance().PlayBGM("城市BGM");
-        
-                
-        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),1);
 
     }
 

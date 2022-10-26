@@ -63,7 +63,7 @@ public class PhoneUIHandler : MonoBehaviour
         
         DontDestroyOnLoad(Parent);
         DontDestroyOnLoad(this);
-
+        InterLogs(1);
         HasInit = true;
     }
 
