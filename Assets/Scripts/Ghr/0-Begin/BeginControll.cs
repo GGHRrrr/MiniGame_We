@@ -38,7 +38,7 @@ public class BeginControll : MonoBehaviour
     {
         //��Ч
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
-        moveGarbage = Resources.Load<AudioClip>("Audio/Sound/�ƶ�����Ͱ");
+        moveGarbage = Resources.Load<AudioClip>("Audio/Sound/移动垃圾桶");
 
         minCamera = GameObject.Find("MinCamera").GetComponent<Camera>();
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();

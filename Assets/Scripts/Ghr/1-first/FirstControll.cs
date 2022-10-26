@@ -27,6 +27,10 @@ public class FirstControll : MonoBehaviour
     private AudioSource audio;
     //开门音效文件
     private AudioClip cantOpenDoor;
+    //影像音效文件
+    private AudioClip openTouying;
+    //开门音效文件
+    private AudioClip openDoor;
     //对话框
     public GameObject dialogueFrame;
     public GameObject daPanel;
@@ -61,9 +65,12 @@ public class FirstControll : MonoBehaviour
     }
     private void Start()
     {
-        post = GameObject.Find("Post").gameObject;
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
+        post = GameObject.Find("Post").gameObject;
+        MusicManager.Instance().PlayBGM("城市BGM");
         cantOpenDoor = Resources.Load<AudioClip>("Audio/Sound/门锁住打不开");
+        openTouying = Resources.Load<AudioClip>("Audio/Sound/投影中留言");
+        openDoor = Resources.Load<AudioClip>("Audio/Sound/开门声");
         
     }
     private void Update()
@@ -161,6 +168,8 @@ public class FirstControll : MonoBehaviour
             //44.5/47   44
             if(Input.GetKeyDown(KeyCode.E))
             {
+                if (!audio.isPlaying)
+                    audio.PlayOneShot(openDoor, 0.8f);
                 //cam.transform.position = new Vector3(44, cam.transform.position.y, cam.transform.position.z);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(46, 0);
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(45.6f, 0);
@@ -187,6 +196,8 @@ public class FirstControll : MonoBehaviour
                 switch (touyingCount)
                 {
                     case 1:
+                        if (!audio.isPlaying)
+                            audio.PlayOneShot(openTouying, 0.8f);
                         daPanel.transform.GetChild(1).GetComponent<Text>().text = "今天是我最后一次在这里站岗了";
                         break;
                     case 2:

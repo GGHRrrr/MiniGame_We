@@ -5,6 +5,17 @@ using UnityEngine;
 public class SecondControl : MonoBehaviour
 {
     public GameObject e;
+    public Transform point1;
+    public Transform point2;
+
+    //调酒相关
+    public GameObject flower;
+    public GameObject suger;
+    public GameObject wine;
+    public GameObject wineBack;
+    public GameObject cup;
+    public GameObject qte;
+    public GameObject finishedWine;
 
     #region 状态变量
     private bool isFlowerShop;
@@ -21,6 +32,10 @@ public class SecondControl : MonoBehaviour
     private bool isBartender;
     //出门
     private bool isExit;
+    //碰到糖罐子
+    private bool isSuger;
+    //收集物数目
+    private int count = 0;
     #endregion
 
     #region 游戏对象
@@ -69,30 +84,21 @@ public class SecondControl : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (isFirstFlower)
+                string[] info =
                 {
-                    string[] info =
-                    {
-                        "Human:真美啊。",
-                    };
-                    //触发对话
-                    DialoguePanel.Instance.ShowDialogue(info);
-                    isFirstFlower = false;
-                }
-                else
-                {
-                    //多次对话
-                    //TODO:将花儿加入背包
-
-                }
-                
+                   "Human:真美啊。",
+                };
+                //触发对话
+                DialoguePanel.Instance.ShowDialogue(info);
+                flower.SetActive(true);
+                count++;
             }
         }
 
         //触碰到交通机器人
         if (isTransport && !GetComponent<SwitchRole>().isYiYi)
         {
-            if (true)
+            if (!qte.GetComponent<UIqte>().isFinish)
             {
                 //没有车票
                 string[] info =
@@ -110,8 +116,11 @@ public class SecondControl : MonoBehaviour
                 {
                     "感谢本次乘坐，下一站：荒原边境。"
                 };
+                
                 //触发对话
                 DialoguePanel.Instance.ShowDialogue(info, Transport.transform);
+                //TODO:坐车！过场
+                transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
             }
             
         }
@@ -124,8 +133,8 @@ public class SecondControl : MonoBehaviour
                 //进入餐厅
                 Restaround.SetActive(true);
                 Village.SetActive(false);
-                transform.position = new Vector3(40, transform.position.y, transform.position.z);
-                Yiyi.position = new Vector3(43, Yiyi.position.y, Yiyi.position.z);
+                transform.position = point2.position;
+                Yiyi.position = point2.position + 3 * Vector3.right;
                 //摄像机阈值
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(9.4f ,0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(35.3f, 0);
@@ -162,11 +171,13 @@ public class SecondControl : MonoBehaviour
                     };
                     DialoguePanel.Instance.ShowDialogue(info, cooker);
                     firstCooker = false;
+                    wine.SetActive(true);
+                    count++;
                 }
                 else
                 {
                     //不是首次交互
-                    if (true)
+                    if (!qte.GetComponent<UIqte>().isFinish)
                     {
                         //未制作出三明治
                         string[] info =
@@ -190,7 +201,7 @@ public class SecondControl : MonoBehaviour
                             };
                             DialoguePanel.Instance.ShowDialogue(info, cooker);
                             firstFinish = false;
-                            //TODO:回收三明治
+                            finishedWine.SetActive(false);
                             //TODO:获得车票
                         }
                         else
@@ -207,12 +218,36 @@ public class SecondControl : MonoBehaviour
             }
         }
 
+        //收集糖
+        if (isSuger && !GetComponent<SwitchRole>().isYiYi)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                suger.SetActive(true);
+                count++;
+            }            
+        }
+
         //TODO:调酒逻辑
         if (isBartender && !GetComponent<SwitchRole>().isYiYi)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 //进入调酒UI页面
+                if (count >= 3)
+                {
+                    wineBack.SetActive(true);
+                    cup.SetActive(true);
+                }
+                else
+                {
+                    string[] info =
+                    {
+                        "Human:调酒需要花，酒和糖，目前材料不够。"
+                    };
+                    DialoguePanel.Instance.ShowDialogue(info);
+                }
+                
             }
         }
 
@@ -224,15 +259,15 @@ public class SecondControl : MonoBehaviour
                 //出餐厅
                 Restaround.SetActive(false);
                 Village.SetActive(true);
-                transform.localPosition = new Vector3(152, 1, transform.position.z);
-                Yiyi.localPosition = new Vector3(149, Yiyi.position.y, Yiyi.position.z);
+                transform.position = point1.position;
+                Yiyi.position = point1.position + 3 * Vector3.left;
                 //摄像机阈值
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(3, 0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(41, 0);
 
                 //如果有车票(触发对话)
                 //TODO:修改条件
-                if (true)
+                if (qte.GetComponent<UIqte>().isFinish)
                 {
                     string[] info =
                     {
@@ -284,6 +319,11 @@ public class SecondControl : MonoBehaviour
                 isBartender = true;
                 print("碰到雪克壶，按E进行调酒");
                 break;
+            case "糖罐子":
+                ShowPlayerE(true);
+                isSuger = true;
+                print("碰到糖罐子");
+                break;
         }
     }
 
@@ -317,6 +357,10 @@ public class SecondControl : MonoBehaviour
                 ShowPlayerE(false);
                 isBartender = false;
                 break;
+            case "糖罐子":
+                ShowPlayerE(false);
+                isSuger = false;
+                break;
         }
     }
     #endregion
@@ -328,6 +372,8 @@ public class SecondControl : MonoBehaviour
         {
             case "Transport":
                 isTransport = true;
+                collision.collider.gameObject.GetComponent<Collider2D>().enabled = false;
+                collision.transform.localPosition = new Vector2(collision.transform.localPosition.x, collision.transform.localPosition.y + 0.5f);
                 print("触碰到交通机器人");
                 break;
         }

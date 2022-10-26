@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /*
@@ -18,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     //玩家音效组件
     private AudioSource audio;
     private AudioClip walkAudio;
+    private AudioClip hardWalk;
 
     //移动速度
     public float moveSpeed;
@@ -36,6 +38,7 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         audio = GetComponent<AudioSource>();
         walkAudio = Resources.Load<AudioClip>("Audio/Sound/脚步声城市乡镇");
+        hardWalk = Resources.Load<AudioClip>("Audio/Sound/脚步声（荒原）");
 
         yiyi = transform.parent.Find("yiyi");
         followPoint = transform.Find("FollowPoint");
@@ -76,7 +79,11 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("walk", true);
             if (!audio.isPlaying)
-                audio.PlayOneShot(walkAudio, 0.8f);
+                if (SceneManager.GetActiveScene().buildIndex == 3 && GetComponent<ThirdController>().isHard)
+                    //如果是荒原
+                    audio.PlayOneShot(hardWalk, 0.8f);
+                else
+                    audio.PlayOneShot(walkAudio, 0.8f);
         }
         else
         {
