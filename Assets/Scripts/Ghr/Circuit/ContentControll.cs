@@ -57,7 +57,6 @@ public class ContentControll : MonoBehaviour
         }
         if (isAllTrue)
         {
-            Debug.Log("全部解锁进行下一步操作");
             if (!player.GetComponent<AudioSource>().isPlaying)
                 player.GetComponent<AudioSource>().PlayOneShot(openDoor, 0.8f);
             StartCoroutine(StartEvent_Circuit());

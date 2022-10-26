@@ -77,7 +77,6 @@ public class PhoneMessagesPanel : MonoBehaviour
         if (HastoSend) PhoneMessageDialog.ToSendMessages++;
 
         data.hasIntered = true;
-        Debug.Log("消息已加载");
     }
 
     public async void ShowMessage()

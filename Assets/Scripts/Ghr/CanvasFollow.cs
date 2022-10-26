@@ -10,7 +10,6 @@ public class CanvasFollow : MonoBehaviour
     private void Start()
     {
         followTarget = GameObject.Find("Player/Human/DialoguePlayer").transform;
-        print(followTarget);
     }
 
     void Update()

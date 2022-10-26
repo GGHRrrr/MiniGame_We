@@ -19,7 +19,6 @@ public class ItemsControll : MonoBehaviour
     public bool isTrue=false;//是否正确
     private void Start()
     {
-        Debug.Log(gameObject.name);
     }
     /// <summary>
     /// 当鼠标点击时进行判断
@@ -35,7 +34,6 @@ public class ItemsControll : MonoBehaviour
                     isTrue = true;
                 else
                     isTrue = false;//判断是否为正确方向，是则为true否则为false
-                Debug.Log("目前" + myDir + " " + isTrue);
                 ContentControll.instance.CheckItems();//调用检查脚本，遍历子物体进行判断
                 break;
             case DirectionType.right:
@@ -45,7 +43,6 @@ public class ItemsControll : MonoBehaviour
                     isTrue = true;
                 else
                     isTrue = false;
-                Debug.Log("目前" + myDir + " " + isTrue);
                 ContentControll.instance.CheckItems();
                 break;
             case DirectionType.down:
@@ -55,7 +52,6 @@ public class ItemsControll : MonoBehaviour
                     isTrue = true;
                 else
                     isTrue = false;
-                Debug.Log("目前" + myDir + " " + isTrue);
                 ContentControll.instance.CheckItems();
                 break;
             case DirectionType.left:
@@ -65,7 +61,6 @@ public class ItemsControll : MonoBehaviour
                     isTrue = true;
                 else
                     isTrue = false;
-                Debug.Log("目前" + myDir + " " + isTrue);
                 ContentControll.instance.CheckItems();
                 break;
            

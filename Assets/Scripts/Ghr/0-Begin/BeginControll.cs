@@ -194,7 +194,6 @@ public class BeginControll : MonoBehaviour
     /// <param name="info"></param>
      void TalkWith_YiYi(object info)
     {
-        Debug.Log("yiyi˵��");
     }
     /// <summary>
     /// ��ҶԻ��¼�
@@ -202,7 +201,6 @@ public class BeginControll : MonoBehaviour
     /// <param name="info"></param>
     void TalkWith_Player(object info)
     {
-        Debug.Log("���˵��");
     }
     /// <summary>
     /// �����ײ�¼�
@@ -216,7 +214,6 @@ public class BeginControll : MonoBehaviour
         switch (collision.gameObject.name)
         {
             case "Environments_Garbage":
-                Debug.Log("����������Ͱ��");
                 //if (isTouchGar == false)
                 //{
                 //    //δ�������򴥷��Ի�;
@@ -239,7 +236,7 @@ public class BeginControll : MonoBehaviour
         switch(collision.gameObject.name)
         {
             case "Environments_Garbage":
-                Debug.Log("����������Ͱ��");
+               
                 if (isTouchGar == false)
                 {
                     //δ�������򴥷��Ի�;
@@ -251,11 +248,11 @@ public class BeginControll : MonoBehaviour
                 //}
                 break;
             case "Environments_Fanmaiji":
-                Debug.Log("��������������");//�������ϻ����淨,��ʱ����˵
+                
                 break;
             case "NextLevel":
                 ShowPlayerE(true);
-                Debug.Log("������һ�ص����ˣ�׼��������һ��");
+                
                 isNextLevel = true;
                 break;
         }
@@ -279,10 +276,10 @@ public class BeginControll : MonoBehaviour
     #region ��������Ͱ
     void UseYilaguan_Garbage(object info)
     {
-        Debug.Log("ִ������1");
+        
         if (isTouchGar)
         {
-            Debug.Log("ִ������");
+            
             //�ƶ�����Ͱ��Ч
             if (!audio.isPlaying)
                 audio.PlayOneShot(moveGarbage, 0.8f);

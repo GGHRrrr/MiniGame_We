@@ -53,7 +53,6 @@ public class UI_Inventory : MonoBehaviour
             }
             );
             itemRectTransfor.Find("Image").GetComponent<Image>().sprite = item.GetSprite();
-            Debug.Log("string" + item.amount.ToString());
             itemRectTransfor.Find("count").GetComponent<Text>().text = item.amount.ToString();
         }
     }

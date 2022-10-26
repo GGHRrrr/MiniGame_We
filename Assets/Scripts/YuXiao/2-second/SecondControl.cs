@@ -303,37 +303,30 @@ public class SecondControl : MonoBehaviour
                 ShowPlayerE(true);
                 //修改状态变量
                 isFlowerShop = true;
-                print("触碰到花店");
                 break;
             case "Flower":
                 ShowPlayerE(true);
                 isFlower = true;
-                print("触碰到伸出的花");
                 break;
             case "EnterRest":
                 ShowPlayerE(true);
                 isEnterRest = true;
-                print("碰到餐厅门槛");
                 break;
             case "Cooker":
                 ShowPlayerE(true);
                 isCooker = true;
-                print("碰到厨师");
                 break;
             case "Exit":
                 ShowPlayerE(true);
                 isExit = true;
-                print("碰到出口，按E离开");
                 break;
             case "雪克壶":
                 ShowPlayerE(true);
                 isBartender = true;
-                print("碰到雪克壶，按E进行调酒");
                 break;
             case "糖罐子":
                 ShowPlayerE(true);
                 isSuger = true;
-                print("碰到糖罐子");
                 break;
         }
     }
@@ -385,7 +378,6 @@ public class SecondControl : MonoBehaviour
                 isTransport = true;
                 //collision.collider.gameObject.GetComponent<Collider2D>().enabled = false;
                 //collision.transform.localPosition = new Vector2(collision.transform.localPosition.x, collision.transform.localPosition.y + 0.5f);
-                print("触碰到交通机器人");
                 break;
             case "Right":
                 isRight = true;
@@ -413,7 +405,7 @@ public class SecondControl : MonoBehaviour
         black.gameObject.SetActive(true);
         StartCoroutine(Fade(black, false));
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(4);
+        SceneManager.LoadSceneAsync(3);
     }
 
     IEnumerator Fade(GameObject gameObj, bool isFade)//写一个渐变函数

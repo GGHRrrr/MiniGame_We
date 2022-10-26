@@ -89,7 +89,6 @@ public class FirstControll : MonoBehaviour
             {
                 if(YiYiControll.isTotalunLocked&&isNowEnter==false)
                 {
-                    Debug.Log("进入工厂");
                     isNowEnter = true;
                     cam.GetComponent<CameraFollow>().maxPos = new Vector2(15f, 0);
                     workEnv.SetActive(false);
@@ -102,7 +101,6 @@ public class FirstControll : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("玩家在大门，播放音乐");
                     //播放音效
                     if (!audio.isPlaying)
                     {
@@ -118,7 +116,6 @@ public class FirstControll : MonoBehaviour
             {
                 string[] dialogues = { "Human:YiYi,你先进去，将正门打开。", "Yiyi:收到！" };
                 DialoguePanel.Instance.ShowDialogue(dialogues);
-                Debug.Log("玩家在窗户吗，输出文字");
             }
         }
         //离开工厂
@@ -199,7 +196,6 @@ public class FirstControll : MonoBehaviour
                     daPanel.SetActive(true);
                 if (touyingCount < 8)
                     touyingCount++;
-                Debug.Log(touyingCount);
                 switch (touyingCount)
                 {
                     case 1:
@@ -303,31 +299,25 @@ public class FirstControll : MonoBehaviour
             case "breakWindow":
                 ShowPlayerE(true);
                 isEnterWindow = true;
-                Debug.Log("碰到窗户了！");
                 break;
             case "workDoor":
-                Debug.Log("碰到门了！");
                 ShowPlayerE(true);
                 isEnterDoor = true;
                 break;
             case "insideLeft":
                 isInsideLeft = true;
                 ShowPlayerE(true);
-                Debug.Log("碰到外边的门了！准备出去了");
                 break;
             case "insideRight":
                 isInsideRight=true;
                 ShowPlayerE(true);
-                Debug.Log("碰到里边的门了，准备进入下一层");
                 break;
             case"under_left":
                 isUnderLeft = true;
                 ShowPlayerE(true);
-                Debug.Log("碰到地下一层的门了，准备下一层");
                 break;
             case "holetrigger":
                 isEnterHole = true;
-                Debug.Log("碰到坑了");
                 //触发对话
                 string[] dialogues = { "Human:也许我需要另寻他法。" };
                 DialoguePanel.Instance.ShowDialogue(dialogues);
@@ -335,21 +325,17 @@ public class FirstControll : MonoBehaviour
             case "outPostDoor":
                 ShowPlayerE(true);
                 isEnterOutPostDoor = true;
-                Debug.Log("碰到哨站了，准备进入");
                 break;
             case "outpostleft":
                 ShowPlayerE(true);
                 isExitOutPost = true;
-                Debug.Log("准备离开哨站");
                 break;
             case "endDia":
                 //到达地图末尾，关闭主角的移动，进行对话，对话完毕开启移动
                 isEndDia = true;
-                Debug.Log("到达地图末尾");
                 break;
             case "NextLevel":
                 ShowPlayerE(true);
-                Debug.Log("碰到下一关的门了，准备进入下一关");
                 isNextLevel = true;
                 break;
 
@@ -435,7 +421,6 @@ public class FirstControll : MonoBehaviour
                 {
                     if (isFirst)
                     {
-                        print("首次交互，无身份卡");
                         string[] dialogues = { "无身份卡者禁止通行。" };
                         DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
                         isFirst = false;
@@ -443,7 +428,6 @@ public class FirstControll : MonoBehaviour
                     else
                     {
                         //多次交互，无身份卡
-                        print("多次交互，无身份卡");
                         string[] dialogues = { "警告！无身份卡者禁止通行！" };
                         DialoguePanel.Instance.ShowDialogue(dialogues, collision.collider.transform);
                     }

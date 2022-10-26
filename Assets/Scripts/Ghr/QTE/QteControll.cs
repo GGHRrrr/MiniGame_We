@@ -84,7 +84,6 @@ public class QteControll : MonoBehaviour
             isPress = true;
             if (Mathf.Abs( arrow.transform.localPosition.x - mid.transform.localPosition.x)<= 0.5f)
             {
-                Debug.Log("³É¹¦");
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
                     QteJump(new Vector3(200f, player.transform.localPosition.y, player.transform.localPosition.z));
@@ -111,7 +110,6 @@ public class QteControll : MonoBehaviour
                 InitQte();
                 //isPress = false;
                 Invoke("ArrowMove", 1f);
-                Debug.Log("Ê§°Ü");
             }
         }
     }

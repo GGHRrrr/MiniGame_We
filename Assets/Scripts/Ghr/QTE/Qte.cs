@@ -67,14 +67,12 @@ public class Qte : MonoBehaviour
             isPress = true;
             if (Mathf.Abs(arrow.transform.localPosition.x - mid.transform.localPosition.x) <= 0.5f)
             {
-                Debug.Log("成功");
                 gameObject.SetActive(false);
             }
             else
             {
                 InitQte();
                 Invoke("ArrowMove", 1f);
-                Debug.Log("失败重新开始");
             }
         }
     }
