@@ -24,8 +24,13 @@ public class UIqte : MonoBehaviour
 
 
     //“Ù–ßœ‡πÿ
-    //private AudioSource audio;
-    //private AudioClip fall;
+    private AudioSource audio;
+    private AudioClip fall;
+
+    private void Start()
+    {
+        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
