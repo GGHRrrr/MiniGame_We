@@ -5,6 +5,8 @@ using UnityEngine;
 public class SecondControl : MonoBehaviour
 {
     public GameObject e;
+    public Transform point1;
+    public Transform point2;
 
     #region 状态变量
     private bool isFlowerShop;
@@ -124,8 +126,8 @@ public class SecondControl : MonoBehaviour
                 //进入餐厅
                 Restaround.SetActive(true);
                 Village.SetActive(false);
-                transform.position = new Vector3(40, transform.position.y, transform.position.z);
-                Yiyi.position = new Vector3(43, Yiyi.position.y, Yiyi.position.z);
+                transform.position = point2.position;
+                Yiyi.position = point2.position + 3 * Vector3.right;
                 //摄像机阈值
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(9.4f ,0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(35.3f, 0);
@@ -224,8 +226,8 @@ public class SecondControl : MonoBehaviour
                 //出餐厅
                 Restaround.SetActive(false);
                 Village.SetActive(true);
-                transform.localPosition = new Vector3(152, 1, transform.position.z);
-                Yiyi.localPosition = new Vector3(149, Yiyi.position.y, Yiyi.position.z);
+                transform.position = point1.position;
+                Yiyi.position = point1.position + 3 * Vector3.left;
                 //摄像机阈值
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(3, 0);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(41, 0);

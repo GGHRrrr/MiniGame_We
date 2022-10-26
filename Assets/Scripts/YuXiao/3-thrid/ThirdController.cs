@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class ThirdController : MonoBehaviour
 {
+    //音效组件
+    private AudioSource audio;
+    private AudioClip fire;
 
+    //组件
     private Animator anim;
-    private Rigidbody2D rigidbody;
     public GameObject e;
     public Transform endDia;
     //书本UI
@@ -24,6 +27,10 @@ public class ThirdController : MonoBehaviour
     public GameObject PowerfulFire;
     public GameObject CommonFire;
 
+    //位置(第一幕动画结束后出现的位置)
+    public Transform point1;
+    public Transform point2;
+
     //对话框
     public GameObject dialoguePanel;
 
@@ -35,17 +42,21 @@ public class ThirdController : MonoBehaviour
     private bool isWalk = false;
     //是否达成通关条件
     private bool isSuccess = false;
+    //是否降低移动速度
+    [HideInInspector]
+    public bool isHard;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-
+        audio = GameObject.Find("Audio").GetComponent<AudioSource>();
+        fire = Resources.Load<AudioClip>("Audio/Sound/火堆燃烧");
         //播放BGM
         MusicManager.Instance().PlayBGM("荒原bgm");
         //挡风沙行走
         anim = GetComponent<Animator>();
         anim.SetBool("HardWalk", true);
+        isHard = true;
         gameObject.GetComponent<PlayerMove>().moveSpeed = 4;
     }
 
@@ -83,6 +94,7 @@ public class ThirdController : MonoBehaviour
         {
             case "SwitchAnim":
                 anim.SetBool("HardWalk", false);
+                isHard = false;
                 gameObject.GetComponent<PlayerMove>().moveSpeed = 7;
                 break;
             case "交互用书":
@@ -104,6 +116,7 @@ public class ThirdController : MonoBehaviour
         {
             case "SwitchAnim":
                 anim.SetBool("HardWalk", true);
+                isHard = true;
                 gameObject.GetComponent<PlayerMove>().moveSpeed = 4;
                 break;
             case "交互用书":
@@ -158,13 +171,17 @@ public class ThirdController : MonoBehaviour
             img.color = new Color(0, 0, 0, img.color.a + 0.05f);
         }
         //完全黑幕了改变物体状态
+        //播放火焰燃烧音效
+        if (!audio.isPlaying)
+            audio.PlayOneShot(fire,0.8f);
+        audio.loop = true;
         //改变火和柴的状态
         finishedFire.SetActive(true);
         unfinishedFire.SetActive(false);
         PowerfulFire.SetActive(true);
         //修改主角动作和位置
-        transform.localPosition = new Vector3(124, transform.position.y, transform.position.z);
-        yiyi.localPosition = new Vector3(144, 6, yiyi.position.z);
+        transform.position = point1.position;
+        yiyi.position = point2.position;
         yiyi.localScale = new Vector3(-yiyi.localScale.x, yiyi.localScale.y, yiyi.localScale.z);
         GetComponent<Animator>().SetBool("sittiing", true);
         //关闭跟随
