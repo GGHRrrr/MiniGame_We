@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class UI_Inventory : MonoBehaviour
 {
 /// <summary>
-///ui仓库 
+///ui??? 
 /// </summary>
     private Inventory inventory;
-    private Transform itemContainer;//ui容器
-    private Transform items;//道具
+    private Transform itemContainer;//ui????
+    private Transform items;//????
     private void Awake()
     {
         itemContainer = transform.Find("BagPanel").transform;
         items = itemContainer.Find("Items").transform;
     }
     /// <summary>
-    /// 将仓库中的数据在ui中刷新
+    /// ??????е???????ui?????
     /// </summary>
     /// <param name="_inventory"></param>
     public void SetInventory(Inventory _inventory)
@@ -32,7 +32,7 @@ public class UI_Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 刷新UI
+    /// ???UI
     /// </summary>
     public void RefreshUIInventory()
     {   
@@ -48,8 +48,8 @@ public class UI_Inventory : MonoBehaviour
             itemRectTransfor.gameObject.SetActive(true);
             itemRectTransfor.Find("Image").GetComponent<Button>().onClick.AddListener(() =>
             {
-                inventory.RemoveItem(item);//道具移除
-                inventory.UseItem(item);//道具的使用
+                inventory.RemoveItem(item);//???????
+                inventory.UseItem(item);//????????
             }
             );
             itemRectTransfor.Find("Image").GetComponent<Image>().sprite = item.GetSprite();

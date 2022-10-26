@@ -14,6 +14,7 @@ public class FourthController : MonoBehaviour
     private GameObject bag;
     private GameObject ca;
     public GameObject end;
+    private GameObject PhoneCanvas;
 
     bool fisScrolling = false;
    public  Text txt_dialogue;
@@ -25,6 +26,7 @@ public class FourthController : MonoBehaviour
         MusicManager.Instance().PlayBGM("·Ï³Ç");
         bag = GameObject.Find("BagCanvas").gameObject;
         ca = GameObject.Find("Main Camera").gameObject;
+        PhoneCanvas = GameObject.Find("PhoneCanvas").gameObject;
     }
     private void Update()
     {
@@ -37,6 +39,7 @@ public class FourthController : MonoBehaviour
             ca.GetComponent<CameraFollow>().enabled = false;
             yiyi.SetActive(false);
             bag.SetActive(false);
+            PhoneCanvas.SetActive(false);
             post.SetActive(true);
             cgList[0].gameObject.SetActive(true);
             txt_dialogue.gameObject.SetActive(true);
