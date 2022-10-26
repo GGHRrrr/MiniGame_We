@@ -72,6 +72,13 @@ public class FirstControll : MonoBehaviour
         openTouying = Resources.Load<AudioClip>("Audio/Sound/投影中留言");
         openDoor = Resources.Load<AudioClip>("Audio/Sound/开门声");
         
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),2);
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Aric",1));
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Hank",1));
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Hank",2));
     }
     private void Update()
     {

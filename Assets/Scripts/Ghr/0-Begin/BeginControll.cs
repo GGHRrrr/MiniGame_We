@@ -49,6 +49,9 @@ public class BeginControll : MonoBehaviour
         StartCoroutine(PlayOpenningAni());
         //播放BGM
         MusicManager.Instance().PlayBGM("城市BGM");
+        
+                
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),1);
 
     }
 
@@ -80,12 +83,50 @@ public class BeginControll : MonoBehaviour
         //当前关卡编号
         int num = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadSceneAsync(num + 1);
+        LoadMessagesAndLogs(num + 1);
         yield return new WaitForSeconds(0.5f);
 
         while (img.color.a > 0)
         {
             yield return new WaitForSeconds(0.05f);
             img.color = new Color(0, 0, 0, img.color.a - 0.05f);
+        }
+    }
+
+    private void LoadMessagesAndLogs(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),1);
+                break;
+            case 2:
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),2);
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Aric",1));
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Hank",1));
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Hank",2));
+                break;
+            case 3:
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),3);
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Aric",2));
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Alice",1));
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Hank",3));
+                break;
+            case 4:
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),4);
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Aric",3));
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Alice",2));
+                EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+                    new KeyValuePair<string,int>("Hank",4));
+                break;
         }
     }
 

@@ -60,6 +60,14 @@ public class SecondControl : MonoBehaviour
         Yiyi = transform.parent.Find("yiyi").transform;
         //≤•∑≈BGM
         MusicManager.Instance().PlayBGM("œÁ’ÚBGM");
+        
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),3);
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Aric",2));
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Alice",1));
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Hank",3));
     }
 
     
