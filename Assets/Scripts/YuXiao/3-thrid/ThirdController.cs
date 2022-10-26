@@ -33,7 +33,7 @@ public class ThirdController : MonoBehaviour
 
     //对话框
     public GameObject dialoguePanel;
-
+    public GameObject car;
     #region 状态变量
     private bool isBook;
     //是否已经点亮了火堆
@@ -49,6 +49,7 @@ public class ThirdController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(start());
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
         fire = Resources.Load<AudioClip>("Audio/Sound/火堆燃烧");
         //播放BGM
@@ -214,7 +215,14 @@ public class ThirdController : MonoBehaviour
         isFire = true;
         
     }
-
+    IEnumerator start()
+    {
+        gameObject.GetComponent<Animator>().Play("CAR");
+        yield return new WaitForSeconds(3f);
+        gameObject.transform.localPosition=new Vector3(12f, 0.3f, transform.localPosition.z);
+        gameObject.GetComponent<Animator>().Play("idle");
+        car.SetActive(false);
+    }
     IEnumerator Anim2(GameObject panel)//写一个渐变函数
     {
         Image img = panel.GetComponent<Image>();
