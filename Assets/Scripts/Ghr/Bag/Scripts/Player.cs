@@ -71,6 +71,9 @@ public class Player : MonoBehaviour
                 EventManager.Instance().EventTrigger(EventTypeEnum.USEITEM_SHENGZI.ToString(), "");
                 inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
                 break;
+            case Item.ItemType.shenfenpai:
+                inventory.AddItem(new Item { itemType = Item.ItemType.shenfenpai, amount = 1 });
+                break;
         }
     }
 }
