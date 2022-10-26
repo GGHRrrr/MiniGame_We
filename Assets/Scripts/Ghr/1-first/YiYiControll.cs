@@ -66,7 +66,6 @@ public class YiYiControll : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E) && player.GetComponent<SwitchRole>().isYiYi)
                 {
-                    Debug.Log("yiyi????????????");
                     isEnterWork = true;
                     workEnv.SetActive(false);
                     workEnv_Inside.SetActive(true);
@@ -84,7 +83,6 @@ public class YiYiControll : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("???¡¤????");
                     if (cir.gameObject.activeSelf == false)
                     {
                         gameObject.GetComponent<BoxCollider2D>().enabled = false;

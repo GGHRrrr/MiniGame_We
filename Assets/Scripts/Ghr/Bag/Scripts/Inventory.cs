@@ -18,7 +18,6 @@ public class Inventory
     {
         this.useItemAction = useItemAction;
         itemList = new List<Item>();
-        Debug.Log("Inventory");
     }/// <summary>
     /// 向仓库中添加道具
     /// </summary>
@@ -37,7 +36,6 @@ public class Inventory
         if(isHave==true)
         {
             //item.amount++;
-            Debug.Log(item.amount);
         }
         else
         {
@@ -62,7 +60,6 @@ public class Inventory
         }
         if (itemInInventory != null&&itemInInventory.amount>0)
         {
-            Debug.Log(itemInInventory.itemType + "背包中剩余" + itemInInventory.amount);
             //如果道具数量大于0不做处理
         }
         else

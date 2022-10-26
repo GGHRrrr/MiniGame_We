@@ -109,7 +109,6 @@ public class ThirdController : MonoBehaviour
             case "交互用书":
                 ShowPlayerE(true);
                 isBook = true;
-                print("触碰到交互用书");
                 break;
             case "endDia":
                 isSuccess = true;

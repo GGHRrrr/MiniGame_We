@@ -65,38 +65,6 @@ public class RunCool : MonoBehaviour
         isOpen = isOpen1;
     }
 
-
-   /* //¼ì²â¼üÅÌÊäÈë
-    void CheckKeyDown(object key)
-    {
-        if (isOpen)
-        {
-            if ((KeyCode)key == KeyCode.W && canJump)
-            {
-                //Jump();
-            }
-            //if (canSwing)
-            Debug.Log("¹þ¹þ");
-
-            //UseHook(key);
-        }
-        
-    }*/
-
-    /*//ÌøÔ¾Âß¼­
-    private void Jump()
-    {
-        rigidbody.velocity = new Vector2(0, jumpForce);
-        //½«ÌøÔ¾ÉèÖÃÎªfalse
-        canJump = false;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        canJump = true;
-    }*/
-
-
     //¹³ËøÄ£¿é
     private void UseHook()
     {
@@ -127,7 +95,6 @@ public class RunCool : MonoBehaviour
         }
         else if (isHook && Vector3.Distance(lineRenderer.GetPosition(0), pivotPos) < 0.1f)
         {
-            //Debug.Log("Ð¡ÓÚ0.1");
             a = 0;
             distanceJoint.connectedAnchor = pivotPos;
             distanceJoint.enabled = true;

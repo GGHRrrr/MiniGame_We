@@ -53,8 +53,6 @@ public class PlayerMove : MonoBehaviour
         if (PlayerManager.Instance().state == E_Player_State.Common)
         {
             moveH = Input.GetAxisRaw("Horizontal");
-            //print(moveH);
-            //moveV = Input.GetAxisRaw("Vertical");
             if (!DialoguePanel.Instance.IsDialogue)
             {
                 rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -150,8 +148,6 @@ public class PlayerMove : MonoBehaviour
             s = Vector3.Distance(yiyi.position, followPoint.position);
             float vt = Mathf.Sqrt(2 * a * s);
             yiyi.transform.Translate(vt * direction * Time.fixedDeltaTime * 0.001f);
-            //print("距离" + s);
         }
-        //yiyi.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 }

@@ -25,7 +25,6 @@ public class Talkable : MonoBehaviour
         {
             if (isEntered && Input.GetKeyDown(KeyCode.F))
             {
-                print("案件成功");
                 DialoguePanel.Instance.ShowDialogue(lines, fixedPos);
             }
         }

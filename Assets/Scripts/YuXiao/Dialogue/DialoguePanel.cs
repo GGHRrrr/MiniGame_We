@@ -17,6 +17,11 @@ public class DialoguePanel : MonoBehaviour
     //实现单例模式
     public static DialoguePanel Instance;
 
+    //对话面板对象
+    public GameObject panel_dialogue;
+    //对话跟随组件
+    private CanvasFollow cf;
+
     private void Awake()
     {
         if (Instance == null)
@@ -40,10 +45,7 @@ public class DialoguePanel : MonoBehaviour
         }
     }
 
-    //对话面板对象
-    public GameObject panel_dialogue;
-    //对话跟随组件
-    private CanvasFollow cf;
+    
 
     //对话文字内容以及说话人
     public Text txt_dialogue;
@@ -164,7 +166,6 @@ public class DialoguePanel : MonoBehaviour
             cf.enabled = false;
             //交互物体说的话
             transform.position = fixedPos.position + Vector3.up * 2;
-            //print(fixedPos.position);
             res = info;
         }
 

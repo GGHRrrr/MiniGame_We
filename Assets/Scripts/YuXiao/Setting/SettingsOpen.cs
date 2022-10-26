@@ -15,7 +15,6 @@ public class SettingsOpen : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         settings.onClick.AddListener(() =>
         {
-            print("设置被按下");
             //显示设置面板
             settingsPanel.SetActive(true);
         });

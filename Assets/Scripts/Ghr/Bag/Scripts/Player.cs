@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
                 {
                     inventory.AddItem(new Item { itemType = Item.ItemType.yilaguan, amount = 1 });
                 }
-                    Debug.Log("?????????,?????????????");
                 break;
             case Item.ItemType.shengzi:
                 EventManager.Instance().EventTrigger(EventTypeEnum.USEITEM_SHENGZI.ToString(), "");
