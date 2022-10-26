@@ -21,6 +21,7 @@ public class PhoneMessageBlock
 {
     public List<PhoneMessage> messages = new List<PhoneMessage>();
     public int InterID;
+    public bool hasIntered = false;
 }
 
 public class PhoneMessage
@@ -41,4 +42,6 @@ public class PhoneLogs
     public string title;
     public string log;
     public int interID;
+    public bool hasIntered = false;
+
 }

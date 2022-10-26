@@ -59,6 +59,14 @@ public class ThirdController : MonoBehaviour
         anim.SetBool("HardWalk", true);
         isHard = true;
         gameObject.GetComponent<PlayerMove>().moveSpeed = 4;
+        
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_LOG.ToString(),4);
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Aric",3));
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Alice",2));
+        EventManager.Instance().EventTrigger(EventTypeEnum.INTER_MESSAGE.ToString(),
+            new KeyValuePair<string,int>("Hank",4));
     }
 
     void Update()

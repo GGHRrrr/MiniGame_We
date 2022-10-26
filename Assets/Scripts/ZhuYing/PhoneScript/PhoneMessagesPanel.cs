@@ -40,6 +40,7 @@ public class PhoneMessagesPanel : MonoBehaviour
 
     public void InterMessage(PhoneMessageBlock data)
     {
+        if(data.hasIntered) return;
         bool Isfirst = false;
         for (int i = 0; i < data.messages.Count; i++)
         {
@@ -75,6 +76,7 @@ public class PhoneMessagesPanel : MonoBehaviour
         PhoneMessageDialog.UnReadMessagesSub += unReadNum;
         if (HastoSend) PhoneMessageDialog.ToSendMessages++;
 
+        data.hasIntered = true;
         Debug.Log("消息已加载");
     }
 

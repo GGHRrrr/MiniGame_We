@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using MEEC.ExportedConfigs;
+using Unity.VisualScripting;
 
 public class PhoneLogsDialog : PhoneUIBase
 {
@@ -22,7 +23,7 @@ public class PhoneLogsDialog : PhoneUIBase
         List<PhoneLogs> data = PhoneModel.Instance().MPhoneData.logs;
         for (int i = 0; i < data.Count; i++)
         {
-            if(data[i].interID > 0) continue;
+            if(data[i].interID > 0 || data[i].hasIntered) continue;
             var BtnObj = Instantiate(TitleBtnPrefab, TitleListParent);
             PhoneElementBtn Btn = BtnObj.GetComponent<PhoneElementBtn>();
             Btn.Init(data[i]);
@@ -41,6 +42,7 @@ public class PhoneLogsDialog : PhoneUIBase
             Btn.OnClickImage.SetActive(false);
             BtnObj.transform.SetSiblingIndex(0);
             _Buttons.Add(Btn);
+            data[i].hasIntered = true;
         }
         _Buttons[_Buttons.Count-1].OnClickImage.SetActive(true);
         LogsDic[_Buttons[_Buttons.Count-1].Id].SetActive(true);
@@ -49,10 +51,9 @@ public class PhoneLogsDialog : PhoneUIBase
 
     public void InterNewLog(int ID)
     {
-        NewLogsNum++;
-        
         PhoneLogs data = PhoneModel.Instance().MPhoneData.logDic[ID];
-        
+        if (data.hasIntered) return;
+        NewLogsNum++;
         var BtnObj = Instantiate(TitleBtnPrefab, TitleListParent);
         PhoneElementBtn Btn = BtnObj.GetComponent<PhoneElementBtn>();
         Btn.Init(data);
@@ -71,6 +72,8 @@ public class PhoneLogsDialog : PhoneUIBase
         PanObj.SetActive(false);
         Btn.OnClickImage.SetActive(false);
         _Buttons.Add(Btn);
+
+        data.hasIntered = true;
     }
     
     public void OnCilckTitleBtn(string key)
