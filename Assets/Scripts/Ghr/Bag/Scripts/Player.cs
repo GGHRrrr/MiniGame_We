@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
+    private Scene scene;
     private Inventory inventory;
     public Inventory Inventory { get { return inventory; } }
     [SerializeField]private  UI_Inventory uiInventory;
@@ -16,6 +17,21 @@ public class Player : MonoBehaviour
     {
         //ItemWorld.SpawnItemWorld(new Vector3(0, 0), new Item { itemType = Item.ItemType.battery, amount = 1 });
         inventory.AddItem(new Item { itemType=Item.ItemType.yilaguan,amount=10});
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 3:
+                inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
+                inventory.AddItem(new Item { itemType = Item.ItemType.shenfenpai, amount = 1 });
+                break;
+            case 4:
+                inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
+                inventory.AddItem(new Item { itemType = Item.ItemType.shenfenpai, amount = 1 });
+                break;
+            case 5:
+                inventory.AddItem(new Item { itemType = Item.ItemType.shengzi, amount = 1 });
+                inventory.AddItem(new Item { itemType = Item.ItemType.shenfenpai, amount = 1 });
+                break;
+        }
     }
     //private void OnTriggerEnter(Collider other)
     //{

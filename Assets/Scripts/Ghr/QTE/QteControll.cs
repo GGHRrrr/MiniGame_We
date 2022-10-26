@@ -87,7 +87,7 @@ public class QteControll : MonoBehaviour
                 Debug.Log("成功");
                 if(player.transform.position.x-gameObject.transform.position.x<0)
                 {
-                    QteJump(new Vector3(220f, player.transform.localPosition.y, player.transform.localPosition.z));
+                    QteJump(new Vector3(200f, player.transform.localPosition.y, player.transform.localPosition.z));
                     string[] info = 
                     {
                         "Human:有惊无险，呼......身法如何？",
@@ -98,7 +98,7 @@ public class QteControll : MonoBehaviour
                 }
                 else
                 {
-                    QteJump(new Vector3(165f, player.transform.localPosition.y, player.transform.localPosition.z));
+                    QteJump(new Vector3(145f, player.transform.localPosition.y, player.transform.localPosition.z));
                 }
                 //播放音效
                 if (!audio.isPlaying)

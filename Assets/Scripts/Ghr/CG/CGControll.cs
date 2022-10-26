@@ -44,7 +44,7 @@ public class CGControll : MonoBehaviour
         player.GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(1f);
         ca.GetComponent<Animator>().enabled = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(7f);
         SceneManager.LoadScene(1);
     }
 }

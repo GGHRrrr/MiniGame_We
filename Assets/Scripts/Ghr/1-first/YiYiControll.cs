@@ -24,7 +24,7 @@ public class YiYiControll : MonoBehaviour
     private bool isEnterHandle = false;
     private bool isEnterBox=false;
     private Vector2 nowPos;
-    private Vector2 palyerNowPos;
+    private Vector2 palyerNowPos=new Vector2(50,0);
     private void Awake()
     {
         EventManager.Instance().AddEventListener(EventTypeEnum.KeyDown_Tab.ToString(), OnKey_TabDownEvnet);
@@ -207,7 +207,7 @@ public class YiYiControll : MonoBehaviour
         workEnv.gameObject.SetActive(true);
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
         post.transform.GetChild(0).gameObject.SetActive(false);
-        player.transform.localPosition = new Vector3(6f, player.transform.localPosition.y, player.transform.localPosition.z);
+        player.transform.localPosition = new Vector3(50f, player.transform.localPosition.y, player.transform.localPosition.z);
         player.transform.GetChild(0).gameObject.SetActive(true);
         SpriteRenderer workEnv_Inside_Spr = workEnv_Inside.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         while (workEnv_Inside_Spr.color.a>=0.05)

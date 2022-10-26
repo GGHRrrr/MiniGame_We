@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SecondControl : MonoBehaviour
 {
     public GameObject e;
     public Transform point1;
     public Transform point2;
-
+    public GameObject black;
     //调酒相关
     public GameObject flower;
     public GameObject suger;
@@ -36,6 +37,7 @@ public class SecondControl : MonoBehaviour
     private bool isSuger;
     //收集物数目
     private int count = 0;
+    public bool isRight = false;
     #endregion
 
     #region 游戏对象
@@ -107,7 +109,7 @@ public class SecondControl : MonoBehaviour
                 };
                 //触发对话
                 DialoguePanel.Instance.ShowDialogue(info,Transport.transform);
-                transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x - 0.2f, transform.position.y, transform.position.z);
             }
             else
             {
@@ -120,7 +122,8 @@ public class SecondControl : MonoBehaviour
                 //触发对话
                 DialoguePanel.Instance.ShowDialogue(info, Transport.transform);
                 //TODO:坐车！过场
-                transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
+                StartCoroutine(guochang());
+                //transform.position = new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z);
             }
             
         }
@@ -372,9 +375,12 @@ public class SecondControl : MonoBehaviour
         {
             case "Transport":
                 isTransport = true;
-                collision.collider.gameObject.GetComponent<Collider2D>().enabled = false;
-                collision.transform.localPosition = new Vector2(collision.transform.localPosition.x, collision.transform.localPosition.y + 0.5f);
+                //collision.collider.gameObject.GetComponent<Collider2D>().enabled = false;
+                //collision.transform.localPosition = new Vector2(collision.transform.localPosition.x, collision.transform.localPosition.y + 0.5f);
                 print("触碰到交通机器人");
+                break;
+            case "Right":
+                isRight = true;
                 break;
         }
     }
@@ -386,9 +392,20 @@ public class SecondControl : MonoBehaviour
             case "Transport":
                 isTransport = false;
                 break;
+            case "Right":
+                isRight = false;
+                break;
         }
     }
     #endregion
+
+    IEnumerator guochang()
+    {
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(Fade(black, false));
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(4);
+    }
 
     IEnumerator Fade(GameObject gameObj, bool isFade)//写一个渐变函数
     {

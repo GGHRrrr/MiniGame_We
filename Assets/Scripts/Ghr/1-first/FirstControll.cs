@@ -174,7 +174,7 @@ public class FirstControll : MonoBehaviour
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(46, 0);
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(45.6f, 0);
                 cam.transform.position = new Vector3(45.6f, cam.transform.position.y, cam.transform.position.z);
-                gameObject.transform.localPosition = new Vector3(203f, transform.localPosition.y, transform.localPosition.z);
+                gameObject.transform.localPosition = new Vector3(179f, transform.localPosition.y, transform.localPosition.z);
                 outPostRoom.SetActive(true);
                 workEnv.SetActive(false);
             }
@@ -250,7 +250,7 @@ public class FirstControll : MonoBehaviour
                 workEnv.SetActive(true);
                 cam.GetComponent<CameraFollow>().maxPos = new Vector2(49f, 0);
                 cam.GetComponent<CameraFollow>().minPos = new Vector2(2.5f, 0);
-                gameObject.transform.localPosition = new Vector3(230f, transform.localPosition.y, transform.localPosition.z);
+                gameObject.transform.localPosition = new Vector3(200f, transform.localPosition.y, transform.localPosition.z);
             }
         }
         

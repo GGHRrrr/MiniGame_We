@@ -79,7 +79,7 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("walk", true);
             if (!audio.isPlaying)
-                if (SceneManager.GetActiveScene().buildIndex == 3 && GetComponent<ThirdController>().isHard)
+                if (SceneManager.GetActiveScene().buildIndex == 4 && GetComponent<ThirdController>().isHard)
                     //如果是荒原
                     audio.PlayOneShot(hardWalk, 0.8f);
                 else
