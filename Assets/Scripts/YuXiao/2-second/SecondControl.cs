@@ -401,7 +401,8 @@ public class SecondControl : MonoBehaviour
 
     IEnumerator guochang()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
+        black.gameObject.SetActive(true);
         StartCoroutine(Fade(black, false));
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(4);
@@ -422,7 +423,7 @@ public class SecondControl : MonoBehaviour
         {
             while (spriteRenderer.color.a < 1)
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.1f);
                 spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a + 0.05f);
             }
         }
