@@ -32,6 +32,9 @@ public class FourthController : MonoBehaviour
     {
         if(isEnterRoom&&Input.GetKeyDown(KeyCode.E))
         {
+            //±‹√‚÷ÿ∏¥Ωªª•
+            isEnterRoom = false;
+            transform.Find("e").gameObject.SetActive(false);
             ca.transform.position = new Vector3(17.3f, ca.transform.position.y, ca.transform.position.z);
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
             gameObject.GetComponent<PlayerMove>().enabled = false;
@@ -61,7 +64,8 @@ public class FourthController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         end.SetActive(true);
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(6);
+        int num = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(num + 1);
     }
     private IEnumerator ScrollingText()
     {

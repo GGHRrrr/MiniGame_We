@@ -19,7 +19,7 @@ public class YiYi : MonoBehaviour
         if (itemWorld != null)
         {
             inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
+            itemWorld.gameObject.SetActive(false);
         }
     }
 }

@@ -45,6 +45,7 @@ public class CGControll : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ca.GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(7f);
-        SceneManager.LoadScene(1);
+        int num = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(num + 1);
     }
 }

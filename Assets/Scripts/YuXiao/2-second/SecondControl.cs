@@ -405,7 +405,8 @@ public class SecondControl : MonoBehaviour
         black.gameObject.SetActive(true);
         StartCoroutine(Fade(black, false));
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadSceneAsync(3);
+        int num = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(num + 1);
     }
 
     IEnumerator Fade(GameObject gameObj, bool isFade)//写一个渐变函数

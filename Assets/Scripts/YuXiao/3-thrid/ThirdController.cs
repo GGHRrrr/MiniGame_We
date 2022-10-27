@@ -49,6 +49,8 @@ public class ThirdController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //关闭相机跟随
+        Camera.main.GetComponent<CameraFollow>().enabled = false ;
         StartCoroutine(start());
         audio = GameObject.Find("Audio").GetComponent<AudioSource>();
         fire = Resources.Load<AudioClip>("Audio/Sound/火堆燃烧");
@@ -229,6 +231,7 @@ public class ThirdController : MonoBehaviour
         gameObject.transform.localPosition=new Vector3(12f, 0.3f, transform.localPosition.z);
         gameObject.GetComponent<Animator>().Play("idle");
         car.SetActive(false);
+        Camera.main.GetComponent<CameraFollow>().enabled = true;
     }
     IEnumerator Anim2(GameObject panel)//写一个渐变函数
     {
